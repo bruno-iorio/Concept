@@ -1,0 +1,2 @@
+# Report Andreea Patarlageanu - Week 1
+This week, week 1, I worked with my colleague, Milana, and decided what we need, what we have to do and how are we going to work on the UI. We made a sketch about how we want it to look like, the colors, and the theme, we discussed with the teammates how we would implement all the functionalities and did research on how to start with the QT Library (basic examples…).

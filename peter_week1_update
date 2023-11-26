@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+//The following is subject to change a lot depending on the evolution of the global code
+
+
+class Note {
+public:
+    Note() {}
+    Note( std::string& title, std::string& content) : title(title), content(content) {}
+
+    void display() const {
+        std::cout << "Title: " << title << "\nContent: " << content << "\n\n";
+    }
+
+
+//other commands to add related to the design and graphics of the WebApp
+// define commands to edit title and content -> communicate with the UI team
+// add member time of last edit -> communicate with timer team
+
+private:
+    std::string title;
+    std::string content;
+};
+// Class (Regroup) notes in folders (and subfolders)
+
+class Folder {
+public:
+    void addNote(const std::string& title, const std::string& content) {
+        notes.emplace_back(title, content);
+    }
+
+    void displayAllNotes() const {
+        if (notes.empty()) {
+            std::cout << "No notes available.\n";
+        } else {
+            std::cout << "All Notes:\n";
+            for (const auto& note : notes) { // or for (std::vector<Note>::iterator note;notes.begin(),notes.end(),notes++)
+                note.display();
+            }
+        }
+    }
+
+
+//define commands to edit title and order notes (in several types of order: time of last edit, alphabetical order, ascending or descending) -> communicate with the UI team
+
+
+private:
+    std::vector<Note> notes;
+    std::string title;
+};

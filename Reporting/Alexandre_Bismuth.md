@@ -1,4 +1,4 @@
-Alexandre Bismuth Reporting File
+# Alexandre Bismuth Reporting File
 
 Lead for the development of the Kernel implementation, the Data Organisation, as well as the Search Bar. Part of the development of the Text editor.
 

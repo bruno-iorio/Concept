@@ -8,12 +8,14 @@ project(ConceptApp LANGUAGES CXX)
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
-qt_add_executable(ConceptApp src/main.cpp)
+qt_add_executable(ConceptApp src/main.cpp src/texteditor.cpp src/texteditor.hpp)
 
 qt_add_resources(ConceptApp "configuration"
     PREFIX "/"
@@ -26,6 +28,7 @@ target_link_libraries(ConceptApp PRIVATE
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
+    Qt6::Widgets
 )
 
 if (BUILD_QDS_COMPONENTS)

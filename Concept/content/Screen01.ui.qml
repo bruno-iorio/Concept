@@ -4,82 +4,80 @@ import QtQuick.Window 2.2
 import Concept
 
 Rectangle {
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
+    width: Screen.width
+    height: Screen.height
 
     // This is the title bar
     Rectangle {
         id: nameBar
         width: parent.width
-        height: 130
+        height: parent.height * 0.1 // Set a percentage of the screen height
         color: "#A1B5D8"
 
-        //Title Concept
+        // Title Concept
         Text {
             text: "Concept"
             id: conceptText
-            font.pixelSize: 80
+            font.pixelSize: nameBar.height * 0.6 // Set a percentage of the nameBar height
             font.family: "Helvetica"
             anchors.left: parent.left
             verticalAlignment: Text.AlignVCenter
-            leftPadding: 200
         }
 
-        //spacing item
+        // Spacing item
         Item {
             id: spacerTitleHelp
             anchors.left: conceptText.right
-            width: 2000
+            width: parent.width * 0.05 // Set a percentage of the screen width
         }
 
         // "Help" button
         Button {
             id: helpButton
             text: "Help"
-            font.pixelSize: 30
+            font.pixelSize: nameBar.height * 0.3 // Set a percentage of the nameBar height
             anchors.left: spacerTitleHelp.right
             anchors.verticalCenter: parent.verticalCenter
         }
 
-        //spacing item
+        // Spacing item
         Item {
             id: spacerHelpSearch
             anchors.left: helpButton.right
-            width: 200
+            width: parent.width * 0.02 // Set a percentage of the screen width
         }
 
         // Search Bar
         TextField {
             id: searchBar
             placeholderText: "Search..."
-            width: 500
-            height: 80
+            width: parent.width * 0.15 // Set a percentage of the screen width
+            height: nameBar.height * 0.8 // Set a percentage of the nameBar height
             anchors.left: spacerHelpSearch.right
             anchors.verticalCenter: parent.verticalCenter
         }
 
-        //spacing item
+        // Spacing item
         Item {
             id: spacerSearchButton
             anchors.left: searchBar.right
-            width: 50
+            width: parent.width * 0.01 // Set a percentage of the screen width
         }
 
         // "Search" button
         Button {
             id: searchButton
             text: "Search"
-            font.pixelSize: 30
+            font.pixelSize: nameBar.height * 0.3 // Set a percentage of the nameBar height
             anchors.left: spacerSearchButton.right
             anchors.verticalCenter: parent.verticalCenter
         }
 
-        //spacing item
+        // Spacing item
         Item {
-            width: 200
+            width: parent.width * 0.04 // Set a percentage of the screen width
             anchors.left: searchButton.right
         }
-
     }
 
     // Main Content with three columns
@@ -92,7 +90,7 @@ Rectangle {
         // Column 1
         Rectangle {
             id: column1Container
-            width: mainContentRow.width * 0.25
+            width: parent.width * 0.25
             height: mainContentRow.height
             color: "#F0EEE9"
         }
@@ -100,13 +98,13 @@ Rectangle {
         // Column 2
         Rectangle {
             id: column2Container
-            width: mainContentRow.width * 0.55
+            width: parent.width * 0.55
             height: mainContentRow.height
             color: "#F0EEE9"
 
             Rectangle {
                 id: chosenListColumn
-                width: mainContentRow.width * 0.3 * 0.003
+                width: parent.width * 0.003
                 height: column2Container.height
                 color: "grey"
             }
@@ -115,7 +113,7 @@ Rectangle {
         // Column 3
         Rectangle {
             id: column3Container
-            width: mainContentRow.width * 0.2
+            width: parent.width * 0.2
             height: mainContentRow.height
             color: "#F0EEE9"
 

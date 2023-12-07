@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.24)
 
 project(TextEditorApp LANGUAGES CXX)
 
 # Set the minimum required version of Qt
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
@@ -22,4 +22,4 @@ set(HEADERS
 add_executable(TextEditorApp ${SOURCES} ${HEADERS})
 
 # Use the Widgets module from Qt 5
-target_link_libraries(TextEditorApp PRIVATE Qt5::Widgets)
+target_link_libraries(TextEditorApp PRIVATE Qt6::Widgets)

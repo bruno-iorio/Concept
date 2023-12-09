@@ -3,3 +3,7 @@ This week, week 1, I worked with my colleague, Milana, and decided what we need,
 
 # Report Andreea Patarlageanu - Week 2
 This week, I started the the title bar and finished it. The title bar contain the title "Concept", a button for "Help", a search bar and the button "Search". The color of the title bar is from the color pallette we chose. The buttons don't have any functionalities yet, but the code will be added after my collegues will provide me their code. I added enough space between the buttons so the interface looks more organized and clear. The help button will preovide help to the users who have any difficulties using the web app. The search button can be clicked after the user types in the search bar. The font of the title will be modified later, after I conclude with my colleagues which one is the best for our app.
+
+# Report Andreea Patarlageanu - Week 3
+This week, I "repaired" the small mistakes/bugs there were in the QML Code. I made the screen fit for any screen and started the "Pomodoro" column, meaning the timer block with its buttons. Monday, during the lecture, I will finish it. Moreover, I did some research on how to "resize" column using the "drag and resize" functionality,
+but together with the team, I concluded on implementing this functionality later, after we implement other functionalities which will determine how are we going to resize the column. The code for the resizing functionality is in Comments, since I started and left it there for later, when we will come back to it.

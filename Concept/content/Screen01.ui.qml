@@ -105,40 +105,136 @@ Rectangle {
 
             Rectangle {
                 id: chosenListColumn
-                width: column3Container.width * 0.004
+                width: pomodoroColumn.width * 0.004
                 height: column2Container.height
                 color: "grey"
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.SizeHorCursor // Change cursor to horizontal resize
-                    // Additional code for handling resizing when dragging
+                //MouseArea {
+                  //  anchors.fill: parent
+                    //cursorShape: Qt.SizeHorCursor // Change cursor to horizontal resize
+
+                    //property real startX: 0
+                    //property real startWidth: 0
+
                     //onPressed: {
-                        // Your code for handling the start of dragging
+                      //  chosenListColumn.startX = mouse.x;
+                        //chosenListColumn.startWidth = chosenListColumn.width;
                     //}
 
                     //onPositionChanged: {
-                        // Your code for handling dragging and resizing
+                      //  let deltaX = mouse.x - chosenListColumn.startX;
+                      //  let newWidth = chosenListColumn.startWidth + deltaX;
+
+                        // Limit the width to a maximum of 500 pixels
+                       // chosenListColumn.width = Math.min(500, Math.max(0, newWidth));
+                       // column2Container.width = mainContentRow.width * 0.55 - chosenListColumn.width;
+                       // column1Container.width = mainContentRow.width * 0.25;
                     //}
 
-                    //onReleased: {
-                        // Your code for handling the end of dragging
+                    //onClicked: {
+                        // Add this block to enable continuous resizing
+                      //  chosenListColumn.startX = mouse.x;
+                        //chosenListColumn.startWidth = chosenListColumn.width;
                     //}
-                }
+                //}
             }
         }
 
         // Column 3
         Rectangle {
-            id: column3Container
+            id: pomodoroColumn
             width: parent.width * 0.2
             height: mainContentRow.height
             color: "#F0EEE9"
 
             Rectangle {
-                id: pomodoroColumn
-                width: column3Container.width * 0.004
-                height: column3Container.height
+                id: column3Container
+                width: pomodoroColumn.width * 0.004
+                height: pomodoroColumn.height
                 color: "grey"
+            }
+
+            Rectangle {
+                id: spacerTitleBarStudyTimerText
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.05
+                anchors.top: nameBar.bottom
+                anchors.left:column3Container.right
+                color: "#F0EEE9"
+            }
+
+            Text {
+                text: "Study Timer"
+                id: studyTimerText
+                font.pixelSize: nameBar.height * 0.4
+                font.family: "Helvetica"
+                //anchors.left: column3Container.right
+                verticalAlignment: pomodoroColumn.AlignVCenter
+                anchors.top: spacerTitleBarStudyTimerText.bottom
+                leftPadding: pomodoroColumn.width * 0.3
+            }
+
+            Rectangle {
+                id: spacerStudyTimerTextTimerBlock
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.05
+                anchors.top: studyTimerText.bottom
+                anchors.left:column3Container.right
+                color: "#F0EEE9"
+            }
+
+            Rectangle {
+                id: timerBlock
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.2
+                anchors.top: spacerStudyTimerTextTimerBlock.bottom
+                anchors.left:column3Container.right
+                color: "#C2D8B9"
+
+                Row {
+
+                    Button {
+                        id: studyButton
+                        text: "Study"
+                        font.pixelSize: timerBlock.height * 0.07
+                        //onClicked: startTimer(25)
+                    }
+
+                    Button {
+                        text: "Break"
+                        id: breakButton
+                        font.pixelSize: timerBlock.height * 0.07
+                        //onClicked: startTimer(5)
+                    }
+
+                }
+
+                // Timer Display
+                Text {
+                    id: timerDisplay
+                    text: "00:00"
+                    font.pixelSize: timerBlock.height * 0.16
+                    anchors.centerIn: parent
+                }
+
+                //Timer {
+                    //id: countdownTimer
+                    //interval: 1000
+                    //onTriggered: updateTimerDisplay()
+                //}
+
+                //function startTimer(minutes) {
+                    //countdownTimer.stop()
+                    //countdownTimer.repeat = minutes * 60 * 1000
+                    //countdownTimer.start()
+                    //updateTimerDisplay()
+                //}
+
+                //function updateTimerDisplay() {
+                    //var minutes = Math.floor(countdownTimer.repeat / 60000)
+                    //var seconds = Math.floor((countdownTimer.repeat % 60000) / 1000)
+                    //timerDisplay.text = Qt.formatDateTime(new Date(0, 0, 0, 0, minutes, seconds), "mm:ss")
+                //}
+
             }
         }
     }

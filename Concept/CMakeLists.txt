@@ -6,16 +6,26 @@ option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
 project(ConceptApp LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Qml Quick)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
-find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
-qt_add_executable(ConceptApp src/main.cpp src/texteditor.cpp src/texteditor.hpp)
+
+### Don't forget to add your new cpp and hpp functions here to link them with the App
+qt_add_executable(ConceptApp
+    src/main.cpp
+    src/texteditor.cpp src/texteditor.hpp
+    src/mainhelp.h src/mainhelp.cpp
+    src/textview.h src/textview.cpp
+    src/textedit.h src/textedit.cpp
+
+)
 
 qt_add_resources(ConceptApp "configuration"
     PREFIX "/"
@@ -23,9 +33,9 @@ qt_add_resources(ConceptApp "configuration"
         qtquickcontrols2.conf
 )
 
+
 target_link_libraries(ConceptApp PRIVATE
     Qt6::Core
-    Qt6::Gui
     Qt6::Qml
     Qt6::Quick
     Qt6::Widgets

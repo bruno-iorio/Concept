@@ -4,17 +4,19 @@
 #include <QTextStream>
 
 TextEditor::TextEditor(QWidget *parent)
-    : QMainWindow(parent) {
-    textEdit = new QTextEdit(this);
-    setCentralWidget(textEdit);
+    : QWidget(parent), textEdit(new QTextEdit(this)), menuBar(new QMenuBar(this)) {
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->setMenuBar(menuBar);
+    layout->addWidget(textEdit);
 
     createMenu();
 }
 
-void TextEditor::createMenu() {
-    QMenuBar *menuBar = new QMenuBar(this);
-    setMenuBar(menuBar);
+TextEditor::~TextEditor() {
+    //DESTROY TO IMPLEMENT IF NECESSARY
+}
 
+void TextEditor::createMenu() {
     QMenu *fileMenu = menuBar->addMenu("File");
 
     QAction *newAction = fileMenu->addAction("New");
@@ -28,7 +30,7 @@ void TextEditor::createMenu() {
 
     QAction *saveAsAction = fileMenu->addAction("Save As");
     connect(saveAsAction, &QAction::triggered, this, &TextEditor::saveFileAs);
-	}
+    }
 
 void TextEditor::newFile() {
     textEdit->clear();

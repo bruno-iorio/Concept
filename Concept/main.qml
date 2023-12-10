@@ -15,6 +15,8 @@ Window {
         width: parent.width
         height: parent.height * 0.07 // Set a percentage of the screen height
         color: "#A1B5D8"
+        border.color: "grey"
+        border.width: 1
 
         // Title Concept
         Text {
@@ -110,7 +112,9 @@ Window {
                 id:column2Header
                 width: parent.width
                 height: parent.height * 0.05
-                color: Qt.rgba(0.094, 0.294, 0.612, 0.769) //modify later, for now its to show you new stuff
+                color: "#A1B5D8" //modify later, for now its to show you new stuff
+                border.color: "grey"
+                border.width: 1
 
                 // "Edit" button
                 Button {

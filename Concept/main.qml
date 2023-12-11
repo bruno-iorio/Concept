@@ -1,7 +1,7 @@
 import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Window 2.2
-import Concept
+
 
 Window {
     width: Screen.width
@@ -26,7 +26,7 @@ Window {
             font.family: "Helvetica"
             anchors.left: parent.left
             verticalAlignment: Text.AlignVCenter
-            leftPadding: parent.width * 0.1
+            anchors.leftMargin: parent.width * 0.07
         }
 
         // Spacing item

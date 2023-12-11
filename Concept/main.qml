@@ -322,13 +322,13 @@ Window {
 
                     Button {
                         id: studyButton
-                        text: "Study"
+                        text: "Break"
                         font.pixelSize: timerBlock.height * 0.07
                         //onClicked: startTimer(25)
                     }
 
                     Button {
-                        text: "Break"
+                        text: "Continue"
                         id: breakButton
                         font.pixelSize: timerBlock.height * 0.07
                         //onClicked: startTimer(5)
@@ -363,6 +363,66 @@ Window {
                     //timerDisplay.text = Qt.formatDateTime(new Date(0, 0, 0, 0, minutes, seconds), "mm:ss")
                 //}
 
+            }
+            Rectangle {
+                id: button1
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.08
+                anchors.top: timerBlock.bottom
+                anchors.left:column3Container.right
+                color: "#F0EEE9"
+                Button{
+                    id: setFocusPeriod
+                    text: "Set focus period"
+                    font.pixelSize: timerBlock.height * 0.07
+                    anchors.centerIn: parent
+                }
+            }
+            Rectangle {
+                id: button2
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.08
+                anchors.top: button1.bottom
+                anchors.left:column3Container.right
+                color: "#F0EEE9"
+                Button{
+                    id: start
+                    text: "Start"
+                    font.pixelSize: timerBlock.height * 0.07
+                    anchors.centerIn: parent
+                }
+            }
+            Rectangle {
+                id: button3
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.08
+                anchors.top: button2.bottom
+                anchors.left:column3Container.right
+                color: "#F0EEE9"
+                Button{
+                    id: stop
+                    text: "Stop"
+                    font.pixelSize: timerBlock.height * 0.07
+                    anchors.centerIn: parent
+                }
+            }
+            Rectangle {
+                id: button4
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.08
+                anchors.top: button3.bottom
+                anchors.left:column3Container.right
+                color: "#F0EEE9"
+                Text {
+                    id: question
+                    text: qsTr("Are you done with studying? See your progress here:")
+                }
+                Button{
+                    id: statistics
+                    text: "Statistics"
+                    font.pixelSize: timerBlock.height * 0.07
+                    anchors.centerIn: parent
+                }
             }
         }
     }

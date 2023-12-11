@@ -1,17 +1,19 @@
 #ifndef TEXTEDITOR_H
 #define TEXTEDITOR_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QTextEdit>
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
+#include <QVBoxLayout>
 
-class TextEditor : public QMainWindow {
-Q_OBJECT
+class TextEditor : public QWidget {
+    Q_OBJECT
 public:
-    TextEditor(QWidget *parent = nullptr);
-    virtual ~TextEditor(){};
+    explicit TextEditor(QWidget *parent = nullptr);
+    virtual ~TextEditor() override;
+
 private slots:
     void newFile();
     void openFile();
@@ -21,6 +23,8 @@ private slots:
 private:
     QTextEdit *textEdit;
     QString currentFilePath;
+    QMenuBar *menuBar;
+    QWindow *window;
 
     void createMenu();
 };

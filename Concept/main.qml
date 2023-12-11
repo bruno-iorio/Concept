@@ -104,6 +104,86 @@ Window {
             width: parent.width * 0.2
             height: mainContentRow.height
             color: "#F0EEE9"
+            // Header for column1 with the name My Lists
+            Rectangle {
+                id: column1Header
+                width: parent.width
+                height: parent.height * 0.13
+                color: "#ffcc99" // Modify later
+                border.color: "grey"
+                border.width: 1
+
+                Text {
+                    id: myliststext
+                    text: "My Lists"
+                    font.pixelSize: nameBar.height * 0.4
+                    font.family: "Helvetica"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    anchors.centerIn: parent
+                }
+            }
+
+            // First basic list for column1
+            Rectangle {
+                id: column1list1
+                width: parent.width
+                height: parent.height * 0.05
+                color: "#ffff99" // Modify later
+                border.color: "grey"
+                border.width: 1
+
+                // Anchor the top of column1list1 to the bottom of column1Header
+                anchors.top: column1Header.bottom
+                property bool listNameInputClicked: false
+
+                // Text input for list name
+                TextInput {
+                    id: listNameInput
+                    anchors.fill: parent
+                    text: "List Name" // Initial text
+                    font.pixelSize: nameBar.height * 0.3
+                    font.family: "Helvetica"
+                    selectByMouse: true // Allow text selection by mouse
+                    color: column1list1.listNameInputClicked ? "blue" : "black"
+                    verticalAlignment: Text.AlignVCenter
+                    readOnly: !column1list1.listNameInputClicked // Set to true to make it read-only
+                    leftPadding: 20
+
+                    // Handle mouse clicks
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            // Handle click event here
+                            console.log("List name clicked!")
+                            column1list1.listNameInputClicked = true
+                        }
+                    }
+
+                    // Handle editing finished event
+                    onEditingFinished: {
+                        // Handle editing finished event here
+                        console.log("Editing finished:", listNameInput.text.trimmed())
+                        column1list1.listNameInputClicked = false
+                    }
+                }
+            }
+            Rectangle {
+                id: newListButtonColumn
+                width: parent.width
+                height: parent.height * 0.05
+                color: "#ffcccc" // Modify later
+                border.width: 1
+                anchors.top: column1list1.bottom
+            // "New list" button
+                Button {
+                    id: newListButton
+                    text: "New List"
+                    font.pixelSize: nameBar.height * 0.2
+                    anchors.horizontalCenter: newListButtonColumn.horizontalCenter
+                    anchors.verticalCenter: newListButtonColumn.verticalCenter
+                }
+            }
         }
 
         // Column 2

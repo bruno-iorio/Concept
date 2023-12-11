@@ -3,11 +3,17 @@ import QtQuick.Controls 6.2
 import QtQuick.Window 2.2
 
 
+
 Window {
     width: Screen.width
     height: Screen.height
     title: "Concept"
     visible: true
+
+    /*TextEditor{
+        id: texteditorWindow
+
+    }*/
 
     // This is the title bar
     Rectangle {
@@ -132,6 +138,16 @@ Window {
                     font.pixelSize: column2Header.height * 0.25
                     anchors.right: editButton.left
                     anchors.verticalCenter: column2Header.verticalCenter
+                }
+                // "New" Button
+                Button {
+                    id: newButton
+                    text: "New"
+                    font.pixelSize: column2Header.height * 0.25
+                    anchors.right: viewButton.left
+                    anchors.verticalCenter: column2Header.verticalCenter
+
+                    onClicked: textEditor.showEditor()
                 }
             }
 

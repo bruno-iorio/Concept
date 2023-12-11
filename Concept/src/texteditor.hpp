@@ -14,11 +14,17 @@ public:
     explicit TextEditor(QWidget *parent = nullptr);
     virtual ~TextEditor() override;
 
+
+public slots:
+    void showEditor();
+
+
 private slots:
     void newFile();
     void openFile();
     void saveFile();
     void saveFileAs();
+
 
 private:
     QTextEdit *textEdit;

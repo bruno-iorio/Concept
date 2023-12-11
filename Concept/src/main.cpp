@@ -15,11 +15,7 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
 
-    TextEditor *textEditor = new TextEditor();
-
-
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("textEditor", textEditor);
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -28,6 +24,8 @@ int main(int argc, char *argv[]) {
         }, Qt::QueuedConnection);
 
     //QObject::connect()
+    TextEditor textEditorWindow;
+    engine.rootContext()->setContextProperty("textEditor", &textEditorWindow);
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");

@@ -22,3 +22,10 @@ I advanced in creating the text editor, but i still haven't commited to repo bec
 From now on, it seem that it will be more fluid since i have learned better how to use qt, especially the <Qapplication>
 
 the idea of creating first a terminal editor was also very bad, because i won't be able to adapt most of it to qt. And ncurses is not so good for gui purposes
+
+
+week 3:
+
+Finished making a prototype for the text editor, and started working with gui directly. I suggested the idea of maybe substuting the entire
+qml for cpp by using a mix of Qwidgets and QmainWindow libraries in cpp. We will try to put this idea in practice for the next week.
+

@@ -71,3 +71,7 @@ void TextEditor::saveFileAs() {
     }
 }
 
+void TextEditor::showEditor() {
+    this->show();
+}
+

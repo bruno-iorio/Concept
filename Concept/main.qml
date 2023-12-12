@@ -47,14 +47,14 @@ Window {
             id: helpButton
             text: "Help"
             font.pixelSize: nameBar.height * 0.25 // Set a percentage of the nameBar height
-            anchors.left: spacerTitleHelp.right
+            anchors.left: spacerHelpSearch.right
             anchors.verticalCenter: parent.verticalCenter
         }
 
         // Spacing item
         Item {
             id: spacerHelpSearch
-            anchors.left: helpButton.right
+            anchors.left: searchButton.right
             width: parent.width * 0.07 // Set a percentage of the screen width
         }
 
@@ -64,7 +64,7 @@ Window {
             placeholderText: "Search..."
             width: parent.width * 0.12 // Set a percentage of the screen width
             height: nameBar.height * 0.55 // Set a percentage of the nameBar height
-            anchors.left: spacerHelpSearch.right
+            anchors.left: spacerTitleHelp.right
             anchors.verticalCenter: parent.verticalCenter
         }
 
@@ -202,6 +202,18 @@ Window {
                 border.color: "grey"
                 border.width: 1
 
+                Item{
+                    id : editview
+                    width : editButton.width * 0.07
+                    anchors.right : editButton.left
+                }
+
+                Item{
+                    id : viewnew
+                    width : editButton.width * 0.07
+                    anchors.right : viewButton.left
+                }
+
                 // "Edit" button
                 Button {
                     id: editButton
@@ -209,6 +221,7 @@ Window {
                     font.pixelSize: column2Header.height * 0.25
                     anchors.right: column2Header.right
                     anchors.verticalCenter: column2Header.verticalCenter
+                    height : column2Header.height * 0.95
                 }
 
                 // "View" button
@@ -216,17 +229,18 @@ Window {
                     id: viewButton
                     text: "View"
                     font.pixelSize: column2Header.height * 0.25
-                    anchors.right: editButton.left
+                    anchors.right: editview.left
                     anchors.verticalCenter: column2Header.verticalCenter
+                    height : column2Header.height * 0.95
                 }
                 // "New" Button
                 Button {
                     id: newButton
                     text: "New"
                     font.pixelSize: column2Header.height * 0.25
-                    anchors.right: viewButton.left
+                    anchors.right: viewnew.left
                     anchors.verticalCenter: column2Header.verticalCenter
-
+                    height : column2Header.height * 0.95
                     onClicked: textEditor.showEditor()
                 }
             }

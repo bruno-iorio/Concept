@@ -337,8 +337,23 @@ Window {
                     Button {
                         id: studyButton
                         text: "Break"
+                        anchors.top: spacerStudyTimerTextTimerBlock.bottom
                         font.pixelSize: timerBlock.height * 0.07
+                        width: timerBlock.width / 2
+                        background: Rectangle{
+                            color: "#738290"
+                        //id: studyButton
+                        //text: "Break"
+                        //font.pixelSize: timerBlock.height * 0.07
                         //onClicked: startTimer(25)
+                        }
+                    }
+                    Rectangle{
+                        id: spacerButtonsTimerBlock
+                        color: white
+                        height: studyButton.height
+                        width: timerBlock.width * 0.003
+                        anchors.left: studyButton.right
                     }
 
                     Button {
@@ -346,6 +361,16 @@ Window {
                         id: breakButton
                         font.pixelSize: timerBlock.height * 0.07
                         //onClicked: startTimer(5)
+                        anchors.top: spacerStudyTimerTextTimerBlock.bottom
+                        anchors.left: spacerButtonsTimerBlock.right
+                        width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
+                        background: Rectangle{
+                            color: "#738290"
+                        //id: studyButton
+                        //text: "Break"
+                        //font.pixelSize: timerBlock.height * 0.07
+                        //onClicked: startTimer(25)
+                        }
                     }
 
                 }
@@ -421,7 +446,7 @@ Window {
                 }
             }
             Rectangle {
-                id: button4
+                id: textQuestion
                 width: pomodoroColumn.width - column3Container.width
                 height: mainContentRow.height * 0.08
                 anchors.top: button3.bottom
@@ -430,7 +455,16 @@ Window {
                 Text {
                     id: question
                     text: qsTr("Are you done with studying? See your progress here:")
+                    anchors.centerIn: parent
                 }
+            }
+            Rectangle{
+                id: button4
+                width: pomodoroColumn.width - column3Container.width
+                height: mainContentRow.height * 0.02
+                anchors.top: textQuestion.bottom
+                anchors.left:column3Container.right
+                color: "#F0EEE9"
                 Button{
                     id: statistics
                     text: "Statistics"

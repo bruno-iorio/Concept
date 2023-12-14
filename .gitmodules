@@ -1,4 +1,3 @@
 [submodule "Concept/Backend"]
 	path = Concept/Backend
 	url = https://github.com/ConceptTeam/Backend
-	branch = Database

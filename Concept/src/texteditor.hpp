@@ -7,7 +7,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QVBoxLayout>
-
+#include <vector>
 class TextEditor : public QWidget {
     Q_OBJECT
 public:
@@ -31,7 +31,8 @@ private:
     QString currentFilePath;
     QMenuBar *menuBar;
     QWindow *window;
-
+    std::vector<TextEditor*> listofTE;
+    int numberofTE{0};
     void createMenu();
 };
 

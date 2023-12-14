@@ -72,6 +72,8 @@ void TextEditor::saveFileAs() {
 }
 
 void TextEditor::showEditor() {
-    this->show();
+    listofTE.push_back(new TextEditor());
+    listofTE[numberofTE]->show();
+    numberofTE++;
 }
 

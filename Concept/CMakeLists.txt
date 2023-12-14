@@ -15,6 +15,10 @@ if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
+message("CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}")
+
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Backend/src/database ${CMAKE_CURRENT_BINARY_DIR}/database)
 
 ### Don't forget to add your new cpp and hpp functions here to link them with the App
 qt_add_executable(ConceptApp
@@ -38,6 +42,7 @@ target_link_libraries(ConceptApp PRIVATE
     Qt6::Qml
     Qt6::Quick
     Qt6::Widgets
+    database
 )
 
 if (BUILD_QDS_COMPONENTS)

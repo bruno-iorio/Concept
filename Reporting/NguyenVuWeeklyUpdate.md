@@ -18,3 +18,7 @@ To effectively tackle the project's initial phase, we made the strategic decisio
 2. Database Implementation
 
 In addition to the team restructuring, I decided to adopt SQLiteCpp, a lightweight and easy-to-use C++ SQLite3 wrapper, as our database solution. SQLiteCpp's simplicity and efficiency align well with our project's requirements, providing a solid foundation for data storage and management.
+
+# Week 3:
+
+I integrated text editor into the main app. We agreed on using a View/Edit feature for the Text Editor. The text will be displayed on the second column will display and clicking the edit button should open a new window to edit with the Text Editor. I will working on integrating the new window with the second column so that a window will not pop up when the user clicks on the edit button.

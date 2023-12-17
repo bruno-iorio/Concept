@@ -137,3 +137,6 @@ CMakeLists.txt.user*
 # End of https://www.toptal.com/developers/gitignore/api/qt,qtcreator,c++,cmake,qml
 
 .idea/
+
+c_cpp_properties.json
+settings.json

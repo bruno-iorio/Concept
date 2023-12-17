@@ -3,7 +3,6 @@ import QtQuick.Controls 6.2
 import QtQuick.Window 2.2
 
 
-
 Window {
     width: Screen.width
     height: Screen.height
@@ -333,11 +332,11 @@ Window {
                 color: "#C2D8B9"
 
                 Row {
+                    //spacing: 0
 
                     Button {
                         id: studyButton
                         text: "Break"
-                        anchors.top: spacerStudyTimerTextTimerBlock.bottom
                         font.pixelSize: timerBlock.height * 0.07
                         width: timerBlock.width / 2
                         background: Rectangle{
@@ -350,19 +349,16 @@ Window {
                     }
                     Rectangle{
                         id: spacerButtonsTimerBlock
-                        color: white
+                        color: "white"
                         height: studyButton.height
                         width: timerBlock.width * 0.003
-                        anchors.left: studyButton.right
                     }
 
                     Button {
-                        text: "Continue"
                         id: breakButton
+                        text: "Continue"
                         font.pixelSize: timerBlock.height * 0.07
-                        //onClicked: startTimer(5)
-                        anchors.top: spacerStudyTimerTextTimerBlock.bottom
-                        anchors.left: spacerButtonsTimerBlock.right
+                        anchors.top: studyButton.top
                         width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
                         background: Rectangle{
                             color: "#738290"

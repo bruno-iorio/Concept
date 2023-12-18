@@ -1,7 +1,7 @@
 import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Window 2.2
-
+import CustomControls 1.0
 
 Window {
     width: Screen.width
@@ -42,12 +42,20 @@ Window {
         }
 
         // "Help" button
+        MainHelp {
+            id: helpItem
+        }
+
         Button {
             id: helpButton
             text: "Help"
-            font.pixelSize: nameBar.height * 0.25 // Set a percentage of the nameBar height
+            font.pixelSize: nameBar.height * 0.25
             anchors.left: spacerHelpSearch.right
             anchors.verticalCenter: parent.verticalCenter
+
+            onClicked: {
+                helpItem.showHelpMenu();
+            }
         }
 
         // Spacing item

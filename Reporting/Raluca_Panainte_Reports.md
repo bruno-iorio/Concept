@@ -4,3 +4,6 @@ I also updated the General board with the information we discussed during this w
 
 Week 2: 
 After each meeting I made sure to update the Trello General board. For better communication, we set up a Discord server on which we can meet and discuss things related to the project easily, even during the break. I familiarized myself with QT, Web Assembly and their relation with C++. Also, I did some research on the tasks I need to implement. So far, I have decided to work on implementing a user login based system, as well as a to do list feature. 
+
+Week 3 & Week 4:
+Worked on the To Do List Feature of our web app. Coded and tested it locally on my computer. Planning to finally commit to Github my work during week 5.

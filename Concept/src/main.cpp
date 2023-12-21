@@ -17,6 +17,8 @@ int main(int argc, char *argv[]) {
 
     QQmlApplicationEngine engine;
 
+    qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
+
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject *obj, const QUrl &objUrl) {
@@ -30,6 +32,11 @@ int main(int argc, char *argv[]) {
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
     engine.load(url);
+
+    //Help Button
+    MainHelp helpItem;
+    engine.rootContext()->setContextProperty("helpItem", &helpItem);
+
 
     if (engine.rootObjects().isEmpty()) return -1;
 

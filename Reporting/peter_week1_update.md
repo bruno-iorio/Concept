@@ -18,3 +18,9 @@ Following Hung's guidance, we have implemented a BaseModel parent class
 we also defined subclasses (Note, Folder, Timer) by inheritance 
 with member functions for each which update the related database
 
+WEEK 4:
+
+During lecture, worked with Alex on ways to test our database handling (thanks to Google test in particular)
+Downloaded the SQLite_orm library in order to make the code functional
+The database handling part is now done
+Next objective: check which subteam/task needs additional help, also make sure the backend part is properly integrated to the frontend/UI part

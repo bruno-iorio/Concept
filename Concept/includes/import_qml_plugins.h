@@ -3,7 +3,7 @@
  * Do not change.
 */
 
-#include <QtQml/qqmlextensionplugin.h>
+#include <qqmlextensionplugin.h>
 
 Q_IMPORT_QML_PLUGIN(contentPlugin)
 Q_IMPORT_QML_PLUGIN(ConceptPlugin)

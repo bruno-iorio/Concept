@@ -1,0 +1,6 @@
+#ifndef CONCEPTAPP_EDITOR_H
+#define CONCEPTAPP_EDITOR_H
+
+
+
+#endif //CONCEPTAPP_EDITOR_H

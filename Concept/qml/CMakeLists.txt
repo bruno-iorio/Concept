@@ -19,5 +19,5 @@ qt_add_qml_module(Concept
 	RESOURCES
 		${RESOURCE_FILES}
 	SOURCES
-		linenumbermodel.cpp linenumbermodel.h
+		../src/linenumbermodel.cpp ../includes/linenumbermodel.h
 )

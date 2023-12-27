@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-set(QML_IMPORT_PATHS "./imports/Concept/")
+include_directories(includes)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Qml Quick Widgets QuickControls2 Svg)
 

@@ -2,17 +2,22 @@
 ### Do not change
 
 qt_add_library(Concept STATIC)
-set_source_files_properties(Constants.qml
+set_source_files_properties(Constants.qml Colors.qml
     PROPERTIES
         QT_QML_SINGLETON_TYPE true
     )
 
-qt6_add_qml_module(Concept
+# glob all qml files for qt6_add_qml_module
+file(GLOB_RECURSE QML_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.qml")
+file(GLOB_RECURSE RESOURCE_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "icons/*.svg")
+
+qt_add_qml_module(Concept
 	URI "Concept"
 	VERSION 1.0
 	QML_FILES
-		Constants.qml
-		DirectoryFontLoader.qml
-		EventListModel.qml
-		EventListSimulator.qml
+		${QML_FILES}
+	RESOURCES
+		${RESOURCE_FILES}
+	SOURCES
+		linenumbermodel.cpp linenumbermodel.h
 )

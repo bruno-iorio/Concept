@@ -27,6 +27,7 @@ QtObject {
                 var i
                 for (i = 0; i < count; i++) {
                     loadFont(folderModel.get(i, "fileURL"))
+                    console.log("Loaded font: " + folderModel.get(i, "fileURL"))
                 }
             }
         }

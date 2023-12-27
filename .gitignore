@@ -80,6 +80,8 @@ Makefile*
 *build*
 *.qm
 *.prl
+!build.sh
+database.sqlite
 
 # Qt unit tests
 target_wrapper.*

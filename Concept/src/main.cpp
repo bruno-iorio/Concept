@@ -9,6 +9,7 @@
 #include "mainhelp.h"
 #include "textedit.h"
 #include "textview.h"
+#include "setFocusPeriod.h"
 
 int main(int argc, char *argv[]) {
     set_qt_environment();
@@ -18,6 +19,9 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
 
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
+    //qmlRegisterType<SetFocusPeriod>("SetFocus", 1, 0, "SetFocusPeriod");
+
+    RedSquareManager redSquareManager;
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -37,6 +41,41 @@ int main(int argc, char *argv[]) {
     MainHelp helpItem;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
 
+    //QObject::connect(&helpItem, &MainHelp::newEditorOptionSelected, &textEditorWindow, &TextEditor::showEditor);
+
+
+    //SetFocusPeriod  focusPeriod;
+
+    //engine.rootContext()->setContextProperty("focusPeriod", &focusPeriod);
+
+
+
+// Find the redSquareItem by objectName
+
+    engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
+
+
+    QObject *rootObject = engine.rootObjects().first();
+    QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
+
+// Connect the showRedSquare signal to a lambda function that shows the red square
+
+    QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [rootObject]() {
+        QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
+        if (redSquareItem) {
+            redSquareItem->setProperty("visible", true);
+        }
+    });
+
+    // Assuming you have instantiated a RedSquareManager object named redSquareManager
+    QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [redSquareItem]() {
+        redSquareItem->setProperty("visible", true);
+    });
+
+    // Assuming you have instantiated a MainHelp object named helpItem
+    QObject::connect(&helpItem, &MainHelp::showRedSquare, &redSquareManager, &RedSquareManager::showRedSquare);
+
+    engine.load(url);
 
     if (engine.rootObjects().isEmpty()) return -1;
 

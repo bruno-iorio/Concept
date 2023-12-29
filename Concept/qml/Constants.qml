@@ -24,4 +24,8 @@ QtObject {
     property StudioApplication application: StudioApplication {
         fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
     }
+
+    property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
+        id: directoryFontLoader
+    }
 }

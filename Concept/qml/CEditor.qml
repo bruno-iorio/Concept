@@ -13,9 +13,11 @@ import Concept
 Rectangle {
     id: root
 
-    required property string currentFilePath
+    property int currentNoteId
+    property string currentNoteTitle
     required property bool showLineNumbers
     property alias text: textArea
+    property alias controller: controller
     property int currentLineNumber: -1
     property int rowHeight: Math.ceil(fontMetrics.lineSpacing)
 
@@ -23,6 +25,19 @@ Rectangle {
 
     onWidthChanged: textArea.update()
     onHeightChanged: textArea.update()
+
+    Component.onCompleted: controller.lastModifiedNote()
+
+    ConceptEditor {
+        id: controller
+
+        onNoteOpened: (id, title, content) => {
+            root.currentNoteId = id
+            root.currentNoteTitle = title
+            textArea.text = content
+            console.log("onNoteOpened", id, title, content)
+        }
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -33,8 +48,8 @@ Rectangle {
             id: lineNumbers
 
             // Calculate the width based on the logarithmic scale.
-            Layout.preferredWidth: fontMetrics.averageCharacterWidth
-                * (Math.floor(Math.log10(textArea.lineCount)) + 1) + 10
+            Layout.preferredWidth: Math.max(fontMetrics.averageCharacterWidth
+                * (Math.floor(Math.log10(textArea.lineCount)) + 1) + 10, 40)
             Layout.fillHeight: true
 
             interactive: false
@@ -99,7 +114,7 @@ Rectangle {
                     color: Colors.background
                     Behavior on opacity {
                         OpacityAnimator {
-                            duration: 500
+                            duration: 200
                         }
                     }
                 }
@@ -127,9 +142,11 @@ Rectangle {
                 id: textArea
                 anchors.fill: parent
 
-                focus: false
+                focus: true
                 topPadding: 0
                 leftPadding: 10
+
+                font: Colors.font
 
                 // text: FileSystemModel.readFile(root.currentFilePath)
                 tabStopDistance: fontMetrics.averageCharacterWidth * 4

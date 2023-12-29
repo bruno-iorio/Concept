@@ -20,4 +20,18 @@ QtObject {
     readonly property color iconIndicator: "#D5B35D"
     readonly property color color1: "#A7B464"
     readonly property color color2: "#D3869B"
+
+    /* load fonts from directory */
+    readonly property font font: Qt.font({
+        family: "Roboto Mono",
+        pixelSize: Qt.application.font.pixelSize
+    })
+    readonly property font largeFont: Qt.font({
+        family: "Roboto Mono",
+        pixelSize: Qt.application.font.pixelSize * 1.6
+    })
+
+    property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
+        id: directoryFontLoader
+    }
 }

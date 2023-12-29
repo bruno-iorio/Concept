@@ -1,4 +1,5 @@
 Module Concept
+singleton Constants 1.0 Constants.qml
 EventListSimulator 1.0 EventListSimulator.qml
 EventListModel 1.0 EventListModel.qml
 DirectoryFontLoader 1.0 DirectoryFontLoader.qml
@@ -10,3 +11,4 @@ CEditor 1.0 CEditor.qml
 singleton Colors 1.0 Colors.qml
 CSidebar 1.0 CSidebar.qml
 About 1.0 About.qml
+FileSystemView 1.0 FileSystemView.qml

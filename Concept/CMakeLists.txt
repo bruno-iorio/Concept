@@ -27,7 +27,7 @@ qt_add_executable(ConceptApp
     src/mainhelp.h src/mainhelp.cpp
     src/textview.h src/textview.cpp
     src/textedit.h src/textedit.cpp
-
+    src/setFocusPeriod.h src/setFocusPeriod.cpp
 )
 
 qt_add_resources(ConceptApp "configuration"

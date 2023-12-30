@@ -9,6 +9,7 @@
 #include "mainhelp.h"
 #include "textedit.h"
 #include "textview.h"
+#include "setFocusPeriod.h"
 
 int main(int argc, char *argv[]) {
     set_qt_environment();
@@ -18,6 +19,7 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
 
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
+    qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -33,10 +35,13 @@ int main(int argc, char *argv[]) {
     engine.addImportPath(":/");
     engine.load(url);
 
+    //Set Focus Period Button
+    SetFocusPeriod focusItem;
+    engine.rootContext()->setContextProperty("focusItem", &focusItem);
+
     //Help Button
     MainHelp helpItem;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
-
 
     if (engine.rootObjects().isEmpty()) return -1;
 

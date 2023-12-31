@@ -9,7 +9,7 @@
 #include "mainhelp.h"
 #include "textedit.h"
 #include "textview.h"
-#include "setFocusPeriod.h"
+//#include "setFocusPeriod.h"
 
 int main(int argc, char *argv[]) {
     set_qt_environment();
@@ -40,9 +40,6 @@ int main(int argc, char *argv[]) {
     //Help Button
     MainHelp helpItem;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
-
-    //QObject::connect(&helpItem, &MainHelp::newEditorOptionSelected, &textEditorWindow, &TextEditor::showEditor);
-
 
     //SetFocusPeriod  focusPeriod;
 
@@ -75,7 +72,6 @@ int main(int argc, char *argv[]) {
     // Assuming you have instantiated a MainHelp object named helpItem
     QObject::connect(&helpItem, &MainHelp::showRedSquare, &redSquareManager, &RedSquareManager::showRedSquare);
 
-    engine.load(url);
 
     if (engine.rootObjects().isEmpty()) return -1;
 

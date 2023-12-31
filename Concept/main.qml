@@ -137,7 +137,9 @@ ApplicationWindow {
                     FileSystemView {
                         id: fileSystemView
                         color: Colors.surface1
-                        onFileClicked: path => root.currentFilePath = path
+                        onNoteClicked: index => {
+                            editor.controller.openNote(index)
+                        }
                     }
                 }
             }

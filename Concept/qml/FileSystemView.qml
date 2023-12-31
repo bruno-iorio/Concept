@@ -11,7 +11,7 @@ pragma ComponentBehavior: Bound
 Rectangle {
     id: root
 
-    signal fileClicked(string filePath)
+    signal noteClicked(var index)
     property alias rootIndex: explorerTreeView.rootIndex
 
     TreeView {
@@ -20,13 +20,16 @@ Rectangle {
         property int lastIndex: -1
 
         anchors.fill: parent
-        model: FileSystemModel
-        rootIndex: FileSystemModel.rootIndex
+        model: ExplorerModel
+        // rootIndex: FileSystemModel.rootIndex
         boundsBehavior: Flickable.StopAtBounds
         boundsMovement: Flickable.StopAtBounds
         clip: true
 
-        Component.onCompleted: explorerTreeView.toggleExpanded(0)
+        Component.onCompleted: {
+            for (let i = 0; i < model.rowCount(); i++)
+                explorerTreeView.toggleExpanded(i)
+        }
 
         // The delegate represents a single entry in the filesystem.
         delegate: TreeViewDelegate {
@@ -36,8 +39,16 @@ Rectangle {
             implicitHeight: 25
 
             required property int index
-            required property url filePath
-            required property string fileName
+            required property var modelData
+            property var modelType: !treeDelegate.hasChildren ? "file" : "directory"
+            property var dataId: treeDelegate.treeView.model.data(
+                treeDelegate.treeView.index(modelData.row, 1), Qt.DisplayRole
+            )
+            property var dataName: treeDelegate.treeView.model.data(
+                treeDelegate.treeView.index(modelData.row, 0), Qt.DisplayRole
+            )
+
+            visible: modelData.column === 0
 
             indicator: Image {
                 id: directoryIcon
@@ -56,8 +67,11 @@ Rectangle {
                 asynchronous: true
             }
 
+            // Change contentItem's color based on whether the item is selected or not.
             contentItem: Text {
-                text: treeDelegate.fileName
+                clip: false
+                text: treeDelegate.dataName
+                elide: Text.ElideRight
                 color: Colors.text
             }
 
@@ -91,11 +105,13 @@ Rectangle {
                     switch (button) {
                         case Qt.LeftButton:
                             explorerTreeView.toggleExpanded(treeDelegate.row)
-                            explorerTreeView.lastIndex = treeDelegate.index
                             // If this model item doesn't have children, it means it's
                             // representing a file.
-                            if (!treeDelegate.hasChildren)
-                                root.fileClicked(treeDelegate.filePath)
+                            let idData = treeDelegate.treeView.model.data(
+                                treeDelegate.treeView.index(modelData.row, 1), Qt.DisplayRole
+                            )
+                            if (!treeDelegate.hasChildren && treeDelegate.modelType === "file")
+                                root.noteClicked(idData)
                         break;
                         case Qt.RightButton:
                             if (treeDelegate.hasChildren)
@@ -106,16 +122,38 @@ Rectangle {
             }
 
             CMenu {
-                id: contextMenu
+                id: folderContextMenu
                 Action {
-                    text: qsTr("Set as root index")
-                    onTriggered: {
-                        explorerTreeView.rootIndex = explorerTreeView.index(treeDelegate.row, 0)
-                    }
+                    text: qsTr("New note")
+                    onTriggered: console.log(true) // TODO: Create note at this layer
                 }
                 Action {
-                    text: qsTr("Reset root index")
-                    onTriggered: explorerTreeView.rootIndex = undefined
+                    text: qsTr("New folder")
+                    onTriggered: console.log(true) // TODO: Create a sibling folder
+                }
+                Action {
+                    text: qsTr("Rename")
+                    onTriggered: console.log(true) // TODO: Rename this folder
+                }
+                Action {
+                    text: qsTr("Delete")
+                    onTriggered: console.log(true) // TODO: Delete this folder and all its contents
+                }
+            }
+
+            CMenu {
+                id: noteContextMenu
+                Action {
+                    text: qsTr("New note")
+                    onTriggered: console.log(true) // TODO: Create note at this layer
+                }
+                Action {
+                    text: qsTr("Rename")
+                    onTriggered: console.log(true) // TODO: Rename this note
+                }
+                Action {
+                    text: qsTr("Delete")
+                    onTriggered: console.log(true) // TODO: Delete this note
                 }
             }
         }

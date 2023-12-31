@@ -9,37 +9,50 @@
 #include <QAbstractItemModel>
 #include "database/database.h"
 
-class ExplorerModel : public QAbstractItemModel {
-    Q_OBJECT
-    QML_ELEMENT
-    QML_SINGLETON
+class ExplorerItem {
+public:
+    explicit ExplorerItem(const QVector<QVariant> &data, ExplorerItem *parentItem = nullptr);
+    ~ExplorerItem();
+
+    void appendChild(ExplorerItem *child);
+
+    ExplorerItem *child(int row);
+    int childCount() const;
+    int columnCount() const;
+    QVariant data(int column) const;
+    int row() const;
+    ExplorerItem *parentItem();
+
 private:
-    struct IndexData
-    {
-        QVector<QModelIndex> parents;
-    };
+    QVector<ExplorerItem*> m_childItems;
+    QVector<QVariant> m_itemData;
+    ExplorerItem *m_parentItem;
+};
+
+class ExplorerModel : public QAbstractItemModel
+{
+Q_OBJECT
+QML_ELEMENT
+QML_SINGLETON
 
 public:
     explicit ExplorerModel(QObject *parent = nullptr);
-    ~ExplorerModel();
+    ~ExplorerModel() override;
 
     QVariant data(const QModelIndex &index, int role) const override;
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    QVariant headerData(int section, Qt::Orientation orientation,
+                        int role = Qt::DisplayRole) const override;
+    QModelIndex index(int row, int column,
+                      const QModelIndex &parent = QModelIndex()) const override;
     QModelIndex parent(const QModelIndex &index) const override;
-protected:
-    IndexData * indexData(const QModelIndex &index) const;
-    QList<int> indexPath(const QModelIndex &index) const;
-    QString indexString(const QModelIndex &index) const;
-    QString indexString(int row, int column, const QModelIndex &parent) const;
-public:
-    int indexDepth(const QModelIndex &index) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-    Qt::ItemFlags flags(const QModelIndex &index) const override;
+
+    Q_INVOKABLE void generate_model();
 
 private:
-    QMap<QString, IndexData*> indexData_;
-    list_note notes;
+    ExplorerItem *rootItem;
 };
 
 #endif //CONCEPTAPP_EXPLORER_H

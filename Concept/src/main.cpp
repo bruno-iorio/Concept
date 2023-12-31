@@ -3,13 +3,14 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDirIterator>
-#include <QtSql>
 #include <QFontDatabase>
 #include "includes/app_environment.h"
 #include "includes/import_qml_components_plugins.h"
 #include "includes/import_qml_plugins.h"
 #include "QxOrm.h"
 #include "database/database.h"
+#include "explorer.h"
+#include <QTreeView>
 
 int main(int argc, char *argv[]) {
     // Initialize QxOrm
@@ -21,8 +22,8 @@ int main(int argc, char *argv[]) {
 
     // Create the table if it doesn't exist
     qx::dao::create_table<Note>();
-//    qx::dao::create_table<Folder>();
-//    qx::dao::create_table<FocusTime>();
+    qx::dao::create_table<Folder>();
+    qx::dao::create_table<FocusTime>();
 
     // Add a note to the database
     Note_ptr note; note.reset(new Note());
@@ -37,6 +38,30 @@ int main(int argc, char *argv[]) {
         note->last_modified = QDateTime::currentDateTime();
 
         QSqlError dao = qx::dao::insert(note);
+    } else {
+        qx::dao::fetch_all(note);
+    }
+
+    // Create test folder
+    Folder_ptr folder; folder.reset(new Folder());
+
+    if (qx::dao::count<Folder>() == 0) {
+        qDebug() << "No folders found, creating a test folder";
+        folder->id = 1;
+        folder->name = QString("Test folder");
+        folder->notes.push_back(note);
+
+        QSqlError dao = qx::dao::insert_with_all_relation(folder);
+    } else {
+        qx::dao::fetch_all(folder);
+    }
+
+    // Add test note to test folder
+    if (qx::dao::count<Folder>() > 0) {
+        qDebug() << "Adding test note to test folder";
+        note->folder = folder;
+        QSqlError dao = qx::dao::update_with_all_relation(note);
+        qDebug() << dao.text();
     }
 
     set_qt_environment();
@@ -64,6 +89,12 @@ int main(int argc, char *argv[]) {
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
     engine.load(url);
+
+//    QTreeView treeView;
+//
+//    ExplorerModel model;
+//    treeView.setModel(&model);
+//    treeView.show();
 
     if (engine.rootObjects().isEmpty()) return -1;
 

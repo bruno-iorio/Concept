@@ -1,22 +1,21 @@
 #include <QtWidgets/QtWidgets>
 #include "editor.h"
-#include "QxOrm.h"
+#include "precompiled.h"
 #include "database/notes.h"
+#include "errors.h"
 
 ConceptEditor::ConceptEditor(QObject *parent) : QObject(parent) {}
 
 void ConceptEditor::lastModifiedNote() {
-    std::shared_ptr<Note> note; note.reset(new Note());
+    Note_ptr note; note.reset(new Note());
     qx_query query;
     query.orderAsc("last_modified").limit(1);
     QSqlError daoError = qx::dao::fetch_by_query(query, note);
-    qDebug() << "Last modified note: " << note->id;
     emit noteOpened(note->id, note->title, note->content);
 }
 
 void ConceptEditor::openNote(int id) {
-    qDebug() << "Open note with id: " << id;
-    std::shared_ptr<Note> note; note.reset(new Note());
+    Note_ptr note; note.reset(new Note());
     note->id = id;
     QSqlError daoError = qx::dao::fetch_by_id(note);
 
@@ -24,8 +23,7 @@ void ConceptEditor::openNote(int id) {
 }
 
 void ConceptEditor::saveNote(int id, const QString &name, const QString &content) {
-    qDebug() << "Save note with id: " << id;
-    std::shared_ptr<Note> note; note.reset(new Note());
+    Note_ptr note; note.reset(new Note());
     note->id = id;
     note->title = name;
     note->content = content;
@@ -36,7 +34,6 @@ void ConceptEditor::saveNote(int id, const QString &name, const QString &content
 
 void ConceptEditor::createNote() {
     QDialog * d = new QDialog();
-    d->setWindowTitle("Create a new note");
 
     QVBoxLayout * vbox = new QVBoxLayout();
     QLineEdit * name = new QLineEdit();
@@ -47,6 +44,7 @@ void ConceptEditor::createNote() {
     QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
 
+    vbox->setGeometry(QRect(0, 0, 300, 300));
     vbox->addWidget(name);
     vbox->addWidget(buttonBox);
 
@@ -55,14 +53,18 @@ void ConceptEditor::createNote() {
     int result = d->exec();
     if(result == QDialog::Accepted)
     {
-        std::shared_ptr<Note> note; note.reset(new Note());
+        Note_ptr note; note.reset(new Note());
         note->id = 0;
         note->title = name->text();
         note->content = "";
         note->last_modified = QDateTime::currentDateTime();
 
         QSqlError daoError = qx::dao::insert(note);
-        qDebug() << "Note created";
+
+        if (daoError.isValid()) {
+            error_popup(daoError.text());
+            return;
+        }
 
         emit noteOpened(note->id, note->title, note->content);
     }

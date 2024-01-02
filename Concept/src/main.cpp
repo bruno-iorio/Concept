@@ -41,21 +41,12 @@ int main(int argc, char *argv[]) {
     MainHelp helpItem;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
 
-    //SetFocusPeriod  focusPeriod;
-
-    //engine.rootContext()->setContextProperty("focusPeriod", &focusPeriod);
-
-
-
-// Find the redSquareItem by objectName
-
     engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
 
 
     QObject *rootObject = engine.rootObjects().first();
     QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
 
-// Connect the showRedSquare signal to a lambda function that shows the red square
 
     QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [rootObject]() {
         QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
@@ -64,12 +55,10 @@ int main(int argc, char *argv[]) {
         }
     });
 
-    // Assuming you have instantiated a RedSquareManager object named redSquareManager
     QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [redSquareItem]() {
         redSquareItem->setProperty("visible", true);
     });
 
-    // Assuming you have instantiated a MainHelp object named helpItem
     QObject::connect(&helpItem, &MainHelp::showRedSquare, &redSquareManager, &RedSquareManager::showRedSquare);
 
 

@@ -49,17 +49,7 @@ Window {
             onShowRedSquare: redSquareManager.showRedSquare()
         }
 
-        function handleShowRedSquare() {
-            // Call the showRedSquare function of the RedSquareManager
-            redSquareManager.showRedSquare();
-        }
 
-        Connections {
-            target: redSquareManager
-            onRedSquareRequested: {
-                redSquareItem.visible = true;
-            }
-        }
 
         Button {
             id: helpButton

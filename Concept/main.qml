@@ -468,8 +468,9 @@ Window {
                 anchors.left:column3Container.right
                 color: "#F0EEE9"
 
-                ///SetFocusPeriod{
-                   /// id : focusPeriod}
+                SetFocusPeriod{
+                    id : focusPeriod
+                }
 
 
                 Button{

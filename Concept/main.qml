@@ -2,6 +2,8 @@ import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Window 2.2
 import CustomControls 1.0
+import QtQuick.Shapes 2.15
+
 
 
 Window {
@@ -260,25 +262,48 @@ Window {
                     height : column2Header.height * 0.95
                     onClicked: textEditor.showEditor()
 
-
-
-                    Pane {
+                    ItemDelegate {
                         id: redSquareItem
                         objectName: "redSquareItem"
                         visible: false
                         anchors.bottom : newButton.top
-                        anchors.horizontalCenter: newButton.horizontalCenter
+                        //anchors.horizontalCenter: newButton.horizontalCenter
+                        anchors.verticalCenter: newButton.verticalCenter
 
-                        Label {
-                            text : qsTr("Here!")
-                            anchors.centerIn: parent
-                        }
+                        Rectangle {
+                                width: newButton.width
+                                height: newButton.height * 0.7
+                                color: "#FF640F"
+                                radius : newButton.width * 0.8
+
+                                Label {
+                                    text: qsTr("Here!")
+                                    anchors.centerIn: parent
+                                }
+
+                                // Add arrow above the button
+                                        Shape {
+                                            anchors.bottom: redSquareItem.top
+                                            //anchors.verticalCenter: parent.verticalCenter  // Center the arrow vertically
+                                            anchors.horizontalCenter: parent.horizontalCenter  // Center the arrow horizontally
+
+                                            ShapePath {
+                                                fillColor: "white"
+
+                                                // Arrow shape
+                                                PathLine { x: -10; y: 10 }
+                                                PathLine { x: 0; y: -10 }
+                                                PathLine { x: 10; y: 10 }
+                                            }
+                                        }
+                            }
 
                         background: Rectangle {
-                            width: newButton.width
-                            height: newButton.height * 0.7
-                            color: "red"
-                        }
+                                width: newButton.width
+                                height: newButton.height * 0.7
+                                color: "#FF640F"
+                                radius: newButton.width * 0.8
+                            }
 
                         Timer {
                             id: hideTimer
@@ -479,7 +504,7 @@ Window {
                     anchors.centerIn: parent
 
                     onClicked : {
-                        focusPeriod.showMenu();
+                        focusItem.showMenu();
                     }
 
                 }

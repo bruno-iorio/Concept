@@ -456,6 +456,10 @@ Window {
                 //}
 
             }
+            SetFocusPeriod {
+                id: focusItem
+            }
+
             Rectangle {
                 id: button1
                 width: pomodoroColumn.width - column3Container.width
@@ -469,7 +473,7 @@ Window {
 
 
                 Button{
-                    id: setFocusPeriod
+                    id: focusPeriodButton
                     text: "Set focus period"
                     font.pixelSize: timerBlock.height * 0.07
                     anchors.centerIn: parent

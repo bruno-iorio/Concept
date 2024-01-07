@@ -25,6 +25,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Backend/src/database ${CMAKE_CURREN
 ### Don't forget to add your new cpp and hpp functions here to link them with the App
 qt_add_executable(ConceptApp
     src/main.cpp
+    includes/mainhelp.h src/mainhelp.cpp
+    includes/setFocusPeriod.h src/setFocusPeriod.cpp
 )
 
 qt_add_resources(ConceptApp "configuration"

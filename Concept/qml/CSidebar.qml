@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import Concept
+import CustomControls 1.0
 
 Rectangle {
     id: root
@@ -127,6 +128,21 @@ Rectangle {
                 icon.source: "icons/info_sign.svg"
                 checkable: false
                 onClicked: aboutQtWindow.visible = !aboutQtWindow.visible
+            }
+
+            MainHelp {
+                id: helpItem
+                onShowRedSquare: redSquareManager.showRedSquare()
+            }
+
+            SidebarEntry {
+                id: helpButton
+
+                icon.source: "icons/help.svg"
+                checkable: false
+                onClicked: {
+                    helpItem.showHelpMenu();
+                }
             }
         }
     }

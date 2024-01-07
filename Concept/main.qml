@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Concept
+import QtQuick.Shapes
 
 pragma ComponentBehavior: Bound
 
@@ -13,8 +14,8 @@ ApplicationWindow {
 
     // readonly property font fontFamily: "Arial"
 
-    width: 1280
-    height: 720
+    width: Screen.width * 0.95
+    height: Screen.height * 0.95
     title: "Concept"
     visible: true
     color: Colors.background
@@ -54,6 +55,8 @@ ApplicationWindow {
                 onTriggered: Qt.exit(0)
                 shortcut: StandardKey.Quit
             }
+
+            
         }
     }
 
@@ -119,8 +122,34 @@ ApplicationWindow {
                 id: editor
                 showLineNumbers: root.showLineNumbers
                 currentFilePath: root.currentFilePath
-                SplitView.fillWidth: true
+                SplitView.preferredWidth: 800
                 SplitView.fillHeight: true
+            }
+
+            SplitView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                // Customized handle to drag between the Navigation and the Editor.
+                handle: Rectangle {
+                    implicitWidth: 5
+                    color: SplitHandle.pressed ? Colors.color2 : Colors.background
+                    border.color: SplitHandle.hovered ? Colors.color2 : Colors.background
+                    opacity: SplitHandle.hovered || navigationView.width < 15 ? 1.0 : 0.0
+
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: 1400
+                        }
+                    }
+                }
+
+                Pomodoro {
+                    id: pomodoro
+                    SplitView.fillWidth: true
+                    SplitView.fillHeight: true
+                    color: Colors.surface1
+                }
+
             }
         }
     }

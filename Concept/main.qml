@@ -2,6 +2,9 @@ import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Window 2.2
 import CustomControls 1.0
+import QtQuick.Shapes 2.15
+
+
 
 Window {
     width: Screen.width
@@ -41,10 +44,14 @@ Window {
             width: parent.width * 0.45 // Set a percentage of the screen width
         }
 
+
         // "Help" button
         MainHelp {
             id: helpItem
+            onShowRedSquare: redSquareManager.showRedSquare()
         }
+
+
 
         Button {
             id: helpButton
@@ -54,9 +61,14 @@ Window {
             anchors.verticalCenter: parent.verticalCenter
 
             onClicked: {
-                helpItem.showHelpMenu();
-            }
+                    helpItem.showHelpMenu();
+
+                }
+
+
         }
+
+
 
         // Spacing item
         Item {
@@ -249,6 +261,68 @@ Window {
                     anchors.verticalCenter: column2Header.verticalCenter
                     height : column2Header.height * 0.95
                     onClicked: textEditor.showEditor()
+
+                    ItemDelegate {
+                        id: redSquareItem
+                        objectName: "redSquareItem"
+                        visible: false
+                        anchors.bottom : newButton.top
+                        //anchors.horizontalCenter: newButton.horizontalCenter
+                        anchors.verticalCenter: newButton.verticalCenter
+
+                        Rectangle {
+                                width: newButton.width
+                                height: newButton.height * 0.7
+                                color: "#FF640F"
+                                radius : newButton.width * 0.8
+
+                                Label {
+                                    text: qsTr("Here!")
+                                    anchors.centerIn: parent
+                                }
+
+                                // Add arrow above the button
+                                        Shape {
+                                            anchors.bottom: redSquareItem.top
+                                            //anchors.verticalCenter: parent.verticalCenter  // Center the arrow vertically
+                                            anchors.horizontalCenter: parent.horizontalCenter  // Center the arrow horizontally
+
+                                            ShapePath {
+                                                fillColor: "white"
+
+                                                // Arrow shape
+                                                PathLine { x: -10; y: 10 }
+                                                PathLine { x: 0; y: -10 }
+                                                PathLine { x: 10; y: 10 }
+                                            }
+                                        }
+                            }
+
+                        background: Rectangle {
+                                width: newButton.width
+                                height: newButton.height * 0.7
+                                color: "#FF640F"
+                                radius: newButton.width * 0.8
+                            }
+
+                        Timer {
+                            id: hideTimer
+                            interval: 7000  // 10 seconds in milliseconds
+                            onTriggered: {
+                                redSquareItem.visible = false;
+                            }
+                        }
+
+                        onVisibleChanged: {
+                            if (visible) {
+                                // Start the timer when the red square becomes visible
+                                hideTimer.start();
+                            } else {
+                                // Stop the timer when the red square is not visible
+                                hideTimer.stop();
+                            }
+                        }
+                    }
                 }
             }
 
@@ -418,15 +492,22 @@ Window {
                 anchors.top: timerBlock.bottom
                 anchors.left:column3Container.right
                 color: "#F0EEE9"
+
+                SetFocusPeriod{
+                    id : focusPeriod
+                }
+
+
                 Button{
                     id: focusPeriodButton
                     text: "Set focus period"
                     font.pixelSize: timerBlock.height * 0.07
                     anchors.centerIn: parent
 
-                    onClicked: {
+                    onClicked : {
                         focusItem.showMenu();
                     }
+
                 }
             }
             Rectangle {

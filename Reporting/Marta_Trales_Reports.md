@@ -26,3 +26,32 @@ At Hung's suggestion, we have restructured the team a bit, we have mege some par
 Max and I have managed to install, activate and run the project and its required tools on our teammates laptops. This also helped us understand how the components work together and which files build what.
 
 Personally, I have been working on analysing classes (hierarchy) and templates can help me implement the help section, how they'll connect with the other parts of the app. I plan on implementing this into code the next week and also tie it to the already existing ui. 
+
+--------------------------WEEK 3--------------------------
+
+Backend is doing nice progress, databases are being implemented and properly handled. The ui team is solving the bugs across devices.
+We had the problem of a Qt version change - some libraries din not build properly, so we switched back to a callable app (no web anymore).
+We had to reconfigure some laptops, but with the already gained experience it all went smoothly.
+
+We had to rethink our texteditor and now we have a second header into the main collumn and a button that triggers a new window of texteditor.
+
+Personal work:
+ - I have implemented a way for the contents to fit into each screen (adapt by the width and height of each) - contribution to Screen01.ui.qml (Now main.qml)
+ - Reordered Help and Search button (in ui) in order to implement the Help Section + rearranged the buttons. (main.qml)
+
+ - Tried implementing the Help Section as a dropdown in qml but could not align the items. 
+ Documented options in cpp and understood the scheme for that. 
+ Will implement it all in cpp - Week 4 (with few additions in qml).
+ 
+
+--------------------------WEEK 4--------------------------
+
+Backend has been implemented into the Concept Project (it's been initially developed individually).
+We have observed and analysed problems for the Windows users in the team. Solutions to these issues were found and the project follows its normal course. 
+
+The timer is currently being implemented, together with its features. To-do lists are also being put into place and will be soon functional + their qml tools.
+
+Personal work:
+- Implemented the dropdown menu, alligned, options and functional
+- (+ Break Week 1 ) Implemented the first option in the dropdown menu
+

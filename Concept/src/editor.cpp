@@ -66,6 +66,6 @@ void ConceptEditor::createNote() {
             return;
         }
 
-        emit noteOpened(note->id, note->title, note->content);
+        emit noteCreated(note->id, note->title, note->content);
     }
 }

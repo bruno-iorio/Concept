@@ -23,9 +23,6 @@ message("CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}")
 #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Backend/src/database ${CMAKE_CURRENT_BINARY_DIR}/database)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party ${CMAKE_CURRENT_BINARY_DIR}/third_party)
 
-#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Backend/src/database ${CMAKE_CURRENT_BINARY_DIR}/database)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party ${CMAKE_CURRENT_BINARY_DIR}/third_party)
-
 ### Don't forget to add your new cpp and hpp functions here to link them with the App
 qt_add_executable(ConceptApp
     src/main.cpp

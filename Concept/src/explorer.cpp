@@ -68,7 +68,7 @@ void ExplorerModel::generate_model()
 {
     beginResetModel();
 
-    rootItem = new ExplorerItem({tr("Title"), tr("id")});
+    rootItem = new ExplorerItem({ tr("id") });
 
     list_note notes_without_folder;
     qx_query query;
@@ -77,7 +77,7 @@ void ExplorerModel::generate_model()
 
     for (auto &note : notes_without_folder) {
         QVector<QVariant> noteColumnData;
-        noteColumnData << note->title << QVariant::fromValue(note->id);
+        noteColumnData << QVariant::fromValue(note->id);
         rootItem->appendChild(new ExplorerItem(noteColumnData, rootItem));
     }
 
@@ -86,12 +86,12 @@ void ExplorerModel::generate_model()
 
     for (auto &folder : folders) {
         QVector<QVariant> folderColumnData;
-        folderColumnData << folder->name << QVariant::fromValue(folder->id);
+        folderColumnData << QVariant::fromValue(folder->id);
         auto *folderItem = new ExplorerItem(folderColumnData, rootItem);
 
         for (auto &note : folder->notes) {
             QVector<QVariant> noteColumnData;
-            noteColumnData << note->title << QVariant::fromValue(note->id);
+            noteColumnData << QVariant::fromValue(note->id);
             auto *noteItem = new ExplorerItem(noteColumnData, folderItem);
             folderItem->appendChild(noteItem);
         }
@@ -183,4 +183,19 @@ QVariant ExplorerModel::headerData(int section, Qt::Orientation orientation,
         return rootItem->data(section);
 
     return {};
+}
+
+QString ExplorerModel::getTitle(int id, int type) {
+    if (type == ExplorerModel::OBJECT_TYPE::NOTE) {
+        Note_ptr note; note.reset(new Note());
+        note->id = id;
+        qx::dao::fetch_by_id(note);
+        return note->title;
+    } else if (type == ExplorerModel::OBJECT_TYPE::FOLDER) {
+        Folder_ptr folder; folder.reset(new Folder());
+        folder->id = id;
+        qx::dao::fetch_by_id(folder);
+        return folder->name;
+    }
+    return "";
 }

@@ -16,6 +16,7 @@ class ConceptEditor : public QObject {
         Q_INVOKABLE void lastModifiedNote();
     signals:
         void noteOpened(long id, const QString &name, const QString &content);
+        void noteCreated(long id, const QString &name, const QString &content);
 };
 
 #endif //CONCEPTAPP_EDITOR_H

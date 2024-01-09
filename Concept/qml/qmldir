@@ -4,11 +4,12 @@ EventListSimulator 1.0 EventListSimulator.qml
 EventListModel 1.0 EventListModel.qml
 DirectoryFontLoader 1.0 DirectoryFontLoader.qml
 
+singleton Colors 1.0 Colors.qml
 WindowDragHandler 1.0 WindowDragHandler.qml
 CMenu 1.0 CMenu.qml
 CMenuBar 1.0 CMenuBar.qml
 CEditor 1.0 CEditor.qml
-singleton Colors 1.0 Colors.qml
 CSidebar 1.0 CSidebar.qml
+CTimer 1.0 CTimer.qml
 About 1.0 About.qml
 FileSystemView 1.0 FileSystemView.qml

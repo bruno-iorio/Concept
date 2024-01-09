@@ -16,6 +16,7 @@ Rectangle {
     property int currentNoteId
     property string currentNoteTitle
     required property bool showLineNumbers
+    required property var explorer
     property alias text: textArea
     property alias controller: controller
     property int currentLineNumber: -1
@@ -36,6 +37,15 @@ Rectangle {
             root.currentNoteTitle = title
             textArea.text = content
             console.log("onNoteOpened", id, title, content)
+        }
+
+        onNoteCreated: (id, title, content) => {
+            root.currentNoteId = id
+            root.currentNoteTitle = title
+            textArea.text = content
+            ExplorerModel.generate_model()
+            explorer.reset()
+            console.log("onNoteCreated", id, title, content)
         }
     }
 

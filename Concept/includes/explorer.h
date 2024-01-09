@@ -51,6 +51,13 @@ public:
 
     Q_INVOKABLE void generate_model();
 
+    enum OBJECT_TYPE {
+        NOTE = 1,
+        FOLDER = 2
+    };
+
+    Q_INVOKABLE QString getTitle(int id, int type);
+
 private:
     ExplorerItem *rootItem;
 };

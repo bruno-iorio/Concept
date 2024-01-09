@@ -7,7 +7,7 @@ import Qt.labs.folderlistmodel 6.2
 QtObject {
     id: loader
 
-    property url fontDirectory: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
+    property url fontDirectory: Qt.resolvedUrl("../content/" + relativeFontDirectory)
     property string relativeFontDirectory: "fonts"
 
     function loadFont(url) {
@@ -23,12 +23,12 @@ QtObject {
         showDirs: false
 
         onStatusChanged: {
-            if (folderModel.status == FolderListModel.Ready) {
-                var i
+            if (folderModel.status === FolderListModel.Ready) {
+                var i;
                 for (i = 0; i < count; i++) {
-                    loadFont(folderModel.get(i, "fileURL"))
-                    console.log("Loaded font: " + folderModel.get(i, "fileURL"))
+                    loadFont(folderModel.get(i, "fileURL"));
                 }
+                console.log("Loaded " + i + " fonts");
             }
         }
     }

@@ -11,6 +11,7 @@ ApplicationWindow {
     id: root
 
     property bool showLineNumbers: true
+    property alias editor: editor
 
     // readonly property font fontFamily: "Arial"
 
@@ -21,13 +22,40 @@ ApplicationWindow {
     color: Colors.background
     flags: Qt.Window | Qt.FramelessWindowHint
 
+    function generateInfoText() {
+        var infoText = "Concept"
+        if (editor.currentNoteTitle !== "") {
+            infoText += " - " + editor.currentNoteTitle
+        }
+        return infoText
+    }
+
     menuBar: CMenuBar {
         dragWindow: root
-        infoText: "Concept"
+        infoText: generateInfoText()
 
         CMenu {
             title: qsTr("File")
-
+            Action {
+                text: qsTr("Debug")
+                shortcut: "Ctrl+D"
+                onTriggered: () => {
+                    console.log("Debug triggered")
+                    editor.controller.openNote(1)
+                }
+            }
+            Action {
+                text: qsTr("Save Note")
+                shortcut: "Ctrl+S"
+                onTriggered: () => {
+                    editor.controller.saveNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
+                }
+            }
+            Action {
+                text: qsTr("New Note")
+                shortcut: StandardKey.New
+                onTriggered: editor.controller.createNote()
+            }
             Action {
                 text: qsTr("Increase Font")
                 shortcut: StandardKey.ZoomIn
@@ -47,7 +75,7 @@ ApplicationWindow {
             Action {
                 text: root.expandPath ? qsTr("Toggle Short Path")
                     : qsTr("Toggle Expand Path")
-                enabled: root.currentFilePath
+                enabled: root.currentNoteId !== ""
                 onTriggered: root.expandPath = !root.expandPath
             }
             Action {
@@ -109,11 +137,13 @@ ApplicationWindow {
                     }
 
                     // Shows the files on the file system.
-                    // FileSystemView {
-                    //     id: fileSystemView
-                    //     color: Colors.surface1
-                    //     onFileClicked: path => root.currentFilePath = path
-                    // }
+                    FileSystemView {
+                        id: fileSystemView
+                        color: Colors.surface1
+                        onNoteClicked: index => {
+                            editor.controller.openNote(index)
+                        }
+                    }
                 }
             }
 
@@ -121,6 +151,8 @@ ApplicationWindow {
             CEditor {
                 id: editor
                 showLineNumbers: root.showLineNumbers
+                currentNoteId: 0  // TODO: Change later
+                SplitView.fillWidth: true
                 currentFilePath: root.currentFilePath
                 SplitView.preferredWidth: 800
                 SplitView.fillHeight: true
@@ -154,4 +186,3 @@ ApplicationWindow {
         }
     }
 }
-

@@ -57,15 +57,14 @@ ApplicationWindow {
                 onTriggered: editor.controller.createNote()
             }
             Action {
-                text: qsTr("Increase Font")
-                shortcut: StandardKey.ZoomIn
-                onTriggered: editor.text.font.pixelSize += 1
+                text: qsTr("Exit")
+                onTriggered: Qt.exit(0)
+                shortcut: StandardKey.Quit
             }
-            Action {
-                text: qsTr("Decrease Font")
-                shortcut: StandardKey.ZoomOut
-                onTriggered: editor.text.font.pixelSize -= 1
-            }
+        }
+
+        CMenu {
+            title: qsTr("View")
             Action {
                 text: root.showLineNumbers ? qsTr("Toggle Line Numbers OFF")
                     : qsTr("Toggle Line Numbers ON")
@@ -79,12 +78,24 @@ ApplicationWindow {
                 onTriggered: root.expandPath = !root.expandPath
             }
             Action {
-                text: qsTr("Exit")
-                onTriggered: Qt.exit(0)
-                shortcut: StandardKey.Quit
+                text: Colors.isDarkMode ? qsTr("Toggle Light Mode")
+                    : qsTr("Toggle Dark Mode")
+                onTriggered: Colors.isDarkMode = !Colors.isDarkMode
             }
+        }
 
-            
+        CMenu {
+            title: qsTr("Format")
+            Action {
+                text: qsTr("Increase Font")
+                shortcut: StandardKey.ZoomIn
+                onTriggered: editor.text.font.pixelSize += 1
+            }
+            Action {
+                text: qsTr("Decrease Font")
+                shortcut: StandardKey.ZoomOut
+                onTriggered: editor.text.font.pixelSize -= 1
+            }
         }
     }
 

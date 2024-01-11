@@ -4,7 +4,6 @@
 #include <QCursor>
 #include <QDebug>
 #include <QQuickItem>
-#include <QQuickItem>
 
 MainHelp::MainHelp(QQuickItem *parent) : QQuickItem(parent) {
     QAction *helpAction1 = new QAction("New Text Editor", this);
@@ -23,12 +22,6 @@ MainHelp::MainHelp(QQuickItem *parent) : QQuickItem(parent) {
 //void MainHelp::handleHelpAction1() {
 //qDebug() << "New Text Editor requested!";}
     // Add your logic here to show the arrow or perform any other visual indication
-
-
-//void MainHelp::handleHelpAction1() {
-//qDebug() << "New Text Editor requested!";}
-    // Add your logic here to show the arrow or perform any other visual indication
-
 
 void MainHelp::showHelpMenu() {
     // Show the context menu at the current cursor position

@@ -85,7 +85,10 @@ int main(int argc, char *argv[]) {
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
 
-    RedSquareManager redSquareManager;
+    //RedSquareManager redSquareManager;
+
+
+
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -104,18 +107,23 @@ int main(int argc, char *argv[]) {
 
     //Help Button
     MainHelp helpItem;
+    HelpDialog helpDialog;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
+    QObject::connect(&helpItem, &MainHelp::newEditorOptionSelected, [&helpDialog]() {
+        helpDialog.show();  // You can use show() instead of exec() for modeless dialog
+    });
 
 
-    engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
+    //engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
 
     if(engine.rootObjects().isEmpty()){
         std::cout << "Root Objects is empty" << std::endl;
         return -1;
     }
     QObject *rootObject = engine.rootObjects().first();
-    QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
 
+/*
+    //QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
 
     QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [rootObject]() {
         QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
@@ -127,8 +135,10 @@ int main(int argc, char *argv[]) {
     QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [redSquareItem]() {
         redSquareItem->setProperty("visible", true);
     });
+*/
 
-    QObject::connect(&helpItem, &MainHelp::showRedSquare, &redSquareManager, &RedSquareManager::showRedSquare);
+
+    //QObject::connect(&helpItem, &MainHelp::showRedSquare, &redSquareManager, &RedSquareManager::showRedSquare);
 
 //    QTreeView treeView;
 //

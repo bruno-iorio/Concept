@@ -26,3 +26,9 @@ For next week, my objective is to finalize this database implementation (with th
 After restrucring the database with Hung to use structs instead of classes, the database should be done. I have constructed 20 tests of our database.hpp file which all build & pass. Then, I investigated the search bar. Thanks to the 'like' function of SQLite_orm which kind of acts as a search bar, all I needed to do what to implement 2 20 lines functions and the trick was done.
 
 For next week, we will make sure that everyone on the front-end can properly integrate and use the database and I will try to work on the text editor, to add a feature where you can have a block which formats text as code.
+
+## Week 5
+
+My main focus was to implement databases functions, such as the search engine feature within the files, as well as the saving/retrieving feature within the database.
+
+With his update, Hung rearranged the folders, changed library, and redesigned the system, moving my code around (Even though he is now the author of the code, I greatly participated in it). Now that the Database system is implemented, I will be working on finding+editing a syntax highlighter for Python code as well as an interpreter, to eventually create a "edit and run Pyhon code" feature in our app. Even though the code will be in C++, our feature will only work on Python and not C++ because it is an interpretable language, compared to C++ which requires a compiler.

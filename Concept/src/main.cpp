@@ -102,6 +102,10 @@ int main(int argc, char *argv[]) {
     SetFocusPeriod focusItem;
     engine.rootContext()->setContextProperty("focusItem", &focusItem);
 
+    //Set Focus Period Button
+    SetFocusPeriod focusItem;
+    engine.rootContext()->setContextProperty("focusItem", &focusItem);
+
     //Help Button
     MainHelp helpItem;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);

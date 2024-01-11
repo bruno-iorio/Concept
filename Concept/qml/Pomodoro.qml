@@ -8,25 +8,33 @@ Rectangle {
     
     id: root
     
-    Text {
-        id: studyTimerText
-        text: "Study Timer"
-        font.pixelSize: 40
-        font.family: "Helvetica"
-        color: "white"
-        
+    Rectangle {
+        id: studyTimerBlock
+        width: root.width
+        height: root.height * 0.30
         anchors.top: root.top
-        topPadding: root.height * 0.05
-        leftPadding: root.width * 0.40
-        bottomPadding: root.height * 0.05
+        color: "black"
+
+        Text {
+            id: studyTimerText
+            text: "Study Timer"
+            font.pixelSize: studyTimerBlock.height * 0.17
+            font.family: "Helvetica"
+            color: "white"
+            
+            anchors.centerIn: parent
+            //topPadding: root.height * 0.05
+            //leftPadding: root.width * 0.40
+            //bottomPadding: root.height * 0.05
+        }
     }
 
     Rectangle {
         id: timerBlock
         width: root.width
         height: root.height * 0.15
-        anchors.top: studyTimerText.bottom
-        color: "#C2D8B9"
+        anchors.top: studyTimerBlock.bottom
+        color: "#c4c8cc"
         
         Row {
             //spacing: 0
@@ -36,7 +44,7 @@ Rectangle {
                 font.pixelSize: timerBlock.height * 0.15
                 width: timerBlock.width / 2
                 background: Rectangle{
-                    color: "#738290"
+                color: "#738290"
                 //id: studyButton
                 //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
@@ -57,7 +65,7 @@ Rectangle {
                 anchors.top: studyButton.top
                 width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
                 background: Rectangle{
-                    color: "#738290"
+                color: "#738290"
                 //id: studyButton
                 //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
@@ -107,7 +115,7 @@ Rectangle {
         height: root.height * 0.05
         anchors.top: timerBlock.bottom
         
-        color: "#F0EEE9"
+        color: "#c4c8cc"
 
 
         Button{
@@ -115,7 +123,7 @@ Rectangle {
             text: "Set focus period"
             font.pixelSize: timerBlock.height * 0.15
             anchors.centerIn: parent
-
+            //color: "#E1D2B7"
             onClicked : {
                 focusItem.showMenu();
             }
@@ -128,7 +136,7 @@ Rectangle {
         height: root.height * 0.05
         anchors.top: button1.bottom
         
-        color: "#F0EEE9"
+        color: "#c4c8cc"
         Button{
             id: start
             text: "Start"
@@ -142,7 +150,7 @@ Rectangle {
         height: root.height * 0.05
         anchors.top: button2.bottom
         
-        color: "#F0EEE9"
+        color: "#c4c8cc"
         Button{
             id: stop
             text: "Stop"
@@ -156,10 +164,10 @@ Rectangle {
         height: root.height * 0.05
         anchors.top: button3.bottom
         
-        color: "#F0EEE9"
+        color: "#c4c8cc"
         Text {
             id: question
-            text: qsTr("Are you done with studying? See your progress here:")
+            text: qsTr("See your progress here:")
             anchors.centerIn: parent
         }
     }
@@ -169,7 +177,7 @@ Rectangle {
         height: root.height * 0.05
         anchors.top: textQuestion.bottom
        
-        color: "#F0EEE9"
+        color: "#c4c8cc"
         Button{
             id: statistics
             text: "Statistics"

@@ -61,7 +61,6 @@ public:
 private slots:
     void onFeatureItemSelected(QListWidgetItem *item);
 
-
 private:
     QLabel *titleLabel;
     QLabel *featuresLabel;

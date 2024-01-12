@@ -113,10 +113,14 @@ Rectangle {
                                 editor.controller.openNote(treeDelegate.dataId)
                         break;
                         case Qt.RightButton:
-                            if (treeDelegate.hasChildren)
+                            if (treeDelegate.hasChildren){
                                 folderContextMenu.popup();
-                            else
+                                console.log("Folder context menu");
+                            }
+                            else{
                                 noteContextMenu.popup();
+                                console.log("Note context menu");
+                            }
                         break;
                     }
                 }
@@ -144,10 +148,6 @@ Rectangle {
 
             CMenu {
                 id: noteContextMenu
-                Action {
-                    text: qsTr("New note")
-                    onTriggered: console.log(true) // TODO: Create note at this layer
-                }
                 Action {
                     text: qsTr("Rename")
                     onTriggered: console.log(true) // TODO: Rename this note

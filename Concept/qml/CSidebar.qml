@@ -102,7 +102,7 @@ Rectangle {
                 checkable: true
                 
                 ToolTip {
-                    text: qsTr("Explorer")
+                    text: qsTr("Notebooks")
                     visible: filesystemTab.hovered
                 }
             }

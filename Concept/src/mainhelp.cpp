@@ -7,8 +7,8 @@
 #include <QBoxLayout>
 
 MainHelp::MainHelp(QQuickItem *parent) : QQuickItem(parent) {
-    QAction *helpAction1 = new QAction("File", this);
-    QAction *helpAction2 = new QAction("2. Help Text 2", this);
+    QAction *helpAction1 = new QAction("File - View - Format", this);
+    QAction *helpAction2 = new QAction("Notebooks", this);
     QAction *helpAction3 = new QAction("3. Help Text 3", this);
 
     connect(helpAction1, &QAction::triggered, this, &MainHelp::handleHelpAction1);  // Corrected connection
@@ -27,7 +27,12 @@ void MainHelp::showHelpMenu() {
 
 void MainHelp::handleHelpAction2() {
     qDebug() << "Help Text 2 clicked!";
-    // Add your logic here
+
+    HelpNotebooks *helpNotebooks = new HelpNotebooks();
+    helpNotebooks->exec();  // Use exec() for a modal dialog
+
+    // Cleanup the dialog when done
+    delete helpNotebooks;
 }
 
 void MainHelp::handleHelpAction3() {
@@ -42,14 +47,14 @@ MainHelp::~MainHelp() {
 void MainHelp::handleHelpAction1() {
     qDebug() << "File";
 
-    HelpDialog *helpDialog = new HelpDialog();
-    helpDialog->exec();  // Use exec() for a modal dialog
+    HelpDialog1 *helpDialog1 = new HelpDialog1();
+    helpDialog1->exec();  // Use exec() for a modal dialog
 
     // Cleanup the dialog when done
-    delete helpDialog;
+    delete helpDialog1;
 }
 
-HelpDialog::HelpDialog(QWidget *parent) : QDialog(parent) {
+HelpDialog1::HelpDialog1(QWidget *parent) : QDialog(parent) {
     setWindowTitle("Help File");
 
     // Create and setup UI components
@@ -87,13 +92,13 @@ HelpDialog::HelpDialog(QWidget *parent) : QDialog(parent) {
     layout->addWidget(featureExplanationLabel);
     layout->addWidget(closeButton);
 
-    connect(closeButton, &QPushButton::clicked, this, &HelpDialog::close);
+    connect(closeButton, &QPushButton::clicked, this, &HelpDialog1::close);
 
     // Connect the itemClicked signal to the custom slot
-    connect(featuresList, &QListWidget::itemClicked, this, &HelpDialog::onFeatureItemSelected);
+    connect(featuresList, &QListWidget::itemClicked, this, &HelpDialog1::onFeatureItemSelected);
 }
 
-void HelpDialog::onFeatureItemSelected(QListWidgetItem *item) {
+void HelpDialog1::onFeatureItemSelected(QListWidgetItem *item) {
     // Update the explanation label based on the selected feature
     QString feature = item->text();
     if (featureExplanations.contains(feature)) {
@@ -103,6 +108,34 @@ void HelpDialog::onFeatureItemSelected(QListWidgetItem *item) {
     }
 }
 
-HelpDialog::~HelpDialog() {
+HelpDialog1::~HelpDialog1() {
+    // Perform cleanup or resource release here, if needed
+}
+
+
+HelpNotebooks::HelpNotebooks(QWidget *parent) : QDialog(parent) {
+    setWindowTitle("Help Notebooks");
+
+    // Create and setup UI components
+    titleNotebooks = new QLabel("", this);
+    featuresNotebooks = new QLabel("This section is where you find your saved and current \nfolders and files. You can toggle between them, \nopen which one you like, read or edit it!", this);
+
+    closeButton2 = new QPushButton("Close", this);
+
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(titleNotebooks);
+    layout->addWidget(featuresNotebooks);
+    //layout->addWidget(featuresList);
+    //layout->addWidget(featureExplanationLabel);
+    layout->addWidget(closeButton2);
+
+    connect(closeButton2, &QPushButton::clicked, this, &HelpNotebooks::close);
+
+    // Connect the itemClicked signal to the custom slot
+    //connect(featuresList, &QListWidget::itemClicked, this, &HelpDialog1::onFeatureItemSelected);
+}
+
+
+HelpNotebooks::~HelpNotebooks() {
     // Perform cleanup or resource release here, if needed
 }

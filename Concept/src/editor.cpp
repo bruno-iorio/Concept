@@ -40,14 +40,16 @@ void ConceptEditor::createNote() {
 
     QDialogButtonBox * buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok
                                                         | QDialogButtonBox::Cancel);
-
+    QLabel * title = new QLabel("Create a new note");
+    
     QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
 
     vbox->setGeometry(QRect(0, 0, 300, 300));
     vbox->addWidget(name);
     vbox->addWidget(buttonBox);
-
+    vbox->addWidget(title);
+    
     d->setLayout(vbox);
 
     int result = d->exec();

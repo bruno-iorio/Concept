@@ -20,10 +20,6 @@ MainHelp::MainHelp(QQuickItem *parent) : QQuickItem(parent) {
     helpMenu.addAction(helpAction3);
 }
 
-//void MainHelp::handleHelpAction1() {
-//qDebug() << "New Text Editor requested!";}
-    // Add your logic here to show the arrow or perform any other visual indication
-
 void MainHelp::showHelpMenu() {
     // Show the context menu at the current cursor position
     helpMenu.exec(QCursor::pos());
@@ -46,35 +42,12 @@ MainHelp::~MainHelp() {
 void MainHelp::handleHelpAction1() {
     qDebug() << "File";
 
-    // Emit the showRedSquare signal when the first option is selected
-    //emit showRedSquare();
-
-    // Emit the signal to notify other components that the "New Text Editor" option is selected
-    //emit newEditorOptionSelected();
-
     HelpDialog *helpDialog = new HelpDialog();
     helpDialog->exec();  // Use exec() for a modal dialog
-
-    // Optionally, emit signals or perform other actions based on the dialog result
-    // emit newEditorOptionSelected();
 
     // Cleanup the dialog when done
     delete helpDialog;
 }
-/*
-RedSquareManager::RedSquareManager(QObject *parent)
-    : QObject(parent)
-{
-}
-
-void RedSquareManager::showRedSquare()
-{
-    qDebug() << "Red Square requested!";
-    // Add your logic here to display the red square
-    // For simplicity, we'll emit a signal that will be connected to QML
-    // emit redSquareRequested();
-}
-*/
 
 HelpDialog::HelpDialog(QWidget *parent) : QDialog(parent) {
     setWindowTitle("Help File");

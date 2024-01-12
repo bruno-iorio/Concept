@@ -87,9 +87,6 @@ int main(int argc, char *argv[]) {
 
     //RedSquareManager redSquareManager;
 
-
-
-
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject *obj, const QUrl &objUrl) {
@@ -121,25 +118,6 @@ int main(int argc, char *argv[]) {
         return -1;
     }
     QObject *rootObject = engine.rootObjects().first();
-
-/*
-    //QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
-
-    QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [rootObject]() {
-        QQuickItem *redSquareItem = rootObject->findChild<QQuickItem*>("redSquareItem");
-        if (redSquareItem) {
-            redSquareItem->setProperty("visible", true);
-        }
-    });
-
-    QObject::connect(&redSquareManager, &RedSquareManager::redSquareRequested, [redSquareItem]() {
-        redSquareItem->setProperty("visible", true);
-    });
-*/
-
-
-    //QObject::connect(&helpItem, &MainHelp::showRedSquare, &redSquareManager, &RedSquareManager::showRedSquare);
-
 //    QTreeView treeView;
 //
 //    ExplorerModel model;

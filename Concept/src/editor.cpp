@@ -71,3 +71,50 @@ void ConceptEditor::createNote() {
         emit noteCreated(note->id, note->title, note->content);
     }
 }
+
+
+
+void ConceptEditor::renameNote(int id, const QString &currentName, const QString &content) {
+    QDialog *d = new QDialog();
+
+    QVBoxLayout *vbox = new QVBoxLayout();
+    QLineEdit *nameLineEdit = new QLineEdit();
+    nameLineEdit->setText(currentName); // Set the initial text
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+
+    QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
+    QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
+
+    vbox->setGeometry(QRect(0, 0, 300, 300));
+    vbox->addWidget(nameLineEdit);
+    vbox->addWidget(buttonBox);
+
+    d->setLayout(vbox);
+
+    int result = d->exec();
+    if(result == QDialog::Accepted) {
+
+        Note_ptr note(new Note());
+
+        note->id = id;
+        note->title = nameLineEdit->text();
+        note->content = content;
+        note->last_modified = QDateTime::currentDateTime();
+        QSqlError daoError = qx::dao::update(note);
+        emit noteRenamed(note->id, note->title, note->content);
+
+        delete d; // Free the memory
+
+        if (daoError.isValid()) {
+            error_popup(daoError.text());
+            return;
+        }
+
+
+
+    } else {
+        delete d; // Free the memory in case of rejection
+    }
+}
+

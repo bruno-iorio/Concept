@@ -47,6 +47,15 @@ Rectangle {
             explorer.reset()
             console.log("onNoteCreated", id, title, content)
         }
+
+        onNoteRenamed: (id, newTitle) => {
+               // Handle the renaming logic here
+               root.currentNoteId = id
+               root.currentNoteTitle = newTitle
+               console.log("onNoteRenamed", id, newTitle)
+           }
+
+
     }
 
     RowLayout {

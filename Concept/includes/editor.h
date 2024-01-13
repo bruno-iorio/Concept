@@ -14,9 +14,15 @@ class ConceptEditor : public QObject {
         Q_INVOKABLE void openNote(int id);
         Q_INVOKABLE void saveNote(int id, const QString &name, const QString &content);
         Q_INVOKABLE void lastModifiedNote();
+        //Q_INVOKABLE void renameNote(int id, const QString &name, const QString &content);
     signals:
         void noteOpened(long id, const QString &name, const QString &content);
         void noteCreated(long id, const QString &name, const QString &content);
+        void noteRenamed(int id, const QString &name, const QString &content);
+
+    public slots:
+        void renameNote(int id, const QString &currentName, const QString &content);
+
 };
 
 #endif //CONCEPTAPP_EDITOR_H

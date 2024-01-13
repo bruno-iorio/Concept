@@ -34,7 +34,9 @@ ApplicationWindow {
         dragWindow: root
         infoText: generateInfoText()
 
+
         CMenu {
+            id: noteContextMenu
             title: qsTr("File")
             Action {
                 text: qsTr("Debug")
@@ -97,7 +99,9 @@ ApplicationWindow {
                 onTriggered: editor.text.font.pixelSize -= 1
             }
         }
+
     }
+
 
     RowLayout {
         anchors.fill: parent
@@ -200,3 +204,4 @@ ApplicationWindow {
         }
     }
 }
+

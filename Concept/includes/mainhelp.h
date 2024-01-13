@@ -29,7 +29,8 @@ private slots:
     void handleHelpAction3();
 
 signals:
-    void newEditorOptionSelected();
+    void File();
+    void Notebooks();
     void showRedSquare();  // New signal for showing the red square
 
 };
@@ -51,12 +52,12 @@ signals:
 };
 */
 
-class HelpDialog : public QDialog {
+class HelpDialog1 : public QDialog {
     Q_OBJECT
 
 public:
-    HelpDialog(QWidget *parent = nullptr);
-    ~HelpDialog();
+    HelpDialog1(QWidget *parent = nullptr);
+    ~HelpDialog1();
 
 private slots:
     void onFeatureItemSelected(QListWidgetItem *item);
@@ -69,5 +70,25 @@ private:
     QLabel *featureExplanationLabel;
 
     QMap<QString, QString> featureExplanations;
+};
+
+class HelpNotebooks : public QDialog {
+    Q_OBJECT
+
+public:
+    HelpNotebooks(QWidget *parent = nullptr);
+    ~HelpNotebooks();
+
+//private slots:
+  //  void notebook(QListWidgetItem *item);
+
+private:
+    QLabel *titleNotebooks;
+    QLabel *featuresNotebooks;
+    //QListWidget *featuresList;
+    QPushButton *closeButton2;
+    //QLabel *featureExplanationLabel;
+
+   // QMap<QString, QString> featureExplanations;
 };
 #endif // MAINHELP_H

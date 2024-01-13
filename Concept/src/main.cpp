@@ -104,12 +104,17 @@ int main(int argc, char *argv[]) {
 
     //Help Button
     MainHelp helpItem;
-    HelpDialog helpDialog;
+    HelpDialog1 helpDialog1;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
-    QObject::connect(&helpItem, &MainHelp::newEditorOptionSelected, [&helpDialog]() {
-        helpDialog.show();  // You can use show() instead of exec() for modeless dialog
+    QObject::connect(&helpItem, &MainHelp::File, [&helpDialog1]() {
+        helpDialog1.show();  // You can use show() instead of exec() for modeless dialog
     });
 
+    HelpNotebooks helpNotebooks;
+    engine.rootContext()->setContextProperty("helpItem", &helpItem);
+    QObject::connect(&helpItem, &MainHelp::Notebooks, [&helpNotebooks]() {
+        helpNotebooks.show();  // You can use show() instead of exec() for modeless dialog
+    });
 
     //engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
 

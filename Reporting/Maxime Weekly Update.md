@@ -26,4 +26,4 @@ Maxime Despréaux Weekly Update
 
     Week 5: 
         The UI was redesigned and retouched quite a lot during the vacation introducing a more eye pleasing dark-theme. There' also a side task bar for space management.
-        The database was also changed to sqxorm, which created a lot of errors for my computer and could't build. I'm dedicating a lot of my work to getting Qt6 running our               project on Ubuntu.
+        The database was also changed to qxorm, which created a lot of errors for my computer and could't build. I'm dedicating a lot of my work to getting Qt6 running our               project on Ubuntu.

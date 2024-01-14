@@ -18,3 +18,6 @@ It is an unfortunate situation since it worked perfectly until Monday, and it si
 
 # Report Andreea Patarlageanu - Week 6
 Finished the drop-down menu for the Set Focus Period Button. Now, the user can choose whether he wants to work for a certain nr of minutes or for one hour. When clicked, there is a print just to make sure it works(and it does!). For the following week, I will start looking forward to implementing the timer.
+
+# Report Andreea Patarlageanu - Week 7
+I made some modifications in the UI regarding the alignment of the text and some colors and now I am currently working on implementing a dark/light mode which the user can set while using the web app. The web app is currently on dark mode so I have to set the new colors and the option of the light mode

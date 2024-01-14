@@ -12,9 +12,9 @@ pragma Singleton
 QtObject {
     property bool isDarkMode: true
     // lightmode colors still need some changes for aesthetics 
-    readonly property color background: isDarkMode ? "#292828" : "#FFFFFF"
-    readonly property color surface1: isDarkMode ? "#171819" : "#EFEFEF"
-    readonly property color surface2: isDarkMode ? "#090A0C" : "#CCCCCC"
+    readonly property color background: isDarkMode ? "#292828" : "#e3e1d8" //Modified here
+    readonly property color surface1: isDarkMode ? "#171819" : "#abbbc9"  //Modified here
+    readonly property color surface2: isDarkMode ? "#090A0C" : "#738290"  //Modified here
     readonly property color text: isDarkMode ? "#D4BE98" : "#333333"
     readonly property color textFile: isDarkMode ? "#E1D2B7" : "#666666"
     readonly property color disabledText: isDarkMode ? "#2C313A" : "#999999"

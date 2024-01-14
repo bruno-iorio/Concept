@@ -28,4 +28,5 @@ Next objective: check which subteam/task needs additional help, also make sure t
 
 WEEK 5:
 During the lecture, understood the updates and the new logic behind our project after the vacation.
-During the TD and the week for genereally: worked on the rename and delete features of the app, currently the files take their new name the next time I build or when i click twice on Test folder so my next goal is to make it update the name instantly. I will need to follow my work on rename and delete during the lecture at least.
+During the TD and the week for genereally: worked on the rename and delete features of the app, thanks to Nguyen's advice the new name is updated instantly on the UI. I will need to follow my work on the delete feature during next lecture at least.
+Objectives for next week: finish implementing the delete feature, and further on a line highlight feature.

@@ -30,5 +30,16 @@ Finished making a prototype for the text editor, and started working with gui di
 qml for cpp by using a mix of Qwidgets and QmainWindow libraries in cpp. We will try to put this idea in practice for the next week.
 
 Week 4: 
+Added some more features in the main page, such as a button to open more than one text editor.
+
+
+week 5:
+
+worked on the reduction of the qml code, and in integrating some qt libraries functionalities.
+
+Week 6:
+
+Started working on creating a calendar that holds events. This created some issues since the way that the QCalendarWidget works is a little bit weird.
+once it does not hold objects.
 
 Added some more features in the main page, such as a button to open more than one text editor.

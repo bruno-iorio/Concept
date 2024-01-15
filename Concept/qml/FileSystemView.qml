@@ -138,7 +138,12 @@ Rectangle {
                 }
                 Action {
                     text: qsTr("Rename")
-                    onTriggered: console.log(true) // TODO: Rename this folder
+                    onTriggered: {
+                        if (editor) {
+                            editor.controller.renameFolder(editor.currentFolderId, editor.currentFolderName);
+
+                        }
+                    }
                 }
                 Action {
                     text: qsTr("Delete")

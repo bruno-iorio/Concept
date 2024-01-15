@@ -4,6 +4,7 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Concept
 import QtQuick.Shapes
+import CustomControls 1.0
 
 pragma ComponentBehavior: Bound
 
@@ -100,8 +101,25 @@ ApplicationWindow {
             }
         }
 
-    }
+        SearchReplace {
+            id: SRtool
+        }
 
+        CMenu {
+            id : toolsMenu
+            title: qsTr("Tools")
+            Action {
+                text: qsTr("Search")
+                shortcut: StandardKey.Find
+                onClicked: SRtool.showSearchMenu();
+            }
+            Action {
+                text: qsTr("Replace")
+                shortcut: StandardKey.Replace
+                onClicked: SRtool.showReplaceMenu();
+            }
+        }
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -204,4 +222,3 @@ ApplicationWindow {
         }
     }
 }
-

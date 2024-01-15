@@ -21,8 +21,6 @@ SearchReplace::SearchReplace(QQuickItem *parent) : QQuickItem(parent)
 
 SearchReplace::~SearchReplace()
 {
-    delete searchDialog;
-    delete replaceDialog;
 }
 
 void SearchReplace::showSearchMenu()
@@ -37,28 +35,30 @@ void SearchReplace::showReplaceMenu()
 
 void SearchReplace::handleSearchAction()
 {
+    SearchDialog *searchDialog = new SearchDialog();
     searchDialog->exec();
 }
 
 void SearchReplace::handleReplaceAction()
 {
+    ReplaceDialog *replaceDialog = new ReplaceDialog();
     replaceDialog->exec();
 }
 
-SearchDialog::SearchDialog(QWidget *parent, QString &editorText) : QDialog(parent), text(editorText)
+SearchDialog::SearchDialog(QWidget *parent, const QString &editorText) : QDialog(parent), text(editorText)
 {
     setWindowTitle("Search");
 
     titleLabel = new QLabel("Enter keyword to search:", this);
     keywordInput = new QLineEdit(this);
     searchButton = new QPushButton("Search", this);
-    searchResultsList = new QListWidget(this); // Create a QListWidget for displaying search results
+    searchResults = new QListWidget(this); // Create a QListWidget for displaying search results
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(titleLabel);
     layout->addWidget(keywordInput);
     layout->addWidget(searchButton);
-    layout->addWidget(searchResultsList); // Add the QListWidget to the layout
+    layout->addWidget(searchResults); // Add the QListWidget to the layout
 
     connect(searchButton, &QPushButton::clicked, this, &SearchDialog::onSearch);
 }
@@ -89,7 +89,7 @@ void SearchDialog::onSearch()
 
 SearchDialog::~SearchDialog() {}
 
-ReplaceDialog::ReplaceDialog(QWidget *parent, QString &editorText) : QDialog(parent), text(editorText)
+ReplaceDialog::ReplaceDialog(QWidget *parent, const QString &editorText) : QDialog(parent), text(editorText)
 {
     setWindowTitle("Replace");
 
@@ -97,6 +97,7 @@ ReplaceDialog::ReplaceDialog(QWidget *parent, QString &editorText) : QDialog(par
     keywordInput = new QLineEdit(this);
     replacementInput = new QLineEdit(this);
     replaceButton = new QPushButton("Replace", this);
+    replaceAllButton = new QPushButton("Replace All", this);
     replaceConfirmationLabel = new QLabel("", this);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -116,7 +117,7 @@ void ReplaceDialog::onReplace()
     QString replacement = replacementInput->text();
 
     // Replace all occurrences of the keyword in the text
-    text.replace(keyword, replacement);
+    // text.replace(keyword, replacement);
 
     // Update the confirmation label
     replaceConfirmationLabel->setText("Replacement done.");

@@ -1,4 +1,3 @@
-// SearchReplace.h
 #ifndef SEARCHREPLACE_H
 #define SEARCHREPLACE_H
 
@@ -9,9 +8,11 @@
 #include <QLabel>
 #include <QString>
 #include <QDialog>
-#include <QListWidgetItem>
+#include <QListWidget> // Corrected from QListWidgetItem
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QMap> // Include QMap header
+
 
 class SearchReplace : public QQuickItem
 {
@@ -43,11 +44,11 @@ class SearchDialog : public QDialog
     Q_OBJECT
 
 public:
-    SearchDialog(QWidget *parent = nullptr);
+    SearchDialog(QWidget *parent = nullptr, const QString &editorText = QString());
     ~SearchDialog();
 
 private slots:
-    void onSearch(QListWidgetItem *item);
+    void onSearch();
 
 private:
     QLabel *titleLabel;
@@ -57,7 +58,7 @@ private:
     QLineEdit *keywordInput;
     QLabel *searchResultsLabel;
 
-    QString &text;
+    const QString &text;
 
     QMap<QString, QString> searchConfirmation;
 };
@@ -67,21 +68,23 @@ class ReplaceDialog : public QDialog
     Q_OBJECT
 
 public:
-    ReplaceDialog(QWidget *parent = nullptr);
+    ReplaceDialog(QWidget *parent = nullptr, const QString &editorText = QString());
     ~ReplaceDialog();
 
 private slots:
-    void onReplace(QListWidgetItem *item);
+    void onReplace();
 
 private:
     QLabel *titleLabel;
     QLabel *keyinputLabel;
     QLabel *newinputLabel;
+    QPushButton *replaceButton;
     QPushButton *replaceAllButton;
     QLineEdit *keywordInput;
     QLineEdit *replacementInput;
+    QLabel *replaceConfirmationLabel;
 
-    QString &text;
+    const QString &text;
 
     QMap<QString, QString> replaceConfirmation;
 };

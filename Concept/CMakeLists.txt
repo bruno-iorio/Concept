@@ -26,6 +26,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party ${CMAKE_CURRENT_BINARY_
 ### Don't forget to add your new cpp and hpp functions here to link them with the App
 qt_add_executable(ConceptApp
     src/main.cpp
+    includes/calendar.h src/calendar.cpp
     includes/mainhelp.h src/mainhelp.cpp
     includes/setFocusPeriod.h src/setFocusPeriod.cpp
     includes/export.h includes/precompiled.h

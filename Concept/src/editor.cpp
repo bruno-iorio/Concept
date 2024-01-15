@@ -101,7 +101,7 @@ void ConceptEditor::renameNote(int id, const QString &currentName, const QString
         note->title = nameLineEdit->text();
         note->content = content;
         note->last_modified = QDateTime::currentDateTime();
-        QSqlError daoError = qx::dao::update(note);
+        QSqlError daoError = qx::dao::update_with_all_relation(note);
         emit noteRenamed(note->id, note->title, note->content);
 
         delete d; // Free the memory
@@ -116,5 +116,35 @@ void ConceptEditor::renameNote(int id, const QString &currentName, const QString
     } else {
         delete d; // Free the memory in case of rejection
     }
+}
+
+
+void ConceptEditor::deleteNote(int id, const QString &currentName, const QString &content) {
+    // Create a dialog to confirm the deletion
+    QMessageBox::StandardButton confirmation;
+    confirmation = QMessageBox::question(nullptr, "Confirm Deletion",
+                                         "Are you sure you want to delete this note?",
+                                         QMessageBox::Yes | QMessageBox::No);
+
+    // Check the user's response
+    if (confirmation == QMessageBox::No) {
+        return;  // User canceled the deletion
+    }
+
+    // Proceed with the deletion
+    Note_ptr note;
+    note.reset(new Note());
+    note->id = id;
+
+    QSqlError daoError = qx::dao::delete_by_id(note);
+    emit noteDeleted(note->id, note->title, note->content);
+
+    if (daoError.isValid()) {
+        error_popup(daoError.text());
+        return;
+    }
+
+    // Emit a signal to notify the UI about the deletion
+
 }
 

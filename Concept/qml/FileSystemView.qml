@@ -160,7 +160,12 @@ Rectangle {
                 }
                 Action {
                     text: qsTr("Delete")
-                    onTriggered: console.log(true) // TODO: Delete this note
+                    onTriggered: {
+                        if (editor) {
+                            editor.controller.deleteNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
+
+                        }
+                    } // TODO: Delete this note
                 }
 
 

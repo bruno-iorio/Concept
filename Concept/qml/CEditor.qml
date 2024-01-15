@@ -14,6 +14,7 @@ Rectangle {
     id: root
 
     property int currentNoteId
+    property int currentWordCount
     property string currentNoteTitle
     required property bool showLineNumbers
     required property var explorer
@@ -199,6 +200,10 @@ Rectangle {
                 selectByMouse: true
                 antialiasing: true
                 background: null
+
+                onTextChanged: {
+                    root.currentWordCount = textArea.text.split(/\s+/).length;
+                }
             }
 
             FontMetrics {

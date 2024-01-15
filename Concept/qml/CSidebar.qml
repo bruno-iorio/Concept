@@ -118,6 +118,17 @@ Rectangle {
                     visible: timerTab.hovered
                 }
             }
+            SidebarEntry {
+                id: calendarTab
+                icon.source: "icons/calendar.svg"
+                checkable: true
+                checked: true
+
+                ToolTip {
+                    text: qsTr("This is the help text.")
+                    visible: infoTab.hovered
+                }
+            }
         }
 
         // This item acts as a spacer to expand between the checkable and non-checkable buttons.

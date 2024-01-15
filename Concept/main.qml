@@ -103,9 +103,7 @@ ApplicationWindow {
         CMenu {
             title: qsTr("Tools")
             Action {
-                text: qsTr("Word Count")
-                shortcut: "Ctrl+W"
-                onTriggered: editor.controller.wordCount(editor.currentWordCount)
+                text: qsTr("Word Count: ") + editor.currentWordCount
             }
         }
 

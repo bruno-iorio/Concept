@@ -17,7 +17,6 @@ public:
     Q_INVOKABLE void lastModifiedNote();
     Q_INVOKABLE void renameNote(int id, const QString &name, const QString &content);
     Q_INVOKABLE void deleteNote(int id, const QString &name, const QString &content);
-    Q_INVOKABLE void wordCount(int count);
 
 signals:
     void noteOpened(long id, const QString &name, const QString &content);

@@ -156,14 +156,3 @@ void ConceptEditor::deleteNote(int id, const QString &currentName, const QString
 
     // Emit a signal to notify the UI about the deletion
 }
-
-void ConceptEditor::wordCount(int count)
-{
-    QDialog *d = new QDialog();
-    QVBoxLayout *layout = new QVBoxLayout();
-    QLabel *label = new QLabel(QString("Word count (at last save): %1").arg(count));
-
-    layout->addWidget(label);
-    d->setLayout(layout);
-    d->show();
-}

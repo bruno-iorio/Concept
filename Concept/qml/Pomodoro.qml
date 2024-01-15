@@ -45,10 +45,10 @@ Rectangle {
                 width: timerBlock.width / 2
                 background: Rectangle{
                 color: "#738290"
-                //id: studyButton
-                //text: "Break"
-                //font.pixelSize: timerBlock.height * 0.07
-                //onClicked: startTimer(25)
+                id: studyButton
+                text: "Break"
+                font.pixelSize: timerBlock.height * 0.07
+                onClicked: SetFocusPeriod.handlePause()
                 }
             }
             Rectangle{
@@ -66,20 +66,22 @@ Rectangle {
                 width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
                 background: Rectangle{
                 color: "#738290"
-                //id: studyButton
-                //text: "Break"
-                //font.pixelSize: timerBlock.height * 0.07
-                //onClicked: startTimer(25)
+                id: studyButton
+                text: "Break"
+                font.pixelSize: timerBlock.height * 0.07
+                onClicked: SetFocusPeriod.handleContinue()
                 }
             }
 
         }
         
-
-        // Timer Display
+        //Timer Display
+        SetFocusPeriod {
+            id:focusItem
+        }
         Text {
             id: timerDisplay
-            text: "00:00"
+            text: focusItem.time
             font.pixelSize: timerBlock.height * 0.20
             anchors.centerIn: parent
         }

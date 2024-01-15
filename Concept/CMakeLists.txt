@@ -12,7 +12,6 @@ set(CMAKE_AUTORCC ON)
 include_directories(includes)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Widgets QuickControls2 Svg)
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Widgets QuickControls2 Svg)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
@@ -32,9 +31,11 @@ qt_add_executable(ConceptApp
     includes/database/notes.h src/database/notes.cpp
     includes/database/folders.h src/database/folders.cpp
     includes/database/focus_time.h src/database/focus_time.cpp
-    includes/timer.h src/timer.cpp
+    includes/studytimer.h src/studytimer.cpp
     includes/database/database.h
     includes/errors.h
+    includes/startTimer.h src/startTimer.cpp
+
 )
 
 ## Configure QxOrm

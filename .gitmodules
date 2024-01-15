@@ -1,7 +1,3 @@
-[submodule "Concept/Backend"]
-	path = Concept/Backend
-	url = https://github.com/ConceptTeam/Backend
-	branch = main
 [submodule "Concept/third_party/QxOrm"]
 	path = Concept/third_party/QxOrm
 	url = https://github.com/QxOrm/QxOrm.git

@@ -47,6 +47,29 @@ Rectangle {
             explorer.reset()
             console.log("onNoteCreated", id, title, content)
         }
+
+        onNoteRenamed: (id, newTitle) => {
+               // Handle the renaming logic here
+               root.currentNoteId = id
+               root.currentNoteTitle = newTitle
+               explorer.reset()
+               console.log("onNoteRenamed", id, newTitle)
+           }
+
+        onNoteDeleted: (id, title, content) =>{
+            if (root.currentNoteId === id) {
+                        // Clear the current note data from UI
+                        root.currentNoteId = -1;  // or set to a default value
+                        root.currentNoteTitle = "";
+                        textArea.text = "";
+
+                        // Optionally, update ExplorerModel and reset explorer
+                        ExplorerModel.generate_model();
+                        explorer.reset();
+                    }
+        }
+
+
     }
 
     RowLayout {

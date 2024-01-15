@@ -102,6 +102,10 @@ int main(int argc, char *argv[]) {
     SetFocusPeriod focusItem;
     engine.rootContext()->setContextProperty("focusItem", &focusItem);
 
+/*<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes*/
     //Help Button
     MainHelp helpItem;
     HelpDialog1 helpDialog1;

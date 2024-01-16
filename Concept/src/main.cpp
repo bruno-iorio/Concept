@@ -14,6 +14,7 @@
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include <iostream>
+#include "includes/calendar.h"
 
 int main(int argc, char *argv[]) {
     // Initialize QxOrm
@@ -84,6 +85,8 @@ int main(int argc, char *argv[]) {
 
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
+    qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
+
 
     //RedSquareManager redSquareManager;
 
@@ -113,6 +116,13 @@ int main(int argc, char *argv[]) {
     QObject::connect(&helpItem, &MainHelp::File, [&helpDialog1]() {
         helpDialog1.show();  // You can use show() instead of exec() for modeless dialog
     });
+
+    //Calendar Button
+    CalendarQML calendarItem = CalendarQML();
+    engine.rootContext()->setContextProperty("calendarItem", &calendarItem);
+    //QObject::connect(&calendarItem, &Calendar::File, [&calendarItem]() {
+       // calendarItem.showCalendar();  // You can use show() instead of exec() for modeless dialog
+    //});
 
     HelpNotebooks helpNotebooks;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);

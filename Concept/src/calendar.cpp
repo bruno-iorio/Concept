@@ -1,7 +1,8 @@
-#include "Calendar.h"
+#include "../includes/calendar.h"
 #include <QVBoxLayout>
 #include <QDate>
 #include <QTextCharFormat>
+#include <QMainWindow>
 
 Calendar::Calendar(QWidget *parent) : QMainWindow(parent) {
     calendarWidget = new QCalendarWidget(this);
@@ -38,3 +39,11 @@ void Calendar::addEvent() {
     eventLineEdit->clear();
 }
 
+CalendarQML::CalendarQML(QObject *parent ):QObject(parent){
+
+    this->myCalendar = new Calendar();
+}
+
+void CalendarQML::showCalendar(){
+    myCalendar->show();
+}

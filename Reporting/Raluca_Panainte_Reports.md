@@ -7,3 +7,12 @@ After each meeting I made sure to update the Trello General board. For better co
 
 Week 3 & Week 4:
 Worked on the To Do List Feature of our web app. Coded and tested it locally on my computer. Planning to finally commit to Github my work during week 5.
+
+Week 5: 
+Improved the code I had so far for the To Do List feature. 
+
+Week 6 & Week 7 (Vacation):
+Struggled with installing Ubuntu on WSL and QT on this. Finally succeeded and continued to improve the To Do List feature. 
+
+Week 8: 
+Pushed the To Do List feature on RalucaPanainte/todolist. Currently it is a dynamic list with an add button. Since it is integrated into the old UI, right now I am working on implementing it on the new version of our project. I also want to add a remove feature, letting the user remove the tasks they have completed from the list. 

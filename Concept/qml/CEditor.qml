@@ -18,6 +18,8 @@ Rectangle {
     property int currentCharacterCount
     property int currentCharacterCountNoSpaces
     property string currentNoteTitle
+    property int currentFolderId
+    property string currentFolderTitle
     required property bool showLineNumbers
     required property var explorer
     property alias text: textArea
@@ -69,6 +71,12 @@ Rectangle {
                 ExplorerModel.generate_model();
                 explorer.reset();
             }
+        }
+        onFolderRenamed: (id, newName) => {
+            root.currentFolderId = id
+            root.currentFolderTitle = newName
+            explorer.reset()
+            console.log("onFolderRenamed", id, newName)
         }
     }
 

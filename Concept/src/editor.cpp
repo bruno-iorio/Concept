@@ -2,7 +2,10 @@
 #include "editor.h"
 #include "precompiled.h"
 #include "database/notes.h"
+#include "database/folders.h"
 #include "errors.h"
+#include <QxOrm.h>
+#include "QxOrm_Impl.h"
 
 ConceptEditor::ConceptEditor(QObject *parent) : QObject(parent) {}
 
@@ -147,4 +150,55 @@ void ConceptEditor::deleteNote(int id, const QString &currentName, const QString
     // Emit a signal to notify the UI about the deletion
 
 }
+
+
+
+
+void ConceptEditor::renameFolder(long id, const QString &currentName) {
+    // Create a dialog for renaming the folder
+    QDialog *d = new QDialog();
+
+    QVBoxLayout *vbox = new QVBoxLayout();
+    QLineEdit *nameLineEdit = new QLineEdit();
+    nameLineEdit->setText(currentName); // Set the initial text
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+
+    QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
+    QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
+
+    vbox->setGeometry(QRect(0, 0, 300, 300));
+    vbox->addWidget(nameLineEdit);
+    vbox->addWidget(buttonBox);
+
+    d->setLayout(vbox);
+
+    int result = d->exec();
+    if (result == QDialog::Accepted) {
+        // Create a custom SQL query to update the folder name
+
+        Folder_ptr folder(new Folder());
+        folder->id=id;
+        folder->name=nameLineEdit->text();
+        QSqlQuery query;
+        query.prepare("UPDATE t_folders SET name = :name WHERE id = :id");
+        query.bindValue(":name", nameLineEdit->text());
+        query.bindValue(":id", QVariant::fromValue(folder->id));
+
+        // Execute the query
+        if (query.exec()) {
+            // Emit the signal indicating that the folder was renamed
+            emit folderRenamed(id, nameLineEdit->text());
+        } else {
+            // Handle the error, e.g., show an error message
+            error_popup(query.lastError().text());
+        }
+
+        delete d; // Free the memory
+    } else {
+        delete d; // Free the memory in case of rejection
+    }
+}
+
+
 

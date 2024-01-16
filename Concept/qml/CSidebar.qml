@@ -108,6 +108,20 @@ Rectangle {
             }
 
             SidebarEntry {
+                id: calendarTab
+                icon.source: "icons/calendar.svg"
+                checkable: true
+
+                ToolTip {
+                    text: qsTr("Calendar")
+                    visible: calendarTab.hovered
+                }
+                onClicked: {
+                        calendarItem.showCalendar();
+                    }
+            }
+
+            SidebarEntry {
                 id: timerTab
 
                 icon.source: "icons/light_bulb.svg"

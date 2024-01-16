@@ -32,13 +32,13 @@ Menu {
             }
         }
         background: Rectangle {
-            implicitWidth: 210
+            implicitWidth: 220
             implicitHeight: 35
             color: menuItem.highlighted ? Colors.active : "transparent"
         }
     }
     background: Rectangle {
-        implicitWidth: 210
+        implicitWidth: 220
         implicitHeight: 35
         color: Colors.surface2
     }

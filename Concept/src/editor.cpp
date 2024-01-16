@@ -9,24 +9,30 @@
 
 ConceptEditor::ConceptEditor(QObject *parent) : QObject(parent) {}
 
-void ConceptEditor::lastModifiedNote() {
-    Note_ptr note; note.reset(new Note());
+void ConceptEditor::lastModifiedNote()
+{
+    Note_ptr note;
+    note.reset(new Note());
     qx_query query;
     query.orderAsc("last_modified").limit(1);
     QSqlError daoError = qx::dao::fetch_by_query(query, note);
     emit noteOpened(note->id, note->title, note->content);
 }
 
-void ConceptEditor::openNote(int id) {
-    Note_ptr note; note.reset(new Note());
+void ConceptEditor::openNote(int id)
+{
+    Note_ptr note;
+    note.reset(new Note());
     note->id = id;
     QSqlError daoError = qx::dao::fetch_by_id(note);
 
     emit noteOpened(note->id, note->title, note->content);
 }
 
-void ConceptEditor::saveNote(int id, const QString &name, const QString &content) {
-    Note_ptr note; note.reset(new Note());
+void ConceptEditor::saveNote(int id, const QString &name, const QString &content)
+{
+    Note_ptr note;
+    note.reset(new Note());
     note->id = id;
     note->title = name;
     note->content = content;
@@ -35,16 +41,16 @@ void ConceptEditor::saveNote(int id, const QString &name, const QString &content
     QSqlError daoError = qx::dao::update(note);
 }
 
-void ConceptEditor::createNote() {
-    QDialog * d = new QDialog();
+void ConceptEditor::createNote()
+{
+    QDialog *d = new QDialog();
 
-    QVBoxLayout * vbox = new QVBoxLayout();
-    QLineEdit * name = new QLineEdit();
+    QVBoxLayout *vbox = new QVBoxLayout();
+    QLineEdit *name = new QLineEdit();
 
-    QDialogButtonBox * buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok
-                                                        | QDialogButtonBox::Cancel);
-    QLabel * title = new QLabel("Create a new note");
-    
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    QLabel *title = new QLabel("Create a new note");
+
     QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
 
@@ -52,13 +58,14 @@ void ConceptEditor::createNote() {
     vbox->addWidget(name);
     vbox->addWidget(buttonBox);
     vbox->addWidget(title);
-    
+
     d->setLayout(vbox);
 
     int result = d->exec();
-    if(result == QDialog::Accepted)
+    if (result == QDialog::Accepted)
     {
-        Note_ptr note; note.reset(new Note());
+        Note_ptr note;
+        note.reset(new Note());
         note->id = 0;
         note->title = name->text();
         note->content = "";
@@ -66,7 +73,8 @@ void ConceptEditor::createNote() {
 
         QSqlError daoError = qx::dao::insert(note);
 
-        if (daoError.isValid()) {
+        if (daoError.isValid())
+        {
             error_popup(daoError.text());
             return;
         }
@@ -75,9 +83,8 @@ void ConceptEditor::createNote() {
     }
 }
 
-
-
-void ConceptEditor::renameNote(int id, const QString &currentName, const QString &content) {
+void ConceptEditor::renameNote(int id, const QString &currentName, const QString &content)
+{
     QDialog *d = new QDialog();
 
     QVBoxLayout *vbox = new QVBoxLayout();
@@ -96,7 +103,8 @@ void ConceptEditor::renameNote(int id, const QString &currentName, const QString
     d->setLayout(vbox);
 
     int result = d->exec();
-    if(result == QDialog::Accepted) {
+    if (result == QDialog::Accepted)
+    {
 
         Note_ptr note(new Note());
 
@@ -109,20 +117,20 @@ void ConceptEditor::renameNote(int id, const QString &currentName, const QString
 
         delete d; // Free the memory
 
-        if (daoError.isValid()) {
+        if (daoError.isValid())
+        {
             error_popup(daoError.text());
             return;
         }
-
-
-
-    } else {
+    }
+    else
+    {
         delete d; // Free the memory in case of rejection
     }
 }
 
-
-void ConceptEditor::deleteNote(int id, const QString &currentName, const QString &content) {
+void ConceptEditor::deleteNote(int id, const QString &currentName, const QString &content)
+{
     // Create a dialog to confirm the deletion
     QMessageBox::StandardButton confirmation;
     confirmation = QMessageBox::question(nullptr, "Confirm Deletion",
@@ -130,8 +138,9 @@ void ConceptEditor::deleteNote(int id, const QString &currentName, const QString
                                          QMessageBox::Yes | QMessageBox::No);
 
     // Check the user's response
-    if (confirmation == QMessageBox::No) {
-        return;  // User canceled the deletion
+    if (confirmation == QMessageBox::No)
+    {
+        return; // User canceled the deletion
     }
 
     // Proceed with the deletion
@@ -142,18 +151,14 @@ void ConceptEditor::deleteNote(int id, const QString &currentName, const QString
     QSqlError daoError = qx::dao::delete_by_id(note);
     emit noteDeleted(note->id, note->title, note->content);
 
-    if (daoError.isValid()) {
+    if (daoError.isValid())
+    {
         error_popup(daoError.text());
         return;
     }
 
     // Emit a signal to notify the UI about the deletion
-
 }
-
-
-
-
 void ConceptEditor::renameFolder(long id, const QString &currentName) {
     // Create a dialog for renaming the folder
     QDialog *d = new QDialog();
@@ -199,6 +204,3 @@ void ConceptEditor::renameFolder(long id, const QString &currentName) {
         delete d; // Free the memory in case of rejection
     }
 }
-
-
-

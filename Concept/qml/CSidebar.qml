@@ -166,10 +166,12 @@ Rectangle {
                 onClicked: aboutQtWindow.visible = !aboutQtWindow.visible
             }
 
+
             MainHelp {
                 id: helpItem
-                onShowRedSquare: redSquareManager.showRedSquare()
+                //onShowRedSquare: redSquareManager.showRedSquare()
             }
+
 
             SidebarEntry {
                 id: helpButton

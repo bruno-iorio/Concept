@@ -14,7 +14,12 @@ Rectangle {
     id: root
 
     property int currentNoteId
+    property int currentWordCount
+    property int currentCharacterCount
+    property int currentCharacterCountNoSpaces
     property string currentNoteTitle
+    property int currentFolderId
+    property string currentFolderTitle
     required property bool showLineNumbers
     required property var explorer
     property alias text: textArea
@@ -36,7 +41,7 @@ Rectangle {
             root.currentNoteId = id
             root.currentNoteTitle = title
             textArea.text = content
-            console.log("onNoteOpened", id, title, content)
+            // console.log("onNoteOpened", id, title, content)
         }
 
         onNoteCreated: (id, title, content) => {
@@ -58,18 +63,23 @@ Rectangle {
 
         onNoteDeleted: (id, title, content) =>{
             if (root.currentNoteId === id) {
-                        // Clear the current note data from UI
-                        root.currentNoteId = -1;  // or set to a default value
-                        root.currentNoteTitle = "";
-                        textArea.text = "";
-
-                        // Optionally, update ExplorerModel and reset explorer
-                        ExplorerModel.generate_model();
-                        explorer.reset();
-                    }
+                // Clear the current note data from UI
+                root.currentNoteId = -1;  // or set to a default value
+                root.currentNoteTitle = "";
+                textArea.text = "";
+                // Optionally, update ExplorerModel and reset explorer
+                ExplorerModel.generate_model();
+                explorer.reset();
+            }
         }
-
-
+        /*
+        onFolderRenamed: (id, newName) => {
+            root.currentFolderId = id
+            root.currentFolderTitle = newName
+            explorer.reset()
+            console.log("onFolderRenamed", id, newName)
+        }
+        */
     }
 
     RowLayout {
@@ -199,6 +209,17 @@ Rectangle {
                 selectByMouse: true
                 antialiasing: true
                 background: null
+
+                onTextChanged: {
+                    // split TextArea.text into words separated by whitespace, endline, tab
+                    var words = textArea.text.split(/\s+/);
+                    // remove empty words
+                    words = words.filter(function (word) { return word.length > 0; });
+                   
+                    root.currentWordCount = words.length;
+                    root.currentCharacterCount = textArea.text.length;
+                    root.currentCharacterCountNoSpaces = textArea.text.replace(/\s+/g, '').length;
+                }
             }
 
             FontMetrics {

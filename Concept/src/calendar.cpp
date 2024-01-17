@@ -1,9 +1,11 @@
-#include "Calendar.h"
+#include "../includes/calendar.h"
 #include <QVBoxLayout>
 #include <QDate>
 #include <QTextCharFormat>
+#include <QMainWindow>
 
-Calendar::Calendar(QWidget *parent) : QMainWindow(parent) {
+Calendar::Calendar(QWidget *parent) : QMainWindow(parent)
+{
     calendarWidget = new QCalendarWidget(this);
     eventLineEdit = new QLineEdit(this);
     addButton = new QPushButton("Add Event", this);
@@ -25,11 +27,13 @@ Calendar::Calendar(QWidget *parent) : QMainWindow(parent) {
     setWindowTitle("Event Calendar");
 }
 
-void Calendar::addEvent() {
+void Calendar::addEvent()
+{
     QDate selectedDate = calendarWidget->selectedDate();
     QString eventText = eventLineEdit->text();
 
-    if (!eventText.isEmpty()) {
+    if (!eventText.isEmpty())
+    {
         QString currentText = eventDisplay->toPlainText();
         currentText += QString("%1: %2\n").arg(selectedDate.toString("yyyy-MM-dd")).arg(eventText);
         eventDisplay->setText(currentText);
@@ -38,3 +42,13 @@ void Calendar::addEvent() {
     eventLineEdit->clear();
 }
 
+CalendarQML::CalendarQML(QObject *parent) : QObject(parent)
+{
+
+    this->myCalendar = new Calendar();
+}
+
+void CalendarQML::showCalendar()
+{
+    myCalendar->show();
+}

@@ -25,7 +25,6 @@ public:
     void rename(const QString& newTitle) {
         title = newTitle;
         last_modified = QDateTime::currentDateTime(); // Update last_modified timestamp
-        // You might want to add additional logic to save the changes to the database.
     }
 
 };

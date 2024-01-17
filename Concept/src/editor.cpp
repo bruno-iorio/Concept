@@ -159,6 +159,7 @@ void ConceptEditor::deleteNote(int id, const QString &currentName, const QString
 
     // Emit a signal to notify the UI about the deletion
 }
+/*
 void ConceptEditor::renameFolder(long id, const QString &currentName) {
     // Create a dialog for renaming the folder
     QDialog *d = new QDialog();
@@ -204,3 +205,4 @@ void ConceptEditor::renameFolder(long id, const QString &currentName) {
         delete d; // Free the memory in case of rejection
     }
 }
+*/

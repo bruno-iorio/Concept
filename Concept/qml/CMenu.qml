@@ -38,7 +38,7 @@ Menu {
         }
     }
     background: Rectangle {
-        implicitWidth: 220
+        implicitWidth: 250
         implicitHeight: 35
         color: Colors.surface2
     }

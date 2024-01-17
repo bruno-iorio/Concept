@@ -98,8 +98,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
     qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
-
     qmlRegisterType<SearchReplace>("CustomControls", 1, 0, "SearchReplace");
+    qmlRegisterType<ReplaceDialog>("CustomControls", 1, 0, "ReplaceDialog");
 
     // RedSquareManager redSquareManager;
 
@@ -145,18 +145,6 @@ int main(int argc, char *argv[])
                      });
 
     // engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
-
-    // SearchReplace Tool
-    SearchReplace SRtool;
-    SearchDialog searchDialog;
-    engine.rootContext()->setContextProperty("SRtool", &SRtool);
-    QObject::connect(&SRtool, &SearchReplace::Search, [&searchDialog]()
-                     { searchDialog.exec(); });
-
-    ReplaceDialog replaceDialog;
-    engine.rootContext()->setContextProperty("SRtool", &SRtool);
-    QObject::connect(&SRtool, &SearchReplace::Replace, [&replaceDialog]()
-                     { replaceDialog.exec(); });
 
     if (engine.rootObjects().isEmpty())
     {

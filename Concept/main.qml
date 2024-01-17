@@ -101,7 +101,19 @@ ApplicationWindow {
             }
         }
 
+        SearchReplace {
+            id: srTool
+        }
+
+        ReplaceDialog {
+            id: replace
+            onTextChanged: (newtext) => {
+                editor.text.text = newtext;
+            }
+        }
+
         CMenu {
+            id : toolsMenu
             title: qsTr("Tools")
             Action {
                 text: qsTr("Word Count: ") + editor.currentWordCount
@@ -113,25 +125,16 @@ ApplicationWindow {
             Action {
                 text: qsTr("Non-space Character Count: ") + editor.currentCharacterCountNoSpaces
             }
-        }
-
-        SearchReplace {
-            id: SRtool
-        }
-
-        CMenu {
-            id : toolsMenu
-            title: qsTr("Tools")
             Action {
                 text: qsTr("Search")
                 shortcut: StandardKey.Find
-                onClicked: SRtool.showSearchMenu();
+                onTriggered: srTool.handleSearchAction(editor.text.text)
             }
             Action {
                 text: qsTr("Replace")
                 shortcut: StandardKey.Replace
-                onClicked: SRtool.showReplaceMenu();
-            }
+                onTriggered: srTool.handleReplaceAction(editor.text.text)
+            }   
         }
     }
 

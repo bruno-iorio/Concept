@@ -13,7 +13,6 @@
 #include <QMessageBox>
 #include <QMap> // Include QMap header
 
-
 class SearchReplace : public QQuickItem
 {
     Q_OBJECT
@@ -23,20 +22,13 @@ public:
     ~SearchReplace();
 
 public slots:
-    void showSearchMenu();
-    void showReplaceMenu();
+    void handleSearchAction(const QString &content);
+    void handleReplaceAction(const QString &content);
 
 private:
     QMenu searchMenu;
     QMenu replaceMenu;
-
-private slots:
-    void handleSearchAction();
-    void handleReplaceAction();
-
-signals:
-    void Search();
-    void Replace();
+    QString text;
 };
 
 class SearchDialog : public QDialog
@@ -58,9 +50,7 @@ private:
     QLineEdit *keywordInput;
     QLabel *searchResultsLabel;
 
-    const QString &text;
-
-    QMap<QString, QString> searchConfirmation;
+    QString text;
 };
 
 class ReplaceDialog : public QDialog
@@ -69,7 +59,6 @@ class ReplaceDialog : public QDialog
 
 public:
     ReplaceDialog(QWidget *parent = nullptr, const QString &editorText = QString());
-    ~ReplaceDialog();
 
 private slots:
     void onReplace();
@@ -79,14 +68,14 @@ private:
     QLabel *keyinputLabel;
     QLabel *newinputLabel;
     QPushButton *replaceButton;
-    QPushButton *replaceAllButton;
     QLineEdit *keywordInput;
     QLineEdit *replacementInput;
     QLabel *replaceConfirmationLabel;
 
-    const QString &text;
+    QString text;
 
-    QMap<QString, QString> replaceConfirmation;
+signals:
+    void textChanged(const QString &newtext);
 };
 
 #endif

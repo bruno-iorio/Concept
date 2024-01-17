@@ -9,44 +9,27 @@
 
 SearchReplace::SearchReplace(QQuickItem *parent) : QQuickItem(parent)
 {
-    QAction *Search = new QAction("Search", this);
-    QAction *Replace = new QAction("Replace", this);
-
-    connect(Search, &QAction::triggered, this, &SearchReplace::handleSearchAction);
-    connect(Replace, &QAction::triggered, this, &SearchReplace::handleReplaceAction);
-
-    searchMenu.addAction(Search);
-    searchMenu.addAction(Replace);
 }
 
 SearchReplace::~SearchReplace()
 {
 }
 
-void SearchReplace::showSearchMenu()
+void SearchReplace::handleSearchAction(const QString &content)
 {
-    searchMenu.exec(QCursor::pos());
-}
-
-void SearchReplace::showReplaceMenu()
-{
-    replaceMenu.exec(QCursor::pos());
-}
-
-void SearchReplace::handleSearchAction()
-{
-    SearchDialog *searchDialog = new SearchDialog();
+    SearchDialog *searchDialog = new SearchDialog(nullptr, content);
     searchDialog->exec();
 }
 
-void SearchReplace::handleReplaceAction()
+void SearchReplace::handleReplaceAction(const QString &content)
 {
-    ReplaceDialog *replaceDialog = new ReplaceDialog();
+    ReplaceDialog *replaceDialog = new ReplaceDialog(nullptr, content);
     replaceDialog->exec();
 }
 
 SearchDialog::SearchDialog(QWidget *parent, const QString &editorText) : QDialog(parent), text(editorText)
 {
+
     setWindowTitle("Search");
 
     titleLabel = new QLabel("Enter keyword to search:", this);
@@ -78,10 +61,18 @@ void SearchDialog::onSearch()
     for (int i = 0; i < lines.size(); ++i)
     {
         // If the line contains the keyword
-        if (lines[i].contains(keyword))
+        int index = lines[i].indexOf(keyword);
+        if (index != -1)
         {
-            // Add the line to the search results
-            QListWidgetItem *item = new QListWidgetItem(lines[i]);
+            // Calculate the start and end positions for the substring
+            int start = std::max(0, index - 10);
+            int end = std::min(lines[i].length(), index + keyword.length() + 10);
+
+            // Get the substring around the keyword
+            QString substring = lines[i].mid(start, end - start);
+
+            // Add the substring to the search results
+            QListWidgetItem *item = new QListWidgetItem(QString("Line ") + QString::number(i + 1) + QString(". '") + substring + QString("'"));
             searchResults->addItem(item);
         }
     }
@@ -97,7 +88,6 @@ ReplaceDialog::ReplaceDialog(QWidget *parent, const QString &editorText) : QDial
     keywordInput = new QLineEdit(this);
     replacementInput = new QLineEdit(this);
     replaceButton = new QPushButton("Replace", this);
-    replaceAllButton = new QPushButton("Replace All", this);
     replaceConfirmationLabel = new QLabel("", this);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -117,10 +107,11 @@ void ReplaceDialog::onReplace()
     QString replacement = replacementInput->text();
 
     // Replace all occurrences of the keyword in the text
-    // text.replace(keyword, replacement);
+    QString copy = text;
 
-    // Update the confirmation label
-    replaceConfirmationLabel->setText("Replacement done.");
+    text.replace(keyword, replacement);
+
+    emit textChanged(text);
+
+    replaceConfirmationLabel->setText(text); // "Replacement done.");
 }
-
-ReplaceDialog::~ReplaceDialog() {}

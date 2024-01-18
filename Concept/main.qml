@@ -101,13 +101,10 @@ ApplicationWindow {
             }
         }
 
-        SearchReplace {
-            id: srTool
-        }
-
-        ReplaceDialog {
-            id: replace
+        ToolBox {
+            id: tbTool
             onTextChanged: (newtext) => {
+                // Action when the replace button is hit in ToolBox.cpp
                 editor.text.text = newtext;
             }
         }
@@ -115,25 +112,28 @@ ApplicationWindow {
         CMenu {
             id : toolsMenu
             title: qsTr("Tools")
+
+            // Tools within QML:
             Action {
                 text: qsTr("Word Count: ") + editor.currentWordCount
             }
             Action {
                 text: qsTr("Character Count: ") + editor.currentCharacterCount
             }
-
             Action {
                 text: qsTr("Non-space Character Count: ") + editor.currentCharacterCountNoSpaces
             }
+
+            // Tools linked to C++ code:
             Action {
                 text: qsTr("Search")
                 shortcut: StandardKey.Find
-                onTriggered: srTool.handleSearchAction(editor.text.text)
+                onTriggered: tbTool.handleSearchAction(editor.text.text)
             }
             Action {
                 text: qsTr("Replace")
                 shortcut: StandardKey.Replace
-                onTriggered: srTool.handleReplaceAction(editor.text.text)
+                onTriggered: tbTool.handleReplaceAction(editor.text.text)
             }   
         }
     }

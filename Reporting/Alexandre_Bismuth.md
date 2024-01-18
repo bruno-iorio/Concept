@@ -27,8 +27,18 @@ After restrucring the database with Hung to use structs instead of classes, the 
 
 For next week, we will make sure that everyone on the front-end can properly integrate and use the database and I will try to work on the text editor, to add a feature where you can have a block which formats text as code.
 
-## Week 5
+## Week 5 (Post Vacations)
 
 My main focus was to implement databases functions, such as the search engine feature within the files, as well as the saving/retrieving feature within the database.
 
 With his update, Hung rearranged the folders, changed library, and redesigned the system, moving my code around (Even though he is now the author of the code, I greatly participated in it). Now that the Database system is implemented, I will be working on finding+editing a syntax highlighter for Python code as well as an interpreter, to eventually create a "edit and run Pyhon code" feature in our app. Even though the code will be in C++, our feature will only work on Python and not C++ because it is an interpretable language, compared to C++ which requires a compiler.
+
+## Week 6
+
+After spending some considertable time understanding the new structure as well as the way to interact with QML since I had been on the backend since the beginning, I started the actual implementation with the front-end of the Tool bar. As I was mentionning before I created a Word count feature which I made visible on the Menu, and defined the SearchReplace Class and Dialogs, in order to allow for local search and replace, within the text editor.
+
+## Week 7
+
+After some bug fixing, the Search function and the Replace function are now done. I had a lot of troubles with C++ signals (I was stuck on this with both Professors during the whole TD) but managed to find a solution by merging the ReplaceDialog class (where the signal is emitted) to the ToolBox class, which receives the signal.
+
+During Week 8, the team has the ambition to finish the project.Therefore, before ending this project, I therefore aim to work as much as I can on this project, implementing a Global Search feature, a calculator, a Python console, and maybe more. Each of these feature should take less time than before since I have now become familiar with the architecture and logic of our project. After that, it will be time to write the individual report, prepare the defense with the team, and study for the other finals !

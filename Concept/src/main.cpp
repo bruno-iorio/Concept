@@ -13,7 +13,7 @@
 #include <QTreeView>
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
-#include "includes/SearchReplace.h"
+#include "includes/ToolBox.h"
 #include <iostream>
 #include "includes/calendar.h"
 
@@ -95,11 +95,11 @@ int main(int argc, char *argv[])
 
     app.setFont(QFont("Roboto Mono"));
 
+    // Defining the types that will be used within the QML
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
     qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
-    qmlRegisterType<SearchReplace>("CustomControls", 1, 0, "SearchReplace");
-    qmlRegisterType<ReplaceDialog>("CustomControls", 1, 0, "ReplaceDialog");
+    qmlRegisterType<ToolBox>("CustomControls", 1, 0, "ToolBox");
 
     // RedSquareManager redSquareManager;
 

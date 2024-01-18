@@ -67,7 +67,7 @@ public:
 
     CountDownTimer(int focus_minutes, int focus_hours) : Timer(focus_minutes, focus_hours) {};
 
-    virtual bool update_time() {
+    virtual bool update_timer() {
         if (second != 0) {second --;}
         else {second = 59;
             if (minute != 0) {minute --;}

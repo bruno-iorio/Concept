@@ -4,7 +4,8 @@
 #include <QObject>
 #include <QQuickItem>
 #include <QMenu>
-#include "studytimer.cpp"
+#include "QtCore/qtimer.h"
+#include "studytimer.h"
 
 class SetFocusPeriod : public QQuickItem {
     Q_OBJECT
@@ -15,6 +16,8 @@ public:
     ~SetFocusPeriod();
 
     QString getTime() const;
+
+    void handleTimeout();
 
 signals:
     void timeChanged();

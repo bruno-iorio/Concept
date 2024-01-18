@@ -6,7 +6,7 @@
 
 SetFocusPeriod::SetFocusPeriod(QQuickItem *parent) : QQuickItem(parent) {
 
-    timer.setInterval(1000); // 1 second
+    //timer->setInterval(1000); // 1 second
     
     QAction *action25 = new QAction("25 Minutes", this);
     QAction *action30 = new QAction("30 Minutes", this);
@@ -29,7 +29,7 @@ SetFocusPeriod::SetFocusPeriod(QQuickItem *parent) : QQuickItem(parent) {
     connect(actionContinue, &QAction::triggered, this, &SetFocusPeriod::handleContinue);
     connect(actionStart, &QAction::triggered, this, &SetFocusPeriod::handleStart);
 
-    connect(&q_timer, &QTimer::timeout, this, &SetFocusPeriod::handleTimeout);
+    //connect(&q_timer, &QTimer::timeout, this, &SetFocusPeriod::handleTimeout);
 
     menu.addAction(action25);
     menu.addAction(action30);

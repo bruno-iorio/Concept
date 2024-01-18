@@ -97,7 +97,7 @@ Timer userStartsZeroTimer() {
     CountUpTimer* timer = initializeZeroTimer();
     startTimer(timer);
 
-    return timer;
+    return *timer;
 }
 
 Timer userStartsFocusTimer(int &focus_minutes, int &focus_hours) {
@@ -105,7 +105,7 @@ Timer userStartsFocusTimer(int &focus_minutes, int &focus_hours) {
     CountDownTimer* timer = initializeFocusTimer(focus_minutes, focus_hours);
     startTimer(timer);
 
-    return timer;
+    return *timer;
 }
 
 

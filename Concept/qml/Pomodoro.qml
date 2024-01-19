@@ -45,7 +45,6 @@ Rectangle {
                 width: timerBlock.width / 2
                 background: Rectangle{
                 color: "#738290"
-                id: studyButton
                 text: "Break"
                 font.pixelSize: timerBlock.height * 0.07
                 onClicked: SetFocusPeriod.handlePause()
@@ -66,7 +65,6 @@ Rectangle {
                 width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
                 background: Rectangle{
                 color: "#738290"
-                id: studyButton
                 text: "Break"
                 font.pixelSize: timerBlock.height * 0.07
                 onClicked: SetFocusPeriod.handleContinue()
@@ -107,9 +105,6 @@ Rectangle {
 
     }
     
-    SetFocusPeriod {
-        id: focusItem
-    }
     
     Rectangle {
         id: button1

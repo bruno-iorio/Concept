@@ -108,5 +108,8 @@ Timer userStartsFocusTimer(int &focus_minutes, int &focus_hours) {
     return *timer;
 }
 
+void CountDownTimer::startTimer(){
+    //Later
+}
 
 

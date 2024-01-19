@@ -19,6 +19,8 @@ public:
 
     void handleTimeout();
 
+
+
 signals:
     void timeChanged();
 
@@ -27,7 +29,7 @@ public slots:
 
 private:
     QMenu menu;
-    CountDownTimer* timer;
+    CountDownTimer timer = CountDownTimer(0, 0);
     QTimer q_timer;
     bool counting;
 
@@ -40,6 +42,7 @@ private slots:
     void handleStop();
     void handleContinue();
     void handleStart();
+
 };
 
 #endif // SETFOCUSPERIOD_H

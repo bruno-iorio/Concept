@@ -13,13 +13,13 @@ public:
     int second;
     int minute;
     int hour;
-    int* current_second;
-    int* current_minute;
-    int* current_hour;
+    int current_second;
+    int current_minute;
+    int current_hour;
     bool counting;
     bool finished;
 
-    Timer(int min=0, int h=0) : second(0), minute(min), hour(h),counting(0), finished(0), current_second(&second), current_minute(&minute) {}
+    Timer(int min=0, int h=0) : second(0), minute(min), hour(h),counting(0), finished(0), current_second(second), current_minute(minute) {}
 
     virtual ~Timer() {}
     // IMPLEMENT IF NECESSARY
@@ -53,6 +53,7 @@ public:
     int stopTimer();
 
 
+
 };
 
 class CountUpTimer : public Timer {
@@ -79,6 +80,9 @@ public:
         }
         return finished;
     }
+
+public slots:
+    void startTimer();
 };
 
 #endif // STUDYTIMER_H

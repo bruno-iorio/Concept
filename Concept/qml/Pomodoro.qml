@@ -66,7 +66,7 @@ Rectangle {
                 background: Rectangle{
                 color: "#738290"
                 text: "Break"
-                font.pixelSize: timerBlock.height * 0.07
+                //font.pixelSize: timerBlock.height * 0.07
                 onClicked: SetFocusPeriod.handleContinue()
                 }
             }

@@ -189,12 +189,12 @@ ApplicationWindow {
                     }
                 }
 
-                Pomodoro {
+            Pomodoro {
                     id: pomodoro
                     SplitView.fillWidth: true
                     SplitView.fillHeight: true
                     color: Colors.surface1
-                }
+            }
 
             }
         }

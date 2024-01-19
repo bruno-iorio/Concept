@@ -38,10 +38,10 @@ private:
     QString text;
 };
 
-// Replace functionality: I had to merge the ReplaceDialog class
-// into this class because otherwise the signal isn't emitted
-// properly. However, as I don't need to emit anything for the
-// SearchDialog, I can keep it as a separate class and it looks cleaner.
+/* Replace functionality: I had to merge the ReplaceDialog class
+into this class because otherwise the signal isn't emitted
+properly. However, as I don't need to emit anything for the
+SearchDialog, I can keep it as a separate class and it looks cleaner.*/
 
 class SearchDialog : public QDialog
 {

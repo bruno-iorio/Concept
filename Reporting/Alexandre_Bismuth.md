@@ -1,6 +1,6 @@
 # Alexandre Bismuth Reporting File
 
-Part of the Backend Team. Working on the Data Organisation & Storage, the Search bar, the Kernel implementation, and the text editor. Details of each of these features can be found in the Week 1 report. Please note that most of my work is not in this repository, but in the Backend repository.
+Part of the Backend Team. Working on the Data Organisation & Storage, the Search bar, the Kernel implementation, and the text editor. Details of each of these features can be found in the Week 1 report. Please note that most of my work is not in this repository, but in the Backend repository. I would also like to add that my handed in individual report is globally much clearer and more consistent, even if it doesn't capture the exact progress and thought process I had every week regarding the project.
 
 ## Week 1
 

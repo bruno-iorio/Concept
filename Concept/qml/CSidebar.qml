@@ -117,8 +117,8 @@ Rectangle {
                     visible: calendarTab.hovered
                 }
                 onClicked: {
-                        calendarItem.showCalendar();
-                    }
+                    calendarItem.showCalendar();
+                }
             }
 
             SidebarEntry {
@@ -130,6 +130,28 @@ Rectangle {
                 ToolTip {
                     text: qsTr("Timer")
                     visible: timerTab.hovered
+                }
+            }            
+            
+            ToolBox {
+                id: globalSearchItem
+            }
+
+            SidebarEntry {
+                id: globalSearchTab
+
+                // TO BE CHANGED TO A LENS SVG
+                icon.source: "icons/light_bulb.svg" 
+
+                checkable: false
+
+                ToolTip {
+                    text: qsTr("Global Search")
+                    visible: globalSearchTab.hovered
+                }
+
+                onClicked: {
+                    globalSearchItem.handleSearchAction();
                 }
             }
         }

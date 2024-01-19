@@ -1,4 +1,8 @@
 #include "ToolBox.h"
+#include "QxOrm_Impl.h"
+#include "precompiled.h"
+#include "database/notes.h"
+#include "database/folders.h"
 #include <QBoxLayout>
 #include <QtWidgets/QtWidgets>
 
@@ -29,10 +33,10 @@ ToolBox::ToolBox(QQuickItem *parent) : QQuickItem(parent)
 
 ToolBox::~ToolBox() {}
 
-void ToolBox::handleSearchAction(const QString &content)
+void ToolBox::handleSearchAction(const QString &content, bool global)
 {
     // Here, we use the SearchDialog class to execute the search
-    SearchDialog *searchDialog = new SearchDialog(nullptr, content);
+    SearchDialog *searchDialog = new SearchDialog(nullptr, content, global);
     searchDialog->exec();
 
     // In order to prevent memory leaks, we use a deleteLater function
@@ -50,7 +54,7 @@ void ToolBox::handleReplaceAction(const QString &content)
     replaceDialog->deleteLater();
 }
 
-SearchDialog::SearchDialog(QWidget *parent, const QString &editorText) : QDialog(parent), text(editorText)
+SearchDialog::SearchDialog(QWidget *parent, const QString &editorText, bool global) : QDialog(parent), text(editorText), global(global)
 {
     setWindowTitle("Search");
     // Initialize search dialog components
@@ -68,11 +72,19 @@ SearchDialog::SearchDialog(QWidget *parent, const QString &editorText) : QDialog
     layout->addWidget(searchResults);
     layout->addWidget(closeSearchButton);
 
-    connect(searchButton, &QPushButton::clicked, this, &SearchDialog::onSearch);
+    if (global)
+    {
+        connect(searchButton, &QPushButton::clicked, this, &SearchDialog::onGlobalSearch);
+    }
+    else
+    {
+        connect(searchButton, &QPushButton::clicked, this, &SearchDialog::onLocalSearch);
+    }
+
     connect(closeSearchButton, &QPushButton::clicked, this, &QDialog::close);
 }
 
-void SearchDialog::onSearch()
+void SearchDialog::onLocalSearch()
 {
 
     QString keyword = keywordInput->text();
@@ -107,6 +119,97 @@ void SearchDialog::onSearch()
             QListWidgetItem *item = new QListWidgetItem(QString("Line ") + QString::number(i + 1) + QString(". '") + substring + QString("'"));
             searchResults->addItem(item);
         }
+    }
+
+    if (searchResults->count() == 0)
+    {
+        searchResults->addItem("Keyword not found");
+    }
+}
+
+void SearchDialog::onGlobalSearch()
+{
+    QString keyword = keywordInput->text();
+
+    searchResults->clear();
+
+    if (keyword.isEmpty())
+    {
+        searchResults->addItem("Keyword not found");
+        return;
+    }
+
+    qx::QxSqlQuery query("WHERE title LIKE :keyword OR content LIKE :keyword");
+    query.bind(":keyword", "%" + keyword + "%");
+
+    QList<std::shared_ptr<Note>> notes;
+    qx::dao::fetch_by_query(query, notes);
+
+    QStringList titleOccurrences;
+    QStringList contentOccurrences;
+
+    for (const auto &note : notes)
+    {
+        if (note->title.contains(keyword))
+        {
+            QString notePath;
+            if (note->folder == NULL)
+            {
+                notePath = "root/" + note->title;
+            }
+            else
+            {
+                notePath = note->folder->name + "/" + note->title; // THIS DOES NOT WORK PROPERLY, THERE IS A PROBLEM WITH THE POINTER
+            }
+            titleOccurrences.append(notePath);
+        }
+
+        QStringList lines = note->content.split("\n");
+
+        for (int i = 0; i < lines.size(); ++i)
+        {
+            int index = lines[i].indexOf(keyword);
+            if (index != -1)
+            {
+                int start = std::max(0, index - 10);
+                int end = std::min(lines[i].length(), index + keyword.length() + 10);
+                QString substring = lines[i].mid(start, end - start);
+                contentOccurrences.append(note->title + ", Line " + QString::number(i + 1) + ":\n  '" + substring + "'");
+            }
+        }
+    }
+
+    std::sort(titleOccurrences.begin(), titleOccurrences.end());
+    std::sort(contentOccurrences.begin(), contentOccurrences.end());
+
+    if (!titleOccurrences.isEmpty())
+    {
+        searchResults->addItem("Notes:");
+    }
+
+    for (const auto &occurrence : titleOccurrences)
+    {
+        searchResults->addItem(occurrence);
+    }
+
+    if (!titleOccurrences.isEmpty())
+    {
+        searchResults->addItem("-----------");
+    }
+
+    if (!contentOccurrences.isEmpty())
+    {
+        searchResults->addItem("Content:");
+    }
+
+    for (const auto &occurrence : contentOccurrences)
+    {
+        searchResults->addItem(occurrence);
+    }
+
+    if (!contentOccurrences.isEmpty())
+    {
+        searchResults->addItem("-----------");
     }
 
     if (searchResults->count() == 0)

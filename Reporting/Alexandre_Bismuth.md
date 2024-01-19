@@ -41,4 +41,8 @@ After spending some considertable time understanding the new structure as well a
 
 After some bug fixing, the Search function and the Replace function are now done. I had a lot of troubles with C++ signals (I was stuck on this with both Professors during the whole TD) but managed to find a solution by merging the ReplaceDialog class (where the signal is emitted) to the ToolBox class, which receives the signal.
 
-During Week 8, the team has the ambition to finish the project.Therefore, before ending this project, I therefore aim to work as much as I can on this project, implementing a Global Search feature, a calculator, a Python console, and maybe more. Each of these feature should take less time than before since I have now become familiar with the architecture and logic of our project. After that, it will be time to write the individual report, prepare the defense with the team, and study for the other finals !
+During Week 8, the team has the ambition to finish the project.Therefore, before ending this project, I therefore aim to work as much as I can on this project, implementing a Global Search feature, and probably a multitude of smaller features. Each of these features should take less time than before since I have now become familiar with the architecture and logic of our project. After that, it will be time to write the individual report, prepare the defense with the team, and study for the other finals !
+
+## Week 8
+
+After some more work, all is done ! It was a pleasure working on this project, so thanks !

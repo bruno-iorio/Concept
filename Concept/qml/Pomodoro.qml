@@ -5,9 +5,9 @@ import Concept
 import CustomControls 1.0
 
 Rectangle {
-    
+
     id: root
-    
+
     Rectangle {
         id: studyTimerBlock
         width: root.width
@@ -21,7 +21,7 @@ Rectangle {
             font.pixelSize: studyTimerBlock.height * 0.17
             font.family: "Helvetica"
             color: Colors.text
-            
+
             anchors.centerIn: parent
             //topPadding: root.height * 0.05
             //leftPadding: root.width * 0.40
@@ -35,7 +35,7 @@ Rectangle {
         height: root.height * 0.15
         anchors.top: studyTimerBlock.bottom
         color: "#c4c8cc"
-        
+
         Row {
             //spacing: 0
             Button {
@@ -45,9 +45,10 @@ Rectangle {
                 width: timerBlock.width / 2
                 background: Rectangle{
                 color: "#738290"
-                text: "Break"
+                //id: studyButton
+                //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
-                onClicked: SetFocusPeriod.handlePause()
+                //onClicked: startTimer(25)
                 }
             }
             Rectangle{
@@ -65,25 +66,24 @@ Rectangle {
                 width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
                 background: Rectangle{
                 color: "#738290"
-                text: "Break"
+                //id: studyButton
+                //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
-                onClicked: SetFocusPeriod.handleContinue()
+                //onClicked: startTimer(25)
                 }
             }
 
         }
-        
-        //Timer Display
-        SetFocusPeriod {
-            id:focusItem
-        }
+
+
+        // Timer Display
         Text {
             id: timerDisplay
-            text: focusItem.time
+            text: "00:00"
             font.pixelSize: timerBlock.height * 0.20
             anchors.centerIn: parent
         }
-        
+
         //Timer {
             //id: countdownTimer
             //interval: 1000
@@ -104,14 +104,17 @@ Rectangle {
         //}
 
     }
-    
-    
+
+    SetFocusPeriod {
+        id: focusItem
+    }
+
     Rectangle {
         id: button1
         width: root.width
         height: root.height * 0.05
         anchors.top: timerBlock.bottom
-        
+
         color: "#c4c8cc"
 
 
@@ -132,7 +135,7 @@ Rectangle {
         width: root.width
         height: root.height * 0.05
         anchors.top: button1.bottom
-        
+
         color: "#c4c8cc"
         Button{
             id: start
@@ -146,7 +149,7 @@ Rectangle {
         width: root.width
         height: root.height * 0.05
         anchors.top: button2.bottom
-        
+
         color: "#c4c8cc"
         Button{
             id: stop
@@ -160,7 +163,7 @@ Rectangle {
         width: root.width
         height: root.height * 0.05
         anchors.top: button3.bottom
-        
+
         color: "#c4c8cc"
         Text {
             id: question
@@ -173,7 +176,7 @@ Rectangle {
         width: root.width
         height: root.height * 0.05
         anchors.top: textQuestion.bottom
-       
+
         color: "#c4c8cc"
         Button{
             id: statistics
@@ -182,5 +185,5 @@ Rectangle {
             anchors.centerIn: parent
         }
     }
-    
+
 }

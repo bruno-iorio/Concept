@@ -13,7 +13,7 @@
 #include <QTreeView>
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
-#include "includes/ToolBox.h"
+#include "includes/toolBox.h"
 #include <iostream>
 #include "includes/calendar.h"
 

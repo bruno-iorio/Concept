@@ -128,7 +128,7 @@ ApplicationWindow {
             Action {
                 text: qsTr("Search")
                 shortcut: StandardKey.Find
-                onTriggered: tbTool.handleSearchAction(editor.text.text)
+                onTriggered: tbTool.handleSearchAction(editor.text.text, false)
             }
             Action {
                 text: qsTr("Replace")

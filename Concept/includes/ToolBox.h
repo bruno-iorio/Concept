@@ -19,7 +19,7 @@ public:
     ~ToolBox();
 
 public slots:
-    void handleSearchAction(const QString &content);
+    void handleSearchAction(const QString &content = QString(""), bool global = true);
     void handleReplaceAction(const QString &content);
     void onReplace();
 
@@ -48,11 +48,12 @@ class SearchDialog : public QDialog
     Q_OBJECT
 
 public:
-    SearchDialog(QWidget *parent = nullptr, const QString &editorText = QString());
+    SearchDialog(QWidget *parent = nullptr, const QString &editorText = QString(), bool global = false);
     ~SearchDialog();
 
 private slots:
-    void onSearch();
+    void onLocalSearch();
+    void onGlobalSearch();
 
 private:
     QDialog *searchDialog;
@@ -63,6 +64,7 @@ private:
     QPushButton *closeSearchButton;
 
     QString text;
+    bool global;
 };
 
 #endif // TOOLBOX_H

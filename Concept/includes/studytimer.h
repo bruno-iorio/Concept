@@ -1,3 +1,5 @@
+//studytimer.h
+
 #ifndef STUDYTIMER_H
 #define STUDYTIMER_H
 #include <chrono>
@@ -23,7 +25,6 @@ public:
 
     virtual ~Timer() {}
     // IMPLEMENT IF NECESSARY
-
     time_t get_time() { //for storing system time
         std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
         time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
@@ -61,6 +62,22 @@ public:
 
     CountUpTimer() : Timer() {};
 
+    virtual bool update_timer() {
+        if (second != 59) {
+            second++;
+        } else {
+            if (minute != 59) {
+                minute++;
+                second = 0;
+            } else {
+                hour++;
+                minute = 0;
+                second = 0;
+            }
+        }
+        return finished;
+    }
+
 };
 
 class CountDownTimer : public Timer {
@@ -68,22 +85,42 @@ public:
 
     CountDownTimer(int focus_minutes, int focus_hours) : Timer(focus_minutes, focus_hours) {};
 
+
+
     virtual bool update_timer() {
-        if (second != 0) {second --;}
-        else {second = 59;
-            if (minute != 0) {minute --;}
-            else {minute = 59;
-                hour --;}
-        }
-        if (second==0 && minute==0 && hour==0) {
-            finished = 1;
+        if (second != 0) {
+            second--;
+        } else {
+            if (minute != 0) {
+                minute--;
+                second = 59;
+            } else {
+                if (hour != 0) {
+                    hour--;
+                    minute = 59;
+                    second = 59;
+                } else {
+                    // Timer is finished
+                    finished = true;
+                }
+            }
         }
         return finished;
     }
 
 public slots:
-    void startTimer();
+    void startTimer() {
+        // Your existing implementation here or any changes you want to make.
+        while (counting) {
+            activeCounting();
+        }
+    }
+
+    // Inside the CountDownTimer class in studytimer.h
+    QString getTime() const {
+        return QString("%1:%2:%3").arg(current_hour, 2, 10, QChar('0')).arg(current_minute, 2, 10, QChar('0')).arg(current_second, 2, 10, QChar('0'));
+    }
+
 };
 
 #endif // STUDYTIMER_H
-

@@ -1,8 +1,11 @@
+//Pomodoro.qml
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import Concept
 import CustomControls 1.0
+
 
 Rectangle {
 
@@ -15,6 +18,7 @@ Rectangle {
         anchors.top: root.top
         color: Colors.surface1
 
+        /*
         Text {
             id: studyTimerText
             text: "Study Timer"
@@ -26,7 +30,7 @@ Rectangle {
             //topPadding: root.height * 0.05
             //leftPadding: root.width * 0.40
             //bottomPadding: root.height * 0.05
-        }
+        }*/
     }
 
     Rectangle {
@@ -79,11 +83,17 @@ Rectangle {
         // Timer Display
         Text {
             id: timerDisplay
-            text: "00:00"
+            text: focusItem.time
             font.pixelSize: timerBlock.height * 0.20
             anchors.centerIn: parent
-        }
 
+            Connections {
+                target: focusItem
+                onTimeChanged: {
+                    timerDisplay.text = focusItem.time;
+                }
+            }
+        }
         //Timer {
             //id: countdownTimer
             //interval: 1000
@@ -107,7 +117,9 @@ Rectangle {
 
     SetFocusPeriod {
         id: focusItem
+
     }
+
 
     Rectangle {
         id: button1
@@ -137,12 +149,16 @@ Rectangle {
         anchors.top: button1.bottom
 
         color: "#c4c8cc"
-        Button{
-            id: start
-            text: "Start"
-            font.pixelSize: timerBlock.height * 0.15
-            anchors.centerIn: parent
-        }
+        Button {
+                    id: start
+                    text: "Start"
+                    font.pixelSize: timerBlock.height * 0.15
+                    anchors.centerIn: parent
+                    onClicked: {
+                        focusItem.handleStart();
+                    }
+                }
+
     }
     Rectangle {
         id: button3
@@ -156,6 +172,9 @@ Rectangle {
             text: "Stop"
             font.pixelSize: timerBlock.height * 0.15
             anchors.centerIn: parent
+            onClicked: {
+                focusItem.handleStop();
+            }
         }
     }
     Rectangle {

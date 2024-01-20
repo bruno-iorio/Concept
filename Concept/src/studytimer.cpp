@@ -1,3 +1,5 @@
+//studytimer.cpp
+
 #include "studytimer.h"
 
 using namespace std;
@@ -83,7 +85,7 @@ int startTimer(Timer *timer_pointer) {
     return 0;
 }
 
-
+/*
 CountUpTimer* initializeZeroTimer() {
     return new CountUpTimer();
 }
@@ -108,8 +110,5 @@ Timer userStartsFocusTimer(int &focus_minutes, int &focus_hours) {
     return *timer;
 }
 
-void CountDownTimer::startTimer(){
-    //Later
-}
-
+*/
 

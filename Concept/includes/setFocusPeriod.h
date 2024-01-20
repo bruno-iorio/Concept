@@ -1,3 +1,4 @@
+//setFocusPeriod.h
 #ifndef SETFOCUSPERIOD_H
 #define SETFOCUSPERIOD_H
 
@@ -14,18 +15,15 @@ class SetFocusPeriod : public QQuickItem {
 public:
     SetFocusPeriod(QQuickItem *parent = nullptr);
     ~SetFocusPeriod();
-
-    QString getTime() const;
-
-    void handleTimeout();
-
-
-
 signals:
     void timeChanged();
+    void setTime(const QString &time);
 
 public slots:
     void showMenu();
+    Q_INVOKABLE void handleStop();
+    Q_INVOKABLE void handleStart();
+    Q_INVOKABLE QString getTime() const;
 
 private:
     QMenu menu;
@@ -39,9 +37,9 @@ private slots:
     void handleFourtyFiveMinutes();
     void handleOneHour();
     void handlePause();
-    void handleStop();
+    void handleTimeout();
     void handleContinue();
-    void handleStart();
+
 
 };
 

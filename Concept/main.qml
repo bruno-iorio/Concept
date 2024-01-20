@@ -4,6 +4,7 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Concept
 import QtQuick.Shapes
+import CustomeControls 1.0
 
 pragma ComponentBehavior: Bound
 

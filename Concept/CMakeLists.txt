@@ -36,6 +36,7 @@ qt_add_executable(ConceptApp
     includes/timer.h src/timer.cpp
     includes/database/database.h
     includes/errors.h
+    includes/cppPomodoro.h src/cppPomodoro.cpp
 )
 
 ## Configure QxOrm

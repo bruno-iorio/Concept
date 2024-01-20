@@ -4,17 +4,20 @@
 #include <QQmlContext>
 #include <QDirIterator>
 #include <QFontDatabase>
+#include <QTreeView>
+
 #include "includes/app_environment.h"
 #include "includes/import_qml_components_plugins.h"
 #include "includes/import_qml_plugins.h"
 #include "QxOrm.h"
 #include "database/database.h"
 #include "explorer.h"
-#include <QTreeView>
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
-#include <iostream>
 #include "includes/calendar.h"
+#include "includes/cppPomodoro.h"
+
+#include <iostream>
 
 int main(int argc, char *argv[]) {
     // Initialize QxOrm
@@ -86,9 +89,7 @@ int main(int argc, char *argv[]) {
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
     qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
-
-
-    //RedSquareManager redSquareManager;
+    qmlRegisterType<Pomodoro>("CustomControls", 1, 0, "Pomodoro");
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -101,14 +102,13 @@ int main(int argc, char *argv[]) {
     engine.addImportPath(":/");
     engine.load(url);
 
+    Pomodoro pomodoroItem;
+    engine.rootContext()->setContextProperty("pomodoroItem", &pomodoroItem);
+
     //Set Focus Period Button
     SetFocusPeriod focusItem;
     engine.rootContext()->setContextProperty("focusItem", &focusItem);
 
-/*<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes*/
     //Help Button
     MainHelp helpItem;
     HelpDialog1 helpDialog1;
@@ -129,8 +129,6 @@ int main(int argc, char *argv[]) {
     QObject::connect(&helpItem, &MainHelp::Notebooks, [&helpNotebooks]() {
         helpNotebooks.show();  // You can use show() instead of exec() for modeless dialog
     });
-
-    //engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
 
     if(engine.rootObjects().isEmpty()){
         std::cout << "Root Objects is empty" << std::endl;

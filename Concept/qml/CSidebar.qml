@@ -97,7 +97,6 @@ Rectangle {
             // Shows the file system when clicked.
             SidebarEntry {
                 id: filesystemTab
-
                 icon.source: "icons/read.svg"
                 checkable: true
                 
@@ -120,10 +119,9 @@ Rectangle {
                     calendarItem.showCalendar();
                 }
             }
-
+            
             SidebarEntry {
                 id: timerTab
-
                 icon.source: "icons/light_bulb.svg"
                 checkable: true
 
@@ -131,25 +129,22 @@ Rectangle {
                     text: qsTr("Timer")
                     visible: timerTab.hovered
                 }
-            }            
+            }           
             
-            ToolBox {
-                id: globalSearchItem
-            }
-
             SidebarEntry {
-                id: globalSearchTab
-
-                // TO BE CHANGED TO A LENS SVG
-                icon.source: "icons/light_bulb.svg" 
-
-                checkable: false
+                id: searchTab
+                icon.source: "icons/search.svg"
+                checkable: true
 
                 ToolTip {
                     text: qsTr("Global Search")
-                    visible: globalSearchTab.hovered
+                    visible: searchTab.hovered
                 }
 
+                ToolBox {
+                    id: globalSearchItem
+                }
+                
                 onClicked: {
                     globalSearchItem.handleSearchAction();
                 }
@@ -175,7 +170,7 @@ Rectangle {
             SidebarEntry {
                 id: qtWebsiteButton
                 icon.source: "icons/globe.svg"
-                checkable: false
+                checkable: true
                 onClicked: Qt.openUrlExternally("https://www.qt.io/")
             }
 

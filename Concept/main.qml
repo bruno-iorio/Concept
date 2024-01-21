@@ -87,6 +87,14 @@ ApplicationWindow {
             }
         }
 
+        ToolBox {
+            id: tbTool
+            onTextChanged: (newtext) => {
+                // Action when the replace button is hit in ToolBox.cpp
+                editor.text.text = newtext;
+            }
+        }
+
         CMenu {
             title: qsTr("Format")
             Action {
@@ -99,19 +107,22 @@ ApplicationWindow {
                 shortcut: StandardKey.ZoomOut
                 onTriggered: editor.text.font.pixelSize -= 1
             }
-        }
-
-        ToolBox {
-            id: tbTool
-            onTextChanged: (newtext) => {
-                // Action when the replace button is hit in ToolBox.cpp
-                editor.text.text = newtext;
+            // Tools linked to C++ code:
+            Action {
+                text: qsTr("Search")
+                shortcut: StandardKey.Find
+                onTriggered: tbTool.handleSearchAction(editor.text.text, false)
+            }
+            Action {
+                text: qsTr("Replace")
+                shortcut: StandardKey.Replace
+                onTriggered: tbTool.handleReplaceAction(editor.text.text)
             }
         }
 
         CMenu {
             id : toolsMenu
-            title: qsTr("Tools")
+            title: qsTr("Count")
 
             // Tools within QML:
             Action {
@@ -123,18 +134,6 @@ ApplicationWindow {
             Action {
                 text: qsTr("Non-space Character Count: ") + editor.currentCharacterCountNoSpaces
             }
-
-            // Tools linked to C++ code:
-            Action {
-                text: qsTr("Search")
-                shortcut: StandardKey.Find
-                onTriggered: tbTool.handleSearchAction(editor.text.text, false)
-            }
-            Action {
-                text: qsTr("Replace")
-                shortcut: StandardKey.Replace
-                onTriggered: tbTool.handleReplaceAction(editor.text.text)
-            }   
         }
     }
 

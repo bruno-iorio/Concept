@@ -84,11 +84,7 @@ ApplicationWindow {
             Action {
                 text: Colors.isDarkMode ? qsTr("Toggle Light Mode")
                     : qsTr("Toggle Dark Mode")
-                onTriggered: 
-                {
-                    Colors.isDarkMode = !Colors.isDarkMode
-                    colorManager.changeColor()
-                }
+                onTriggered: Colors.isDarkMode = !Colors.isDarkMode
             }
         }
 

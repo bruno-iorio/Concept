@@ -9,7 +9,6 @@
 #include <QPushButton>
 #include <QTextBrowser>
 #include <QObject>
-#include <QResizeEvent>
 
 class Calendar : public QMainWindow {
     Q_OBJECT

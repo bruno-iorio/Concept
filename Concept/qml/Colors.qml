@@ -28,6 +28,7 @@ QtObject {
     readonly property color color2: isDarkMode ? "#D3869B" : "#E74C3C"
 
     /* load fonts from directory */
+    /*
     readonly property font font: Qt.font({
         family: "Roboto Mono",
         pixelSize: Qt.application.font.pixelSize
@@ -36,6 +37,7 @@ QtObject {
         family: "Roboto Mono",
         pixelSize: Qt.application.font.pixelSize * 1.6
     })
+    */
 
     property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
         id: directoryFontLoader

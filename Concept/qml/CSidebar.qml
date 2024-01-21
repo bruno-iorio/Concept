@@ -92,6 +92,9 @@ Rectangle {
                     text: qsTr("This is the help text.")
                     visible: infoTab.hovered
                 }
+                onClicked: {
+                    calendarItem.closeCalendarFromQML();
+                }
             }
 
             // Shows the file system when clicked.
@@ -105,6 +108,9 @@ Rectangle {
                     text: qsTr("Notebooks")
                     visible: filesystemTab.hovered
                 }
+                onClicked: {
+                    calendarItem.closeCalendarFromQML();
+                }
             }
 
             SidebarEntry {
@@ -117,8 +123,8 @@ Rectangle {
                     visible: calendarTab.hovered
                 }
                 onClicked: {
-                        calendarItem.showCalendar();
-                    }
+                    calendarItem.showCalendar();
+                }
             }
 
             SidebarEntry {
@@ -130,6 +136,9 @@ Rectangle {
                 ToolTip {
                     text: qsTr("Timer")
                     visible: timerTab.hovered
+                }
+                onClicked: {
+                    calendarItem.closeCalendarFromQML();
                 }
             }
         }

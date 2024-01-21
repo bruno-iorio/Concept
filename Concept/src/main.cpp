@@ -15,7 +15,6 @@
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include "includes/calendar.h"
-#include "includes/cppPomodoro.h"
 
 #include <iostream>
 
@@ -89,7 +88,7 @@ int main(int argc, char *argv[]) {
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
     qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
-    qmlRegisterType<Pomodoro>("CustomControls", 1, 0, "Pomodoro");
+    qmlRegisterType<CalendarQML>("CustomControls", 1, 0, "CalendarQML");
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -101,9 +100,6 @@ int main(int argc, char *argv[]) {
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
     engine.load(url);
-
-    Pomodoro pomodoroItem;
-    engine.rootContext()->setContextProperty("pomodoroItem", &pomodoroItem);
 
     //Set Focus Period Button
     SetFocusPeriod focusItem;
@@ -117,7 +113,6 @@ int main(int argc, char *argv[]) {
         helpDialog1.show();  // You can use show() instead of exec() for modeless dialog
     });
 
-    //Calendar Button
     //Calendar Button
     CalendarQML calendarItem = CalendarQML();
     engine.rootContext()->setContextProperty("calendarItem", &calendarItem);
@@ -135,10 +130,6 @@ int main(int argc, char *argv[]) {
         calendarItem.closeCalendarFromQML();
     });
 
-    QObject::connect(&calendarItem, &::CalendarQML::showCalendar, [&calendarItem]() {
-        calendarItem.closeCalendarFromQML();
-    });
-
     HelpNotebooks helpNotebooks;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
     QObject::connect(&helpItem, &MainHelp::Notebooks, [&helpNotebooks]() {
@@ -149,14 +140,10 @@ int main(int argc, char *argv[]) {
         std::cout << "Root Objects is empty" << std::endl;
         return -1;
     }
-    QObject *rootObject = engine.rootObjects().first();
 //    QTreeView treeView;
-//
 //    ExplorerModel model;
 //    treeView.setModel(&model);
 //    treeView.show();
-
-    if (engine.rootObjects().isEmpty()) return -1;
 
     return app.exec();
 }

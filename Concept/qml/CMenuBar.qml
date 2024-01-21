@@ -145,9 +145,9 @@ MenuBar {
 
                 color: hovered ? "#ec4143" : "transparent"
                 onAction: {
-                        root.dragWindow.close();
-                        calendarItem.closeCalendarFromQML();
-                    }
+                    root.dragWindow.close();
+                    calendarItem.closeCalendarFromQML();
+                }
                 Rectangle {
                     anchors.centerIn: parent
                     width: parent.height - 8; height: 2

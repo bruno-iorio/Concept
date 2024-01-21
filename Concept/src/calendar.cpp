@@ -19,7 +19,6 @@ Calendar::Calendar(QWidget *parent) : QMainWindow(parent) {
 
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(layout);
-
     setCentralWidget(centralWidget);
 
     connect(addButton, SIGNAL(clicked()), this, SLOT(addEvent()));
@@ -27,6 +26,8 @@ Calendar::Calendar(QWidget *parent) : QMainWindow(parent) {
     setWindowTitle("Event Calendar");
 
     connect(this, SIGNAL(destroyed(QObject*)), this, SLOT(closeCalendar()));
+
+    setGeometry(50, 100, 200, 300);
 }
 
 void Calendar::addEvent() {

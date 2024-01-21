@@ -12,7 +12,6 @@ set(CMAKE_AUTORCC ON)
 include_directories(includes)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Widgets QuickControls2 Svg)
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Widgets QuickControls2 Svg)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
@@ -28,6 +27,7 @@ qt_add_executable(ConceptApp
     src/main.cpp
     includes/calendar.h src/calendar.cpp
     includes/mainhelp.h src/mainhelp.cpp
+    includes/toolBox.h src/toolBox.cpp
     includes/setFocusPeriod.h src/setFocusPeriod.cpp
     includes/export.h includes/precompiled.h
     includes/database/notes.h src/database/notes.cpp

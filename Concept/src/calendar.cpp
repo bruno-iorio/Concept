@@ -1,3 +1,4 @@
+//calendar.cpp
 #include "../includes/calendar.h"
 #include <QVBoxLayout>
 #include <QDate>
@@ -19,12 +20,15 @@ Calendar::Calendar(QWidget *parent) : QMainWindow(parent)
 
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(layout);
-
     setCentralWidget(centralWidget);
 
     connect(addButton, SIGNAL(clicked()), this, SLOT(addEvent()));
 
     setWindowTitle("Event Calendar");
+
+    connect(this, SIGNAL(destroyed(QObject*)), this, SLOT(closeCalendar()));
+
+    setGeometry(50, 100, 200, 300);
 }
 
 void Calendar::addEvent()
@@ -51,4 +55,16 @@ CalendarQML::CalendarQML(QObject *parent) : QObject(parent)
 void CalendarQML::showCalendar()
 {
     myCalendar->show();
+}
+
+void Calendar::closeCalendar() {
+    emit calendarClosed();
+}
+
+void CalendarQML::closeCalendarFromQML() {
+    myCalendar->close();  // Close the calendar window
+}
+
+void Calendar::closeCalendarFromButton() {
+    close();  // Close the calendar window
 }

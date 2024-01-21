@@ -4,18 +4,19 @@
 #include <QQmlContext>
 #include <QDirIterator>
 #include <QFontDatabase>
+#include <QTreeView>
+
 #include "includes/app_environment.h"
 #include "includes/import_qml_components_plugins.h"
 #include "includes/import_qml_plugins.h"
 #include "QxOrm.h"
 #include "database/database.h"
 #include "explorer.h"
-#include <QTreeView>
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include "includes/toolBox.h"
-#include <iostream>
 #include "includes/calendar.h"
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -100,8 +101,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
     qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
     qmlRegisterType<ToolBox>("CustomControls", 1, 0, "ToolBox");
-
-    // RedSquareManager redSquareManager;
+    qmlRegisterType<CalendarQML>("CustomControls", 1, 0, "CalendarQML");
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(
@@ -133,9 +133,20 @@ int main(int argc, char *argv[])
     // Calendar Button
     CalendarQML calendarItem = CalendarQML();
     engine.rootContext()->setContextProperty("calendarItem", &calendarItem);
-    // QObject::connect(&calendarItem, &Calendar::File, [&calendarItem]() {
-    //  calendarItem.showCalendar();  // You can use show() instead of exec() for modeless dialog
-    //});
+
+    QObject::connect(&calendarItem, &CalendarQML::File, [&calendarItem]() {
+        calendarItem.showCalendar();
+    });
+
+    // Connect the signal from CalendarQML to close the Calendar
+    QObject::connect(&calendarItem, &CalendarQML::showCalendar, [&calendarItem]() {
+        calendarItem.closeCalendarFromQML();
+    });
+
+    // Connect the aboutToQuit signal to close the calendar when the application is about to quit
+    QObject::connect(qApp, &QGuiApplication::aboutToQuit, [&calendarItem]() {
+        calendarItem.closeCalendarFromQML();
+    });
 
     HelpNotebooks helpNotebooks;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
@@ -143,23 +154,15 @@ int main(int argc, char *argv[])
                      {
                          helpNotebooks.show(); // You can use show() instead of exec() for modeless dialog
                      });
-
-    // engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
-
-    if (engine.rootObjects().isEmpty())
-    {
+  
+    if(engine.rootObjects().isEmpty()){
         std::cout << "Root Objects is empty" << std::endl;
         return -1;
     }
-    QObject *rootObject = engine.rootObjects().first();
-    //    QTreeView treeView;
-    //
-    //    ExplorerModel model;
-    //    treeView.setModel(&model);
-    //    treeView.show();
-
-    if (engine.rootObjects().isEmpty())
-        return -1;
+//    QTreeView treeView;
+//    ExplorerModel model;
+//    treeView.setModel(&model);
+//    treeView.show();
 
     return app.exec();
 }

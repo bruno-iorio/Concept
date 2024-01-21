@@ -1,3 +1,5 @@
+// calendar.h
+
 #ifndef EVENTCALENDAR_H
 #define EVENTCALENDAR_H
 
@@ -14,8 +16,10 @@ class Calendar : public QMainWindow {
 public:
     Calendar(QWidget *parent = nullptr);
 
-private slots:
+public slots:
     void addEvent();
+    void closeCalendar();
+    void closeCalendarFromButton();
 
 private:
     QCalendarWidget *calendarWidget;
@@ -23,7 +27,10 @@ private:
     QPushButton *addButton;
     QTextBrowser *eventDisplay;
 
+signals:
+    void calendarClosed();
 };
+
 
 class CalendarQML : public QObject {
     Q_OBJECT
@@ -32,6 +39,7 @@ public:
 
 public slots:
     void showCalendar();
+    void closeCalendarFromQML();  // New slot to close the calendar from QML
 
 private:
     Calendar *myCalendar;

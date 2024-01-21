@@ -92,6 +92,9 @@ Rectangle {
                     text: qsTr("This is the help text.")
                     visible: infoTab.hovered
                 }
+                onClicked: {
+                    calendarItem.closeCalendarFromQML();
+                }
             }
 
             // Shows the file system when clicked.
@@ -103,6 +106,9 @@ Rectangle {
                 ToolTip {
                     text: qsTr("Notebooks")
                     visible: filesystemTab.hovered
+                }
+                onClicked: {
+                    calendarItem.closeCalendarFromQML();
                 }
             }
 
@@ -147,6 +153,7 @@ Rectangle {
                 
                 onClicked: {
                     globalSearchItem.handleSearchAction();
+                    calendarItem.closeCalendarFromQML();
                 }
             }
         }
@@ -183,10 +190,12 @@ Rectangle {
                 onClicked: aboutQtWindow.visible = !aboutQtWindow.visible
             }
 
+
             MainHelp {
                 id: helpItem
-                onShowRedSquare: redSquareManager.showRedSquare()
+                //onShowRedSquare: redSquareManager.showRedSquare()
             }
+
 
             SidebarEntry {
                 id: helpButton

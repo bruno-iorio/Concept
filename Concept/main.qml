@@ -21,6 +21,7 @@ ApplicationWindow {
     title: "Concept"
     visible: true
     color: Colors.background
+    
     flags: Qt.Window | Qt.FramelessWindowHint
 
     function generateInfoText() {
@@ -168,7 +169,7 @@ ApplicationWindow {
             Rectangle {
                 id: navigationView
                 color: Colors.surface1
-                SplitView.preferredWidth: 250
+                SplitView.preferredWidth: 300
                 SplitView.fillHeight: true
                 // The stack-layout provides different views, based on the
                 // selected buttons inside the sidebar.
@@ -195,6 +196,15 @@ ApplicationWindow {
                         }
                     }
 
+                    Text {
+                        anchors.leftMargin: 10
+                        anchors.topMargin: 10
+                        text: qsTr("This is a calender")
+                        wrapMode: TextArea.Wrap
+                        color: Colors.text
+
+                    }
+                    
                     CTimer {}
                 }
             }

@@ -156,8 +156,6 @@ void ConceptEditor::deleteNote(int id, const QString &currentName, const QString
         error_popup(daoError.text());
         return;
     }
-
-    // Emit a signal to notify the UI about the deletion
 }
 /*
 void ConceptEditor::renameFolder(long id, const QString &currentName) {

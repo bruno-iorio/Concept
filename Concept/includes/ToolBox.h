@@ -22,6 +22,7 @@ public slots:
     void handleSearchAction(const QString &content = QString(""), bool global = true);
     void handleReplaceAction(const QString &content);
     void onReplace();
+    void onSearch();
 
 signals:
     void textChanged(const QString &newtext);
@@ -30,6 +31,8 @@ private:
     QDialog *replaceDialog;
     QLabel *replaceTitleLabel;
     QPushButton *replaceButton;
+    QPushButton *searchButton;
+    QListWidget *searchResults;
     QLineEdit *keywordInput;
     QLineEdit *replacementInput;
     QLabel *replaceConfirmationLabel;

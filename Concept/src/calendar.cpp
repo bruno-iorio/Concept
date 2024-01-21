@@ -48,7 +48,6 @@ void Calendar::addEvent()
 
 CalendarQML::CalendarQML(QObject *parent) : QObject(parent)
 {
-
     this->myCalendar = new Calendar();
 }
 

@@ -15,6 +15,8 @@ ToolBox::ToolBox(QQuickItem *parent) : QQuickItem(parent)
     keywordInput = new QLineEdit(replaceDialog);
     replacementInput = new QLineEdit(replaceDialog);
     replaceButton = new QPushButton("Replace", replaceDialog);
+    searchButton = new QPushButton("Search", replaceDialog);
+    searchResults = new QListWidget(replaceDialog);
     replaceConfirmationLabel = new QLabel("", replaceDialog);
     closeReplaceButton = new QPushButton("Close Window", replaceDialog);
 
@@ -24,9 +26,12 @@ ToolBox::ToolBox(QQuickItem *parent) : QQuickItem(parent)
     replaceLayout->addWidget(keywordInput);
     replaceLayout->addWidget(replacementInput);
     replaceLayout->addWidget(replaceButton);
+    replaceLayout->addWidget(searchButton);
+    replaceLayout->addWidget(searchResults);
     replaceLayout->addWidget(closeReplaceButton);
     replaceLayout->addWidget(replaceConfirmationLabel);
 
+    connect(searchButton, &QPushButton::clicked, this, &ToolBox::onSearch);
     connect(replaceButton, &QPushButton::clicked, this, &ToolBox::onReplace);
     connect(closeReplaceButton, &QPushButton::clicked, replaceDialog, &QDialog::close);
 }
@@ -86,7 +91,6 @@ SearchDialog::SearchDialog(QWidget *parent, const QString &editorText, bool glob
 
 void SearchDialog::onLocalSearch()
 {
-
     QString keyword = keywordInput->text();
 
     searchResults->clear();
@@ -239,8 +243,49 @@ void ToolBox::onReplace()
     else
     {
         replaceConfirmationLabel->setText("Replacement done.");
-
         // Emit the signal to update the main text in main.qml
         emit textChanged(text);
+    }
+}
+
+void ToolBox::onSearch()
+{
+    QString keyword = keywordInput->text();
+
+    searchResults->clear();
+
+    if (keyword.isEmpty())
+    {
+        searchResults->addItem("Keyword not found");
+        return;
+    }
+
+    QStringList lines = text.split("\n");
+
+    for (int i = 0; i < lines.size(); ++i)
+    {
+        // If the line contains the keyword
+        int index = lines[i].indexOf(keyword);
+        if (index != -1)
+        {
+            // Calculate the start and end positions for the substring
+
+            // I chose +/- 10 arbitrarely to make it only print part of
+            // line as it looks better
+            int start = std::max(0, index - 10);
+            int end = std::min(lines[i].length(), index + keyword.length() + 10);
+
+            // Get the substring around the keyword
+            QString substring = lines[i].mid(start, end - start);
+
+            // Add the substring to the search results
+            QListWidgetItem *item = new QListWidgetItem(QString("Line ") + QString::number(i + 1) + QString(". '") + substring + QString("'"));
+            searchResults->addItem(item);
+        }
+    }
+
+    if (searchResults->count() == 0)
+    {
+        searchResults->addItem("Keyword not found");
     }
 }

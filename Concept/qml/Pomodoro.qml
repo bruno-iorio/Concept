@@ -23,9 +23,6 @@ Rectangle {
             color: Colors.text
             
             anchors.centerIn: parent
-            //topPadding: root.height * 0.05
-            //leftPadding: root.width * 0.40
-            //bottomPadding: root.height * 0.05
         }
     }
 

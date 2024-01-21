@@ -29,8 +29,6 @@ private:
 
 signals:
     void calendarClosed();
-
-
 };
 
 

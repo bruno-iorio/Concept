@@ -14,7 +14,8 @@ ToolBox::ToolBox(QQuickItem *parent) : QQuickItem(parent)
     replaceTitleLabel = new QLabel("Enter keyword to replace and its replacement:", replaceDialog);
     keywordInput = new QLineEdit(replaceDialog);
     replacementInput = new QLineEdit(replaceDialog);
-    replaceButton = new QPushButton("Replace", replaceDialog);
+    replaceOneButton = new QPushButton("Replace One", replaceDialog);
+    replaceButton = new QPushButton("Replace All", replaceDialog);
     searchButton = new QPushButton("Search", replaceDialog);
     searchResults = new QListWidget(replaceDialog);
     replaceConfirmationLabel = new QLabel("", replaceDialog);
@@ -25,12 +26,14 @@ ToolBox::ToolBox(QQuickItem *parent) : QQuickItem(parent)
     replaceLayout->addWidget(replaceTitleLabel);
     replaceLayout->addWidget(keywordInput);
     replaceLayout->addWidget(replacementInput);
+    replaceLayout->addWidget(replaceOneButton);
     replaceLayout->addWidget(replaceButton);
     replaceLayout->addWidget(searchButton);
     replaceLayout->addWidget(searchResults);
     replaceLayout->addWidget(closeReplaceButton);
     replaceLayout->addWidget(replaceConfirmationLabel);
 
+    connect(replaceOneButton, &QPushButton::clicked, this, &ToolBox::onReplaceOne);
     connect(searchButton, &QPushButton::clicked, this, &ToolBox::onSearch);
     connect(replaceButton, &QPushButton::clicked, this, &ToolBox::onReplace);
     connect(closeReplaceButton, &QPushButton::clicked, replaceDialog, &QDialog::close);
@@ -231,11 +234,30 @@ void ToolBox::onReplace()
     // Get the keyword and its replacement from the inputs
     QString keyword = keywordInput->text();
     QString replacement = replacementInput->text();
-
     // Replace all occurrences of the keyword in the text
     QString copy = text;
     text.replace(keyword, replacement);
 
+    if (copy == text)
+    {
+        replaceConfirmationLabel->setText("Nothing to change.");
+    }
+    else
+    {
+        replaceConfirmationLabel->setText("Replacement done.");
+        // Emit the signal to update the main text in main.qml
+        emit textChanged(text);
+    }
+}
+
+void ToolBox::onReplaceOne()
+{
+    // Get the keyword and its replacement from the inputs
+    QString keyword = keywordInput->text();
+    QString replacement = replacementInput->text();
+    QString copy = text;
+    // Replace the first occurrence of the keyword in the text
+    text.replace(text.indexOf(keyword), keyword.length(), replacement);
     if (copy == text)
     {
         replaceConfirmationLabel->setText("Nothing to change.");

@@ -1,5 +1,4 @@
 import QtQuick
-// import QtQuick.Controls
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Concept
@@ -13,8 +12,6 @@ ApplicationWindow {
 
     property bool showLineNumbers: true
     property alias editor: editor
-
-    // readonly property font fontFamily: "Arial"
 
     width: Screen.width * 0.95
     height: Screen.height * 0.95
@@ -40,6 +37,7 @@ ApplicationWindow {
         CMenu {
             id: noteContextMenu
             title: qsTr("File")
+            /*
             Action {
                 text: qsTr("Debug")
                 shortcut: "Ctrl+D"
@@ -48,6 +46,7 @@ ApplicationWindow {
                     editor.controller.openNote(1)
                 }
             }
+            */
             Action {
                 text: qsTr("Save Note")
                 shortcut: "Ctrl+S"
@@ -93,6 +92,7 @@ ApplicationWindow {
             onTextChanged: (newtext) => {
                 // Action when the replace button is hit in ToolBox.cpp
                 editor.text.text = newtext;
+                editor.controller.saveNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
             }
         }
 
@@ -108,11 +108,14 @@ ApplicationWindow {
                 shortcut: StandardKey.ZoomOut
                 onTriggered: editor.text.font.pixelSize -= 1
             }
-            // Tools linked to C++ code:
             Action {
                 text: qsTr("Search")
                 shortcut: StandardKey.Find
                 onTriggered: tbTool.handleSearchAction(editor.text.text, false)
+            }
+            Action {
+                text: qsTr("Search all files")
+                onTriggered: tbTool.handleSearchAction(editor.text.text, true)
             }
             Action {
                 text: qsTr("Replace")
@@ -124,8 +127,6 @@ ApplicationWindow {
         CMenu {
             id : toolsMenu
             title: qsTr("Count")
-
-            // Tools within QML:
             Action {
                 text: qsTr("Word Count: ") + editor.currentWordCount
             }

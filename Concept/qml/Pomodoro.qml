@@ -23,9 +23,6 @@ Rectangle {
             color: Colors.text
             
             anchors.centerIn: parent
-            //topPadding: root.height * 0.05
-            //leftPadding: root.width * 0.40
-            //bottomPadding: root.height * 0.05
         }
     }
 
@@ -44,11 +41,11 @@ Rectangle {
                 font.pixelSize: timerBlock.height * 0.15
                 width: timerBlock.width / 2
                 background: Rectangle{
-                color: "#738290"
-                //id: studyButton
-                //text: "Break"
-                //font.pixelSize: timerBlock.height * 0.07
-                //onClicked: startTimer(25)
+                    color: "#738290"
+                    //id: studyButton
+                    //text: "Break"
+                    //font.pixelSize: timerBlock.height * 0.07
+                    //onClicked: startTimer(25)
                 }
             }
             Rectangle{
@@ -65,11 +62,11 @@ Rectangle {
                 anchors.top: studyButton.top
                 width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
                 background: Rectangle{
-                color: "#738290"
-                //id: studyButton
-                //text: "Break"
-                //font.pixelSize: timerBlock.height * 0.07
-                //onClicked: startTimer(25)
+                    color: "#738290"
+                    //id: studyButton
+                    //text: "Break"
+                    //font.pixelSize: timerBlock.height * 0.07
+                    //onClicked: startTimer(25)
                 }
             }
 

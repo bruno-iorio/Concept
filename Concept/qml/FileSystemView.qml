@@ -138,7 +138,11 @@ Rectangle {
                 }
                 Action {
                     text: qsTr("Rename")
-                    onTriggered: console.log(true) // TODO: Rename this folder
+                    onTriggered: {
+                        if (editor) {
+                            editor.controller.renameFolder(editor.currentFolderId, editor.currentFolderName);
+                        }
+                    }
                 }
                 Action {
                     text: qsTr("Delete")
@@ -147,14 +151,23 @@ Rectangle {
             }
 
             CMenu {
+
                 id: noteContextMenu
                 Action {
                     text: qsTr("Rename")
-                    onTriggered: console.log(true) // TODO: Rename this note
+                    onTriggered: {
+                        if (editor) {
+                            editor.controller.renameNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
+                        }
+                    }
                 }
                 Action {
                     text: qsTr("Delete")
-                    onTriggered: console.log(true) // TODO: Delete this note
+                    onTriggered: {
+                        if (editor) {
+                            editor.controller.deleteNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
+                        }
+                    } // TODO: Delete this note
                 }
             }
         }
@@ -180,3 +193,4 @@ Rectangle {
         }
     }
 }
+

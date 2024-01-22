@@ -3,6 +3,7 @@
 
 #include "precompiled.h"
 
+
 class Folder;
 
 class QX_CONCEPTAPP_DLL_EXPORT Note {
@@ -19,6 +20,13 @@ public:
 
     Note() : id(0) { ; }
     virtual ~Note() { ; }
+
+
+    void rename(const QString& newTitle) {
+        title = newTitle;
+        last_modified = QDateTime::currentDateTime(); // Update last_modified timestamp
+    }
+
 };
 
 QX_REGISTER_HPP_QX_CONCEPTAPP(Note, qx::trait::no_base_class_defined, 0)

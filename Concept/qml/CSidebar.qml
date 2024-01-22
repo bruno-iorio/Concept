@@ -92,12 +92,14 @@ Rectangle {
                     text: qsTr("This is the help text.")
                     visible: infoTab.hovered
                 }
+                onClicked: {
+                    calendarItem.closeCalendarFromQML();
+                }
             }
 
             // Shows the file system when clicked.
             SidebarEntry {
                 id: filesystemTab
-
                 icon.source: "icons/read.svg"
                 checkable: true
                 
@@ -105,17 +107,53 @@ Rectangle {
                     text: qsTr("Notebooks")
                     visible: filesystemTab.hovered
                 }
+                onClicked: {
+                    calendarItem.closeCalendarFromQML();
+                }
             }
 
             SidebarEntry {
-                id: timerTab
+                id: calendarTab
+                icon.source: "icons/calendar.svg"
+                checkable: true
 
+                ToolTip {
+                    text: qsTr("Calendar")
+                    visible: calendarTab.hovered
+                }
+                onClicked: {
+                    calendarItem.showCalendar();
+                }
+            }
+            /*
+            SidebarEntry {
+                id: timerTab
                 icon.source: "icons/light_bulb.svg"
                 checkable: true
 
                 ToolTip {
                     text: qsTr("Timer")
                     visible: timerTab.hovered
+                }
+            }           
+            */
+            SidebarEntry {
+                id: searchTab
+                icon.source: "icons/search.svg"
+                checkable: true
+
+                ToolTip {
+                    text: qsTr("Global Search")
+                    visible: searchTab.hovered
+                }
+
+                ToolBox {
+                    id: globalSearchItem
+                }
+                
+                onClicked: {
+                    globalSearchItem.handleSearchAction();
+                    calendarItem.closeCalendarFromQML();
                 }
             }
             // Shows the to do list when clicked.
@@ -152,23 +190,30 @@ Rectangle {
             SidebarEntry {
                 id: qtWebsiteButton
                 icon.source: "icons/globe.svg"
-                checkable: false
+                checkable: true
                 onClicked: Qt.openUrlExternally("https://www.qt.io/")
             }
 
             // Opens the About Qt Window.
             SidebarEntry {
                 id: aboutQtButton
-
                 icon.source: "icons/info_sign.svg"
                 checkable: false
                 onClicked: aboutQtWindow.visible = !aboutQtWindow.visible
             }
 
+            SidebarEntry {
+                id: githubRepoButton
+                icon.source: "icons/github.svg"
+                checkable: true
+                onClicked: Qt.openUrlExternally("https://github.com/ConceptTeam/Concept")
+            }
+
             MainHelp {
                 id: helpItem
-                onShowRedSquare: redSquareManager.showRedSquare()
+                //onShowRedSquare: redSquareManager.showRedSquare()
             }
+
 
             SidebarEntry {
                 id: helpButton

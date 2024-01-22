@@ -72,32 +72,38 @@ app->exec();
 void timerStart::choose1() {
     timer = CountDownTimer(1, 0);
     countdowntimer = 1;
+    time_string = createTimeString(timer.second,timer.minute,timer.hour);
     emit timeChanged();
 }
 
 void timerStart::choose25() {
     timer = CountDownTimer(25, 0);
     countdowntimer = 1;
+    time_string = createTimeString(timer.second,timer.minute,timer.hour);
     emit timeChanged();
 }
 
 void timerStart::choose30() {
     timer = CountDownTimer(30, 0);
     countdowntimer = 1;
+    time_string = createTimeString(timer.second,timer.minute,timer.hour);
     emit timeChanged();
 }
 
 void timerStart::choose45() {
     timer = CountDownTimer(45, 0);
     countdowntimer = 1;
+    time_string = createTimeString(timer.second,timer.minute,timer.hour);
     emit timeChanged();
 }
 
 void timerStart::choose60() {
     timer = CountDownTimer(0, 1);
     countdowntimer = 1;
+    time_string = createTimeString(timer.second,timer.minute,timer.hour);
     emit timeChanged();
 }
+
 void timerStart::startTheTimer() {
     timer.counting = 1;
     started = 1;
@@ -166,5 +172,6 @@ void timerStart::onTimerFinished() {
         timer.counting = 0;
         countdowntimer = 0;
         timer = CountUpTimer();
+        time_string = createTimeString(0,0,0);
         emit timeChanged();
     }

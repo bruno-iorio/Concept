@@ -169,30 +169,21 @@ Rectangle {
                 Action {
                     text: qsTr("Rename")
                     onTriggered: {
-                                     if (editor) {
-                                         editor.controller.renameNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
-
-                                     }
+                        if (editor) {
+                            editor.controller.renameNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
                         }
+                    }
                 }
                 Action {
                     text: qsTr("Delete")
                     onTriggered: {
                         if (editor) {
                             editor.controller.deleteNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
-
                         }
                     } // TODO: Delete this note
                 }
-
-
             }
-
-
-
         }
-
-
 
         // Provide our own custom ScrollIndicator for the TreeView.
         ScrollIndicator.vertical: ScrollIndicator {

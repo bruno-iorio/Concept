@@ -9,9 +9,9 @@
 MainHelp::MainHelp(QQuickItem *parent) : QQuickItem(parent) {
     QAction *helpAction1 = new QAction("File - View - Format", this);
     QAction *helpAction2 = new QAction("Notebooks", this);
-    QAction *helpAction3 = new QAction("3. Help Text 3", this);
+    QAction *helpAction3 = new QAction("Study Timer", this);
 
-    connect(helpAction1, &QAction::triggered, this, &MainHelp::handleHelpAction1);  // Corrected connection
+    connect(helpAction1, &QAction::triggered, this, &MainHelp::handleHelpAction1);
     connect(helpAction2, &QAction::triggered, this, &MainHelp::handleHelpAction2);
     connect(helpAction3, &QAction::triggered, this, &MainHelp::handleHelpAction3);
 
@@ -37,7 +37,11 @@ void MainHelp::handleHelpAction2() {
 
 void MainHelp::handleHelpAction3() {
     qDebug() << "Help Text 3 clicked!";
-    // Add your logic here
+
+    StudyTimer *studyTimer = new StudyTimer();
+    ~studyTimer -> exec();
+
+
 }
 
 MainHelp::~MainHelp() {
@@ -52,6 +56,52 @@ void MainHelp::handleHelpAction1() {
 
     // Cleanup the dialog when done
     delete helpDialog1;
+}
+
+StudyTimer::StudyTimer(QWidget *parent) : QDialog(parent){
+    setWindowTitle("Study Timer Help");
+
+    featuresTimer = new QLabel("Features:", this);
+
+    timerList = new QListWidget(this);
+    timerList->addItem("Where?");
+    timerList->addItem("Set Focus Period");
+    timerList->addItem("Start/Stop");
+    timerList->addItem("Break");
+    timerList->addItem("Continue");
+    timerList->addItem("Statistics");
+
+    timerFeatExplained["Where?"] = "Collumn on the right!";
+    timerFeatExplained["Set Focus Period"] = "Choose the period you want to \nfocus for and press Start.";
+    timerFeatExplained["Start/Stop"] = "Start or Stop the timer.";
+    timerFeatExplained["Break"] = "Stop the timer to take a break.";
+    timerFeatExplained["Continue"] = "Start the timer again after \nthe break, continues the time.";
+    timerFeatExplained["Statistics"] = "See your progress!";
+
+    timerFeatureLabel = new QLabel("", this);
+
+    closeTimer = new QPushButton("Close", this);
+
+    QVBoxLayout *layoutTimer = new QVBoxLayout(this);
+    layoutTimer->addWidget(featuresTimer);
+    layoutTimer->addWidget(timerList);
+    layoutTimer->addWidget(timerFeatureLabel);
+    layoutTimer->addWidget(closeTimer);
+
+    connect(closeTimer, &QPushButton::clicked, this, &StudyTimer::close);
+
+    // Connect the itemClicked signal to the custom slot
+    connect(timerList, &QListWidget::itemClicked, this, &StudyTimer::timer_selected);
+
+}
+
+void StudyTimer::timer_selected(QListWidgetItem *item){
+    QString feature = item->text();
+    if (timerFeatExplained.contains(feature)) {
+        timerFeatureLabel->setText(timerFeatExplained[feature]);
+    } else {
+        timerFeatureLabel->setText("");
+    }
 }
 
 HelpDialog1::HelpDialog1(QWidget *parent) : QDialog(parent) {
@@ -96,6 +146,10 @@ HelpDialog1::HelpDialog1(QWidget *parent) : QDialog(parent) {
 
     // Connect the itemClicked signal to the custom slot
     connect(featuresList, &QListWidget::itemClicked, this, &HelpDialog1::onFeatureItemSelected);
+}
+
+StudyTimer::~StudyTimer(){
+
 }
 
 void HelpDialog1::onFeatureItemSelected(QListWidgetItem *item) {

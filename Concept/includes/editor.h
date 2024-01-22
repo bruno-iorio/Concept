@@ -3,12 +3,11 @@
 
 #include <QObject>
 #include <QtQml>
-//#include "database.hpp"
 #include "database/folders.h"
 #include "database/notes.h"
 
-
-class ConceptEditor : public QObject {
+class ConceptEditor : public QObject
+{
     Q_OBJECT
     QML_ELEMENT
     public:
@@ -38,7 +37,6 @@ class ConceptEditor : public QObject {
         void renameNote(int id, const QString &currentName, const QString &content);*/
     private:
         std::vector<Folder> folders;
-
 };
 
-#endif //CONCEPTAPP_EDITOR_H
+#endif // CONCEPTAPP_EDITOR_H

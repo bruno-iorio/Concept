@@ -72,6 +72,26 @@ private:
     QMap<QString, QString> featureExplanations;
 };
 
+class StudyTimer : public QDialog {
+    Q_OBJECT
+
+public:
+    StudyTimer(QWidget *parent = nullptr);
+    ~StudyTimer();
+
+private slots:
+    void timer_selected(QListWidgetItem *item);
+
+private:
+    //QLabel *titleTimer;
+    QLabel *featuresTimer;
+    QListWidget *timerList;
+    QPushButton *closeTimer;
+    QLabel *timerFeatureLabel;
+
+    QMap <QString, QString> timerFeatExplained;
+};
+
 class HelpNotebooks : public QDialog {
     Q_OBJECT
 
@@ -92,3 +112,4 @@ private:
    // QMap<QString, QString> featureExplanations;
 };
 #endif // MAINHELP_H
+

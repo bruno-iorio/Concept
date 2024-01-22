@@ -1,9 +1,9 @@
 import QtQuick
-// import QtQuick.Controls
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Concept
 import QtQuick.Shapes
+import CustomControls 1.0
 
 pragma ComponentBehavior: Bound
 
@@ -13,13 +13,12 @@ ApplicationWindow {
     property bool showLineNumbers: true
     property alias editor: editor
 
-    // readonly property font fontFamily: "Arial"
-
     width: Screen.width * 0.95
     height: Screen.height * 0.95
     title: "Concept"
     visible: true
     color: Colors.background
+    
     flags: Qt.Window | Qt.FramelessWindowHint
 
     function generateInfoText() {
@@ -38,6 +37,7 @@ ApplicationWindow {
         CMenu {
             id: noteContextMenu
             title: qsTr("File")
+            /*
             Action {
                 text: qsTr("Debug")
                 shortcut: "Ctrl+D"
@@ -46,6 +46,7 @@ ApplicationWindow {
                     editor.controller.openNote(1)
                 }
             }
+            */
             Action {
                 text: qsTr("Save Note")
                 shortcut: "Ctrl+S"
@@ -86,6 +87,15 @@ ApplicationWindow {
             }
         }
 
+        ToolBox {
+            id: tbTool
+            onTextChanged: (newtext) => {
+                // Action when the replace button is hit in ToolBox.cpp
+                editor.text.text = newtext;
+                editor.controller.saveNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
+            }
+        }
+
         CMenu {
             title: qsTr("Format")
             Action {
@@ -98,10 +108,36 @@ ApplicationWindow {
                 shortcut: StandardKey.ZoomOut
                 onTriggered: editor.text.font.pixelSize -= 1
             }
+            Action {
+                text: qsTr("Search")
+                shortcut: StandardKey.Find
+                onTriggered: tbTool.handleSearchAction(editor.text.text, false)
+            }
+            Action {
+                text: qsTr("Search all files")
+                onTriggered: tbTool.handleSearchAction(editor.text.text, true)
+            }
+            Action {
+                text: qsTr("Replace")
+                shortcut: StandardKey.Replace
+                onTriggered: tbTool.handleReplaceAction(editor.text.text)
+            }
         }
 
+        CMenu {
+            id : toolsMenu
+            title: qsTr("Count")
+            Action {
+                text: qsTr("Word Count: ") + editor.currentWordCount
+            }
+            Action {
+                text: qsTr("Character Count: ") + editor.currentCharacterCount
+            }
+            Action {
+                text: qsTr("Non-space Character Count: ") + editor.currentCharacterCountNoSpaces
+            }
+        }
     }
-
 
     RowLayout {
         anchors.fill: parent
@@ -134,7 +170,7 @@ ApplicationWindow {
             Rectangle {
                 id: navigationView
                 color: Colors.surface1
-                SplitView.preferredWidth: 250
+                SplitView.preferredWidth: 300
                 SplitView.fillHeight: true
                 // The stack-layout provides different views, based on the
                 // selected buttons inside the sidebar.
@@ -143,6 +179,7 @@ ApplicationWindow {
                     currentIndex: sidebar.currentTabIndex
 
                     // Shows the help text.
+                    /*
                     Text {
                         anchors.leftMargin: 10
                         anchors.topMargin: 10
@@ -150,6 +187,7 @@ ApplicationWindow {
                         wrapMode: TextArea.Wrap
                         color: Colors.text
                     }
+                    */
 
                     // Shows the files on the file system.
                     FileSystemView {
@@ -164,7 +202,16 @@ ApplicationWindow {
                                          }
                     }
 
-                    CTimer {}
+                  
+                    ToDoList {}
+                    Text {
+                        anchors.leftMargin: 10
+                        anchors.topMargin: 10
+                        text: qsTr("This is a calender")
+                        wrapMode: TextArea.Wrap
+                        color: Colors.text
+
+                    }
                 }
             }
 
@@ -207,4 +254,3 @@ ApplicationWindow {
         }
     }
 }
-

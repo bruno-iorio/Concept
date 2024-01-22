@@ -20,3 +20,10 @@ Maxime Despréaux Weekly Update
         Qt Design (Screen01.ui.qml was deleted and everything merged into main.qml). We also settled on using a View/Edit
         feature for the Text Editor, the 2nd column will display and clicking the edit button should open a new window to 
         edit with the Text Editor.
+
+    Week 4: 
+        The Text editor is pretty well-implemented already and we can see progress in the UI. We have been running into quite a bit of trouble with Windows and are starting to            consider switching to Linux on Ubuntu. For now, the database is finished but requires some polishment, we're using sqliteorm. The timer is now implemented but still               doesn't run. Once we'll get it to run, we considered adding statistics and data tracking for performance in productivity.
+
+    Week 5: 
+        The UI was redesigned and retouched quite a lot during the vacation introducing a more eye pleasing dark-theme. There' also a side task bar for space management.
+        The database was also changed to qxorm, which created a lot of errors for my computer and could't build. I'm dedicating a lot of my work to getting Qt6 running our               project on Ubuntu.

@@ -9,6 +9,7 @@
 
 
 
+
 ConceptEditor::ConceptEditor(QObject *parent) : QObject(parent) {}
 
 void ConceptEditor::lastModifiedNote()

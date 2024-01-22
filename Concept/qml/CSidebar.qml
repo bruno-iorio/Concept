@@ -125,7 +125,7 @@ Rectangle {
                     calendarItem.showCalendar();
                 }
             }
-            
+            /*
             SidebarEntry {
                 id: timerTab
                 icon.source: "icons/light_bulb.svg"
@@ -136,7 +136,7 @@ Rectangle {
                     visible: timerTab.hovered
                 }
             }           
-            
+            */
             SidebarEntry {
                 id: searchTab
                 icon.source: "icons/search.svg"
@@ -184,12 +184,17 @@ Rectangle {
             // Opens the About Qt Window.
             SidebarEntry {
                 id: aboutQtButton
-
                 icon.source: "icons/info_sign.svg"
                 checkable: false
                 onClicked: aboutQtWindow.visible = !aboutQtWindow.visible
             }
 
+            SidebarEntry {
+                id: githubRepoButton
+                icon.source: "icons/github.svg"
+                checkable: true
+                onClicked: Qt.openUrlExternally("https://github.com/ConceptTeam/Concept")
+            }
 
             MainHelp {
                 id: helpItem

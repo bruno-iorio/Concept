@@ -179,6 +179,7 @@ ApplicationWindow {
                     currentIndex: sidebar.currentTabIndex
 
                     // Shows the help text.
+                    /*
                     Text {
                         anchors.leftMargin: 10
                         anchors.topMargin: 10
@@ -186,6 +187,7 @@ ApplicationWindow {
                         wrapMode: TextArea.Wrap
                         color: Colors.text
                     }
+                    */
 
                     // Shows the files on the file system.
                     FileSystemView {
@@ -206,7 +208,7 @@ ApplicationWindow {
 
                     }
                     
-                    CTimer {}
+                    //CTimer {}
                 }
             }
 

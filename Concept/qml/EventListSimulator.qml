@@ -12,9 +12,7 @@ QtObject {
     property Timer __timer: Timer {
         id: timer
         interval: 100
-        onTriggered: {
-            EventSimulator.show()
-        }
+        onTriggered:   EventSimulator.show()
     }
 
     Component.onCompleted: {

@@ -1,5 +1,6 @@
 // main.cpp
 #include <QApplication>
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDirIterator>
@@ -14,6 +15,7 @@
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include <iostream>
+#include "includes/timerUI.h"
 
 int main(int argc, char *argv[]) {
     // Initialize QxOrm
@@ -73,6 +75,7 @@ int main(int argc, char *argv[]) {
 
     QQmlApplicationEngine engine;
 
+
     // Font database
     QDirIterator it(":/content/fonts", QDirIterator::Subdirectories);
 
@@ -84,6 +87,11 @@ int main(int argc, char *argv[]) {
 
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
+    qmlRegisterType<timerStart>("CustomControls", 1, 0, "TimerStart");
+
+
+    timerStart myTimerStart;
+    engine.rootContext()->setContextProperty("myTimerStart", &myTimerStart); // Exposing to QML
 
     //RedSquareManager redSquareManager;
 

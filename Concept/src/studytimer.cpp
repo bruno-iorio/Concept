@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 int Timer::storeTimer() {
 
     time_t end_time = get_time();
@@ -36,15 +37,12 @@ int Timer::display() {
 
 int Timer::activeCounting() {
 
-
     if (finished) {
         stopTimer();
     }
     else {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        update_time();
-        display();
-    }
+        update_time();    }
 
     return 0;
 
@@ -85,7 +83,8 @@ int startTimer(Timer *timer_pointer) {
     return 0;
 }
 
-/*
+
+
 CountUpTimer* initializeZeroTimer() {
     return new CountUpTimer();
 }
@@ -110,5 +109,5 @@ Timer userStartsFocusTimer(int &focus_minutes, int &focus_hours) {
     return *timer;
 }
 
-*/
+
 

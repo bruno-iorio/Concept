@@ -5,8 +5,11 @@
 #include <chrono>
 #include <thread>
 #include <ctime>
+#include <QObject>
+#include <QTimer>
 
 using namespace std;
+
 
 class Timer
 {
@@ -15,13 +18,11 @@ public:
     int second;
     int minute;
     int hour;
-    int current_second;
-    int current_minute;
-    int current_hour;
+
     bool counting;
     bool finished;
 
-    Timer(int min=0, int h=0) : second(0), minute(min), hour(h),counting(0), finished(0), current_second(second), current_minute(minute) {}
+    Timer(int min=0, int h=0) : second(0), minute(min), hour(h),counting(0), finished(0) {}
 
     virtual ~Timer() {}
     // IMPLEMENT IF NECESSARY
@@ -55,12 +56,13 @@ public:
 
 
 
+
 };
 
 class CountUpTimer : public Timer {
 public:
 
-    CountUpTimer() : Timer() {};
+    CountUpTimer() : Timer(0,0) {};
 
     virtual bool update_timer() {
         if (second != 59) {
@@ -86,7 +88,6 @@ public:
     CountDownTimer(int focus_minutes, int focus_hours) : Timer(focus_minutes, focus_hours) {};
 
 
-
     virtual bool update_timer() {
         if (second != 0) {
             second--;
@@ -106,19 +107,6 @@ public:
             }
         }
         return finished;
-    }
-
-public slots:
-    void startTimer() {
-        // Your existing implementation here or any changes you want to make.
-        while (counting) {
-            activeCounting();
-        }
-    }
-
-    // Inside the CountDownTimer class in studytimer.h
-    QString getTime() const {
-        return QString("%1:%2:%3").arg(current_hour, 2, 10, QChar('0')).arg(current_minute, 2, 10, QChar('0')).arg(current_second, 2, 10, QChar('0'));
     }
 
 };

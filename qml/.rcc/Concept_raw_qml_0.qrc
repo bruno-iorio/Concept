@@ -1,0 +1,31 @@
+<RCC>
+  <qresource prefix="/Concept/">
+    <file alias="About.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/About.qml</file>
+    <file alias="CEditor.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/CEditor.qml</file>
+    <file alias="CMenu.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/CMenu.qml</file>
+    <file alias="CMenuBar.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/CMenuBar.qml</file>
+    <file alias="CSidebar.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/CSidebar.qml</file>
+    <file alias="CTimer.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/CTimer.qml</file>
+    <file alias="Colors.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/Colors.qml</file>
+    <file alias="Constants.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/Constants.qml</file>
+    <file alias="DirectoryFontLoader.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/DirectoryFontLoader.qml</file>
+    <file alias="EventListModel.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/EventListModel.qml</file>
+    <file alias="EventListSimulator.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/EventListSimulator.qml</file>
+    <file alias="FileSystemView.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/FileSystemView.qml</file>
+    <file alias="Pomodoro.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/Pomodoro.qml</file>
+    <file alias="ResizeButton.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/ResizeButton.qml</file>
+    <file alias="WindowDragHandler.qml">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/WindowDragHandler.qml</file>
+    <file alias="icons/app_icon.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/app_icon.svg</file>
+    <file alias="icons/folder_closed.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/folder_closed.svg</file>
+    <file alias="icons/folder_open.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/folder_open.svg</file>
+    <file alias="icons/generic_file.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/generic_file.svg</file>
+    <file alias="icons/globe.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/globe.svg</file>
+    <file alias="icons/help.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/help.svg</file>
+    <file alias="icons/info_sign.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/info_sign.svg</file>
+    <file alias="icons/light_bulb.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/light_bulb.svg</file>
+    <file alias="icons/qt_logo.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/qt_logo.svg</file>
+    <file alias="icons/read.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/read.svg</file>
+    <file alias="icons/resize.svg">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/qml/icons/resize.svg</file>
+  </qresource>
+</RCC>
+

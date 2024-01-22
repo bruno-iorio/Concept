@@ -7,6 +7,7 @@
 #include <QMenu>
 #include "QtCore/qtimer.h"
 #include "studytimer.h"
+#include "timerUI.h"
 
 class SetFocusPeriod : public QQuickItem {
     Q_OBJECT

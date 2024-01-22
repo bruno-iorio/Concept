@@ -35,6 +35,7 @@ qt_add_executable(ConceptApp
     includes/database/database.h
     includes/errors.h
     includes/startTimer.h src/startTimer.cpp
+    includes/timerUI.h src/timerUI.cpp
 
 )
 

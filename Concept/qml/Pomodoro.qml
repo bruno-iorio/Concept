@@ -52,8 +52,8 @@ Rectangle {
                 //id: studyButton
                 //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
-                //onClicked: startTimer(25)
                 }
+                onClicked: myTimerStart.pauseTimer();
             }
             Rectangle{
                 id: spacerButtonsTimerBlock
@@ -73,26 +73,28 @@ Rectangle {
                 //id: studyButton
                 //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
-                //onClicked: startTimer(25)
+
                 }
+                onClicked: myTimerStart.continueTimer();
             }
 
         }
 
-
         // Timer Display
         Text {
             id: timerDisplay
-            text: focusItem.time
+            text: myTimerStart.get_time_string();
             font.pixelSize: timerBlock.height * 0.20
             anchors.centerIn: parent
 
-            Connections {
+            /* Connections {
                 target: focusItem
                 onTimeChanged: {
                     timerDisplay.text = focusItem.time;
                 }
-            }
+                }
+                */
+            
         }
         //Timer {
             //id: countdownTimer
@@ -114,12 +116,18 @@ Rectangle {
         //}
 
     }
-
+    /*
     SetFocusPeriod {
         id: focusItem
 
-    }
+    } */
 
+    Connections {
+                target: myTimerStart
+                onTimeChanged: {
+                    timerDisplay.text = myTimerStart.get_time_string();
+                }
+            }
 
     Rectangle {
         id: button1
@@ -136,9 +144,7 @@ Rectangle {
             font.pixelSize: timerBlock.height * 0.15
             anchors.centerIn: parent
             //color: "#E1D2B7"
-            onClicked : {
-                focusItem.showMenu();
-            }
+            onClicked: myTimerStart.showMenu();
 
         }
     }
@@ -154,9 +160,7 @@ Rectangle {
                     text: "Start"
                     font.pixelSize: timerBlock.height * 0.15
                     anchors.centerIn: parent
-                    onClicked: {
-                        focusItem.handleStart();
-                    }
+                    onClicked: myTimerStart.startTheTimer();
                 }
 
     }
@@ -173,7 +177,7 @@ Rectangle {
             font.pixelSize: timerBlock.height * 0.15
             anchors.centerIn: parent
             onClicked: {
-                focusItem.handleStop();
+                myTimerStart.stopTimer();
             }
         }
     }

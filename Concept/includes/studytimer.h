@@ -55,8 +55,6 @@ public:
     int stopTimer();
 
 
-
-
 };
 
 class CountUpTimer : public Timer {

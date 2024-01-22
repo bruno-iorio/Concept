@@ -15,7 +15,7 @@
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include "includes/todoList.h"
-#include "includes/toolBox.h"
+#include "includes/ToolBox.h"
 #include "includes/calendar.h"
 #include <iostream>
 

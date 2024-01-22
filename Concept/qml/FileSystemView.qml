@@ -6,12 +6,14 @@ import QtQuick.Effects
 import QtQuick.Controls.Basic
 import Concept
 
+
 pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
 
     signal noteClicked(var index)
+    signal folderClicked(var index)
     signal reset()
 
     onReset: {
@@ -130,23 +132,34 @@ Rectangle {
                 id: folderContextMenu
                 Action {
                     text: qsTr("New note")
-                    onTriggered: console.log(true) // TODO: Create note at this layer
+                    shortcut: StandardKey.New
+                    onTriggered: {editor.controller.createNote();}
                 }
                 Action {
                     text: qsTr("New folder")
-                    onTriggered: console.log(true) // TODO: Create a sibling folder
+                    shortcut: StandardKey.New
+                    onTriggered: {editor.controller.createFolder();} // TODO: Create a sibling folder
                 }
                 Action {
                     text: qsTr("Rename")
                     onTriggered: {
-                        if (editor) {
+
+
                             editor.controller.renameFolder(editor.currentFolderId, editor.currentFolderName);
+                            console.log('rename clicked', editor.currentFolderId, editor.currentFolderName);
+
                         }
-                    }
+
                 }
+
                 Action {
                     text: qsTr("Delete")
-                    onTriggered: console.log(true) // TODO: Delete this folder and all its contents
+                    onTriggered: {
+                        if (editor) {
+                            editor.controller.deleteFolder(editor.currentFolderId);
+
+                        }
+                    } // TODO: Delete this folder and all its contents
                 }
             }
 

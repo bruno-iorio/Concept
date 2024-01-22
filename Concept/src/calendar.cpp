@@ -4,7 +4,7 @@
 #include <QDate>
 #include <QTextCharFormat>
 #include <QMainWindow>
-
+#include <QList>
 Calendar::Calendar(QWidget *parent) : QMainWindow(parent)
 {
     calendarWidget = new QCalendarWidget(this);
@@ -29,6 +29,8 @@ Calendar::Calendar(QWidget *parent) : QMainWindow(parent)
     connect(this, SIGNAL(destroyed(QObject*)), this, SLOT(closeCalendar()));
 
     setGeometry(50, 100, 200, 300);
+
+    this->initializeEvents();
 }
 
 void Calendar::addEvent()
@@ -46,6 +48,18 @@ void Calendar::addEvent()
     eventLineEdit->clear();
 }
 
+void Calendar::initializeEvents(){
+    QList<calendarEvents> e;
+    QSqlError fetchError = qx::dao::fetch_all(e);
+    QString textToAdd = QString("");
+    if(fetchError.is_valid()){
+    	for(const calendarEvents& event : e){
+		textToAdd += QString("%1: %2\n").arg(event.date.toString("yyyy-MM-dd")).arg(event.eventName);
+    	} 
+    eventDisplay->setText(textToAdd);	
+
+}
+}
 CalendarQML::CalendarQML(QObject *parent) : QObject(parent)
 {
     this->myCalendar = new Calendar();

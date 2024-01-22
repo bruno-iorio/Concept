@@ -19,7 +19,6 @@ QtObject {
                                               })
 
     readonly property color backgroundColor: "#c2c2c2"
-    */
 
 
     property StudioApplication application: StudioApplication {
@@ -29,4 +28,5 @@ QtObject {
     property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
         id: directoryFontLoader
     }
+    */
 }

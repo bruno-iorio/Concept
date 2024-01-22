@@ -21,3 +21,6 @@ Finished the drop-down menu for the Set Focus Period Button. Now, the user can c
 
 # Report Andreea Patarlageanu - Week 7
 I made some modifications in the UI regarding the alignment of the text and some colors and now I am currently working on implementing a dark/light mode which the user can set while using the web app. The web app is currently on dark mode so I have to set the new colors and the option of the light mode
+
+# Report Andreea Patarlageanu - Week 8
+This week, I worked on implementing the button for the calendar function. Basically, now, on the left side of the screen, a button for the calendar appears. When clicked, a new window appears with a calendar(dates etc). As it was a bit more rigorous since it was of another type, and with help from Bruno, I managed to implement it. Now, everything is done, so the project is ready to be delivered! :)

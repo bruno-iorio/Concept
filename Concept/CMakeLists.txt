@@ -35,6 +35,10 @@ qt_add_executable(ConceptApp
     includes/timer.h src/timer.cpp
     includes/database/database.h
     includes/errors.h
+    includes/todoList.h
+    includes/todoItem.h
+    src/todoList.cpp
+    src/todoItem.cpp
 )
 
 ## Configure QxOrm

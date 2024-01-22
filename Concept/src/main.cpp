@@ -13,6 +13,7 @@
 #include <QTreeView>
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
+#include "includes/todoList.h"
 #include <iostream>
 
 int main(int argc, char *argv[]) {
@@ -84,6 +85,9 @@ int main(int argc, char *argv[]) {
 
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
+    
+    NewListAbstractModel model(&app);
+    engine.rootContext()->setContextProperty("fileListModel", QVariant::fromValue(&model));
 
     //RedSquareManager redSquareManager;
 
@@ -116,7 +120,14 @@ int main(int argc, char *argv[]) {
         helpNotebooks.show();  // You can use show() instead of exec() for modeless dialog
     });
 
-    //engine.rootContext()->setContextProperty("redSquareManager", &redSquareManager);
+    //Connection for To Do List Menu button
+    MainHelp helpToDoListItem;
+    HelpDialog1 helpDialog2;
+    engine.rootContext()->setContextProperty("helpItem", &helpItem);
+    QObject::connect(&helpItem, &MainHelp::File, [&helpDialog2]() {
+        helpDialog2.show();  // You can use show() instead of exec() for modeless dialog
+    });
+
 
     if(engine.rootObjects().isEmpty()){
         std::cout << "Root Objects is empty" << std::endl;

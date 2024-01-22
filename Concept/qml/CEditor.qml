@@ -16,7 +16,7 @@ Rectangle {
     property int currentNoteId
     property string currentNoteTitle
     property int currentFolderId
-    property string currentFolderTitle
+    property string currentFolderName
     required property bool showLineNumbers
     required property var explorer
     property alias text: textArea
@@ -71,11 +71,38 @@ Rectangle {
                     }
 
         }
+
+        onFolderOpened: (id, title) => {
+            root.currentFolderId = id
+            root.currentFolderName = title
+            console.log("onFolderOpened", id, title)
+        }
         onFolderRenamed: (id, newName) => {
             root.currentFolderId = id
-            root.currentFolderTitle = newName
+            root.currentFolderName = newName
             explorer.reset()
             console.log("onFolderRenamed", id, newName)
+        }
+
+        onFolderCreated: (id, newName) => {
+            root.currentFolderId = id
+            root.currentFolderName = newName
+            ExplorerModel.generate_model()
+            explorer.reset()
+            console.log("onFolderRenamed", id, newName)
+        }
+
+        onFolderDeleted: (id) =>{
+            if (root.currentFolderId === id) {
+                        // Clear the current note data from UI
+                        root.currentFolderId = -1;  // or set to a default value
+                        root.currentFolderName = "";
+                        textArea.text = "";
+
+                        // Optionally, update ExplorerModel and reset explorer
+                        ExplorerModel.generate_model();
+                        explorer.reset();
+                    }
         }
 
 

@@ -159,6 +159,9 @@ ApplicationWindow {
                         onNoteClicked: index => {
                             editor.controller.openNote(index)
                         }
+                        onFolderClicked: index => {
+                                             editor.controller.openFolder(index)
+                                         }
                     }
 
                     CTimer {}

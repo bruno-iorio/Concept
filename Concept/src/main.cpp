@@ -14,6 +14,7 @@
 #include "explorer.h"
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
+#include "includes/todoList.h"
 #include "includes/toolBox.h"
 #include "includes/calendar.h"
 #include <iostream>
@@ -116,6 +117,9 @@ int main(int argc, char *argv[])
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
     engine.load(url);
+  
+    NewListAbstractModel model(&app);
+    engine.rootContext()->setContextProperty("fileListModel", QVariant::fromValue(&model));
 
     // Set Focus Period Button
     SetFocusPeriod focusItem;

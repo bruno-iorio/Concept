@@ -199,6 +199,8 @@ ApplicationWindow {
                         }
                     }
 
+                  
+                    ToDoList {}
                     Text {
                         anchors.leftMargin: 10
                         anchors.topMargin: 10
@@ -207,8 +209,6 @@ ApplicationWindow {
                         color: Colors.text
 
                     }
-                    
-                    //CTimer {}
                 }
             }
 

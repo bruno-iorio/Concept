@@ -156,7 +156,20 @@ Rectangle {
                     calendarItem.closeCalendarFromQML();
                 }
             }
+            // Shows the to do list when clicked.
+            SidebarEntry {
+                id: todolistTab
+
+                icon.source: "icons/light_bulb.svg"
+                checkable: true
+
+                ToolTip {
+                    text: qsTr("To Do List")
+                    visible: todolistTab.hovered
+                }
+            }
         }
+
 
         // This item acts as a spacer to expand between the checkable and non-checkable buttons.
         Item {

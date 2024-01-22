@@ -44,10 +44,6 @@ public:
 signals:
     void timeChanged();
     void timerFinished();
-    void timerStopped();
-    void timerPaused();
-    void timerContinued();
-    void timerStarted();
 
 public slots:
     void showMenu();

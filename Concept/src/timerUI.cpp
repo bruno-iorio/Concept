@@ -70,49 +70,37 @@ app->exec();
 
 
 void timerStart::choose1() {
-    qDebug() << "chose 25";
     timer = CountDownTimer(1, 0);
     countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
     emit timeChanged();
 }
 
 void timerStart::choose25() {
-    qDebug() << "chose 25";
     timer = CountDownTimer(25, 0);
     countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
     emit timeChanged();
 }
 
 void timerStart::choose30() {
-    qDebug() << "chose 30";
     timer = CountDownTimer(30, 0);
     countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
     emit timeChanged();
 }
 
 void timerStart::choose45() {
-    qDebug() << "chose 45";
     timer = CountDownTimer(45, 0);
     countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
     emit timeChanged();
 }
 
 void timerStart::choose60() {
-    qDebug() << "chose 60";
     timer = CountDownTimer(0, 1);
     countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
     emit timeChanged();
 }
 void timerStart::startTheTimer() {
-    qDebug() << "started timer";
     timer.counting = 1;
     started = 1;
-    emit timerStarted();
 }
 
 bool timerStart::update_time() {
@@ -135,14 +123,13 @@ bool timerStart::update_time() {
                 timer.hour --;}
         }
     }
-    
+
     total_time += 1;
 
     time_string = createTimeString(timer.hour, timer.minute, timer.second);
     emit timeChanged();
 
     if (timer.second == 0 && timer.minute == 0 && timer.hour == 0) {
-        timer.finished = true;
         emit timerFinished();
     }
 
@@ -156,31 +143,20 @@ void timerStart::updateTime () {
 }
 
 void timerStart::showMenu() {
-    qDebug() << "showing menu";
     menu.exec(QCursor::pos());
 }
 
 void timerStart::pauseTimer() {
-
-    qDebug() << "paused timer";
-
     timer.counting = 0;
-    emit timerPaused();
     }
 
 
 void timerStart::continueTimer() {
-
-        qDebug() << "continued timer";
-
         if (started) {
-        timer.counting = 1;
-        emit timerContinued();}
+        timer.counting = 1;}
     }
 
 void timerStart::stopTimer() {
-
-        qDebug() << "stopped timer";
         emit timerFinished();
     }
 
@@ -189,11 +165,6 @@ void timerStart::onTimerFinished() {
         started = 0;
         timer.counting = 0;
         countdowntimer = 0;
-
-        timer.second = 0;
-        timer.minute = 0;
-        timer.hour = 0;
-
-        time_string = createTimeString(timer.hour, timer.minute, timer.second);
+        timer = CountUpTimer();
         emit timeChanged();
     }

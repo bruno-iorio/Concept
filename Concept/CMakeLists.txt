@@ -32,6 +32,7 @@ qt_add_executable(ConceptApp
     includes/export.h includes/precompiled.h
     includes/database/notes.h src/database/notes.cpp
     includes/database/folders.h src/database/folders.cpp
+    includes/database/calendarEvents.h src/database/calendarEvents.cpp
     includes/database/focus_time.h src/database/focus_time.cpp
     includes/timer.h src/timer.cpp
     includes/database/database.h

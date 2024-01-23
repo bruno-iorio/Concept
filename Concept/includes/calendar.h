@@ -28,7 +28,6 @@ private:
     QLineEdit *eventLineEdit;
     QPushButton *addButton;
     QTextBrowser *eventDisplay;
-    QVector<calendarEvents> eventList;
 signals:
     void calendarClosed();
 };

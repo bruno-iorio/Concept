@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
     qx::dao::create_table<Note>();
     qx::dao::create_table<Folder>();
     qx::dao::create_table<FocusTime>();
+    qx::dao::create_table<calendarEvents>();
 
     // Add a note to the database
     Note_ptr note;
@@ -39,6 +40,12 @@ int main(int argc, char *argv[])
 
     // Check if at least 1 note exists, if not, create a test note
 
+
+    if (qx::dao::count<calendarEvents>() == 0){
+	qDebug() << "no calendarEvents found." << "\n";
+
+
+    }
     if (qx::dao::count<Note>() == 0)
     {
         qDebug() << "No notes found, creating a test note";

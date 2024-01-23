@@ -1,10 +1,14 @@
 //calendar.cpp
-#include "../includes/calendar.h"
+#include "calendar.h"
 #include <QVBoxLayout>
 #include <QDate>
 #include <QTextCharFormat>
 #include <QMainWindow>
-#include <QList>
+#include <QxOrm.h>
+#include "database/calendarEvents.h"
+#include <QDebug>
+#include "QxOrm_Impl.h"
+
 Calendar::Calendar(QWidget *parent) : QMainWindow(parent)
 {
     calendarWidget = new QCalendarWidget(this);
@@ -37,29 +41,38 @@ void Calendar::addEvent()
 {
     QDate selectedDate = calendarWidget->selectedDate();
     QString eventText = eventLineEdit->text();
-
+    calendarEvents e = calendarEvents();
+    e.eventName = eventText;
+    e.date = selectedDate;
+    QSqlError daoError = qx::dao::insert(e);
     if (!eventText.isEmpty())
     {
         QString currentText = eventDisplay->toPlainText();
         currentText += QString("%1: %2\n").arg(selectedDate.toString("yyyy-MM-dd")).arg(eventText);
         eventDisplay->setText(currentText);
     }
-
+    
     eventLineEdit->clear();
 }
 
 void Calendar::initializeEvents(){
-    QList<calendarEvents> e;
+    QVector<calendarEvents> e;
     QSqlError fetchError = qx::dao::fetch_all(e);
     QString textToAdd = QString("");
-    if(fetchError.is_valid()){
-    	for(const calendarEvents& event : e){
-		textToAdd += QString("%1: %2\n").arg(event.date.toString("yyyy-MM-dd")).arg(event.eventName);
-    	} 
+    if(fetchError.isValid())
+    {
+	    return;
+    }
+
+    	for(const calendarEvents& eventinDB : e){
+		textToAdd += QString("%1: %2\n").arg(eventinDB.date.toString("yyyy-MM-dd")).arg(eventinDB.eventName);
+		qDebug() << eventinDB.eventName << "\n";
+} 
     eventDisplay->setText(textToAdd);	
 
 }
-}
+	
+
 CalendarQML::CalendarQML(QObject *parent) : QObject(parent)
 {
     this->myCalendar = new Calendar();

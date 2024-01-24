@@ -53,7 +53,7 @@ Rectangle {
                 //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
                 }
-                onClicked: myTimerStart.pauseTimer();
+                onClicked: myTimerStart.showBreakMenu();
             }
             Rectangle{
                 id: spacerButtonsTimerBlock
@@ -64,7 +64,7 @@ Rectangle {
 
             Button {
                 id: breakButton
-                text: "Continue"
+                text: "End break"
                 font.pixelSize: timerBlock.height * 0.15
                 anchors.top: studyButton.top
                 width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
@@ -86,41 +86,9 @@ Rectangle {
             text: myTimerStart.get_time_string();
             font.pixelSize: timerBlock.height * 0.20
             anchors.centerIn: parent
-
-            /* Connections {
-                target: focusItem
-                onTimeChanged: {
-                    timerDisplay.text = focusItem.time;
-                }
-                }
-                */
             
         }
-        //Timer {
-            //id: countdownTimer
-            //interval: 1000
-            //onTriggered: updateTimerDisplay()
-        //}
-
-        //function startTimer(minutes) {
-            //countdownTimer.stop()
-            //countdownTimer.repeat = minutes * 60 * 1000
-            //countdownTimer.start()
-            //updateTimerDisplay()
-        //}
-
-        //function updateTimerDisplay() {
-            //var minutes = Math.floor(countdownTimer.repeat / 60000)
-            //var seconds = Math.floor((countdownTimer.repeat % 60000) / 1000)
-            //timerDisplay.text = Qt.formatDateTime(new Date(0, 0, 0, 0, minutes, seconds), "mm:ss")
-        //}
-
     }
-    /*
-    SetFocusPeriod {
-        id: focusItem
-
-    } */
 
     Connections {
                 target: myTimerStart
@@ -144,7 +112,7 @@ Rectangle {
             font.pixelSize: timerBlock.height * 0.15
             anchors.centerIn: parent
             //color: "#E1D2B7"
-            onClicked: myTimerStart.showMenu();
+            onClicked: myTimerStart.showTimeMenu();
 
         }
     }
@@ -173,7 +141,7 @@ Rectangle {
         color: "#c4c8cc"
         Button{
             id: stop
-            text: "Stop"
+            text: "End session"
             font.pixelSize: timerBlock.height * 0.15
             anchors.centerIn: parent
             onClicked: {

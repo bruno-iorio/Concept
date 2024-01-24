@@ -28,7 +28,7 @@ public slots:
 
 private:
     QMenu menu;
-    CountDownTimer timer = CountDownTimer(0, 0);
+    CountDownTimer timer = CountDownTimer(0, 0, 0);
     QTimer q_timer;
     bool counting;
 

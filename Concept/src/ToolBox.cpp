@@ -150,7 +150,7 @@ void SearchDialog::onGlobalSearch()
     query.bind(":keyword", "%" + keyword + "%");
 
     QList<std::shared_ptr<Note>> notes;
-    qx::dao::fetch_by_query(query, notes);
+    qx::dao::fetch_by_query_with_all_relation(query, notes);
 
     QStringList titleOccurrences;
     QStringList contentOccurrences;
@@ -181,7 +181,7 @@ void SearchDialog::onGlobalSearch()
                 int start = std::max(0, index - 10);
                 int end = std::min(lines[i].length(), index + keyword.length() + 10);
                 QString substring = lines[i].mid(start, end - start);
-                contentOccurrences.append(note->title + ", Line " + QString::number(i + 1) + ":\n  '" + substring + "'");
+                contentOccurrences.append(note->folder->name + "/" + note->title + ", Line " + QString::number(i + 1) + ":\n  '" + substring + "'");
             }
         }
     }

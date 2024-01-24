@@ -115,10 +115,6 @@ ApplicationWindow {
                 onTriggered: tbTool.handleSearchAction(editor.text.text, false)
             }
             Action {
-                text: qsTr("Search all files")
-                onTriggered: tbTool.handleSearchAction(editor.text.text, true)
-            }
-            Action {
                 text: qsTr("Replace")
                 shortcut: StandardKey.Replace
                 onTriggered: tbTool.handleReplaceAction(editor.text.text)

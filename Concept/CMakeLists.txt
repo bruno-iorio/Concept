@@ -28,6 +28,7 @@ qt_add_executable(ConceptApp
     includes/calendar.h src/calendar.cpp
     includes/mainhelp.h src/mainhelp.cpp
     includes/ToolBox.h src/ToolBox.cpp
+    includes/calc.h src/calc.cpp
     includes/setFocusPeriod.h src/setFocusPeriod.cpp
     includes/export.h includes/precompiled.h
     includes/database/notes.h src/database/notes.cpp

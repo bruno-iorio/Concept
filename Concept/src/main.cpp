@@ -14,6 +14,7 @@
 #include "includes/todoList.h"
 #include "includes/ToolBox.h"
 #include "includes/calendar.h"
+#include "includes/calc.h"
 #include <iostream>
 
 int main(int argc, char *argv[])
@@ -37,11 +38,10 @@ int main(int argc, char *argv[])
 
     // Check if at least 1 note exists, if not, create a test note
 
-
-    if (qx::dao::count<calendarEvents>() == 0){
-	qDebug() << "no calendarEvents found." << "\n";
-
-
+    if (qx::dao::count<calendarEvents>() == 0)
+    {
+        qDebug() << "no calendarEvents found."
+                 << "\n";
     }
     if (qx::dao::count<Note>() == 0)
     {
@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
     qmlRegisterType<ToolBox>("CustomControls", 1, 0, "ToolBox");
     qmlRegisterType<CalendarQML>("CustomControls", 1, 0, "CalendarQML");
+    qmlRegisterType<Calc>("CustomControls", 1, 0, "Calc");
 
     const QUrl url(u"qrc:/Main/main.qml"_qs);
     QObject::connect(
@@ -142,19 +143,16 @@ int main(int argc, char *argv[])
     CalendarQML calendarItem = CalendarQML();
     engine.rootContext()->setContextProperty("calendarItem", &calendarItem);
 
-    QObject::connect(&calendarItem, &CalendarQML::File, [&calendarItem]() {
-        calendarItem.showCalendar();
-    });
+    QObject::connect(&calendarItem, &CalendarQML::File, [&calendarItem]()
+                     { calendarItem.showCalendar(); });
 
     // Connect the signal from CalendarQML to close the Calendar
-    QObject::connect(&calendarItem, &CalendarQML::showCalendar, [&calendarItem]() {
-        calendarItem.closeCalendarFromQML();
-    });
+    QObject::connect(&calendarItem, &CalendarQML::showCalendar, [&calendarItem]()
+                     { calendarItem.closeCalendarFromQML(); });
 
     // Connect the aboutToQuit signal to close the calendar when the application is about to quit
-    QObject::connect(qApp, &QGuiApplication::aboutToQuit, [&calendarItem]() {
-        calendarItem.closeCalendarFromQML();
-    });
+    QObject::connect(qApp, &QGuiApplication::aboutToQuit, [&calendarItem]()
+                     { calendarItem.closeCalendarFromQML(); });
 
     HelpNotebooks helpNotebooks;
     engine.rootContext()->setContextProperty("helpItem", &helpItem);
@@ -163,14 +161,15 @@ int main(int argc, char *argv[])
                          helpNotebooks.show(); // You can use show() instead of exec() for modeless dialog
                      });
 
-    if(engine.rootObjects().isEmpty()){
+    if (engine.rootObjects().isEmpty())
+    {
         std::cout << "Root Objects is empty" << std::endl;
         return -1;
     }
-//    QTreeView treeView;
-//    ExplorerModel model;
-//    treeView.setModel(&model);
-//    treeView.show();
+    //    QTreeView treeView;
+    //    ExplorerModel model;
+    //    treeView.setModel(&model);
+    //    treeView.show();
 
     return app.exec();
 }

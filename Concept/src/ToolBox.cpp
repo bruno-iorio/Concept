@@ -181,7 +181,7 @@ void SearchDialog::onGlobalSearch()
                 int start = std::max(0, index - 10);
                 int end = std::min(lines[i].length(), index + keyword.length() + 10);
                 QString substring = lines[i].mid(start, end - start);
-                contentOccurrences.append(note->title + ", Line " + QString::number(i + 1) + ":\n  '" + substring + "'");
+                contentOccurrences.append(note->folder->name + "/" + note->title + ", Line " + QString::number(i + 1) + ":\n  '" + substring + "'");
             }
         }
     }

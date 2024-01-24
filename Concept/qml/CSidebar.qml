@@ -172,7 +172,7 @@ Rectangle {
 
             SidebarEntry {
                 id: calculatorTab
-                icon.source: "icons/light_bulb.svg" // To be changed
+                icon.source: "icons/light_bulb.svg" // TO BE CHANGED
                 checkable: true
 
                 ToolTip {

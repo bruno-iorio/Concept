@@ -3,7 +3,7 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QLineEdit>
-#include <Qlabel>
+#include <QLabel>
 
 class Calc : public QDialog
 {

@@ -56,9 +56,6 @@ void ConceptEditor::createNote()
                                                         | QDialogButtonBox::Cancel);
     QLabel * title = new QLabel("Create a new note");
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    QLabel *title = new QLabel("Create a new note");
-
     QObject::connect(buttonBox, SIGNAL(accepted()), d, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), d, SLOT(reject()));
 

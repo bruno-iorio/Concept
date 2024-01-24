@@ -30,6 +30,7 @@ qt_add_qml_module(Concept
 		../src/linenumbermodel.cpp ../includes/linenumbermodel.h
 		../src/editor.cpp ../includes/editor.h
 		../src/explorer.cpp ../includes/explorer.h
+		../src/errors.cpp
 )
 
 target_link_libraries(Concept PRIVATE QxOrm maddy)

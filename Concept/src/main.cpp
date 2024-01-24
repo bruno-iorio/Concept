@@ -4,14 +4,11 @@
 #include <QQmlContext>
 #include <QDirIterator>
 #include <QFontDatabase>
-#include <QTreeView>
-
 #include "includes/app_environment.h"
 #include "includes/import_qml_components_plugins.h"
 #include "includes/import_qml_plugins.h"
 #include "QxOrm.h"
 #include "database/database.h"
-#include "explorer.h"
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include "includes/todoList.h"
@@ -124,7 +121,7 @@ int main(int argc, char *argv[])
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
     engine.load(url);
-  
+
     NewListAbstractModel model(&app);
     engine.rootContext()->setContextProperty("fileListModel", QVariant::fromValue(&model));
 
@@ -165,7 +162,7 @@ int main(int argc, char *argv[])
                      {
                          helpNotebooks.show(); // You can use show() instead of exec() for modeless dialog
                      });
-  
+
     if(engine.rootObjects().isEmpty()){
         std::cout << "Root Objects is empty" << std::endl;
         return -1;

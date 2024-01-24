@@ -1,3 +1,6 @@
 [submodule "Concept/third_party/QxOrm"]
 	path = Concept/third_party/QxOrm
 	url = https://github.com/QxOrm/QxOrm.git
+[submodule "Concept/third_party/maddy"]
+	path = Concept/third_party/maddy
+	url = https://github.com/progsource/maddy.git

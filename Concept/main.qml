@@ -18,7 +18,7 @@ ApplicationWindow {
     title: "Concept"
     visible: true
     color: Colors.background
-    
+
     flags: Qt.Window | Qt.FramelessWindowHint
 
     function generateInfoText() {
@@ -51,6 +51,7 @@ ApplicationWindow {
                 text: qsTr("Save Note")
                 shortcut: "Ctrl+S"
                 onTriggered: () => {
+                    editor.render(editor.text.text);
                     editor.controller.saveNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
                 }
             }
@@ -156,13 +157,13 @@ ApplicationWindow {
             // Customized handle to drag between the Navigation and the Editor.
             handle: Rectangle {
                 implicitWidth: 5
-                color: SplitHandle.pressed ? Colors.color2 : Colors.background
+                color: Colors.color2
                 border.color: SplitHandle.hovered ? Colors.color2 : Colors.background
-                opacity: SplitHandle.hovered || navigationView.width < 15 ? 1.0 : 0.0
+                opacity: SplitHandle.hovered || navigationView.width < 15 ? 1.0 : 0.2
 
                 Behavior on opacity {
                     OpacityAnimator {
-                        duration: 1400
+                        duration: 1000
                     }
                 }
             }
@@ -202,7 +203,7 @@ ApplicationWindow {
                                          }
                     }
 
-                  
+
                     ToDoList {}
                     Text {
                         anchors.leftMargin: 10
@@ -212,44 +213,39 @@ ApplicationWindow {
                         color: Colors.text
 
                     }
+                    Pomodoro {
+                        id: pomodoro
+                        SplitView.fillWidth: true
+                        SplitView.fillHeight: true
+                        color: Colors.surface1
+                    }
                 }
             }
 
             // The main view that contains the editor.
+
             CEditor {
                 id: editor
                 showLineNumbers: root.showLineNumbers
                 currentNoteId: 0  // TODO: Change later
                 explorer: fileSystemView
+                renderer: renderer
                 //currentFilePath: root.currentFilePath
-                SplitView.preferredWidth: 800
+                SplitView.preferredWidth: 900
                 SplitView.fillHeight: true
             }
 
-            SplitView {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                // Customized handle to drag between the Navigation and the Editor.
-                handle: Rectangle {
-                    implicitWidth: 5
-                    color: SplitHandle.pressed ? Colors.color2 : Colors.background
-                    border.color: SplitHandle.hovered ? Colors.color2 : Colors.background
-                    opacity: SplitHandle.hovered || navigationView.width < 15 ? 1.0 : 0.0
+            Text {
+                id: renderer
+                text: ""
 
-                    Behavior on opacity {
-                        OpacityAnimator {
-                            duration: 1400
-                        }
-                    }
-                }
+                textFormat: TextEdit.RichText
 
-                Pomodoro {
-                    id: pomodoro
-                    SplitView.fillWidth: true
-                    SplitView.fillHeight: true
-                    color: Colors.surface1
-                }
+                SplitView.preferredWidth: 900
+                SplitView.fillHeight: true
 
+                font: Colors.font
+                color: Colors.textFile
             }
         }
     }

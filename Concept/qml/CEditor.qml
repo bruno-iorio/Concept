@@ -27,7 +27,17 @@ Rectangle {
     property int currentLineNumber: -1
     property int rowHeight: Math.ceil(fontMetrics.lineSpacing)
 
+    property var renderer
+
     color: Colors.background
+
+    signal render(var note);
+
+    onRender: (note) => {
+        renderer.text = controller.renderHtml(note);
+        // render.loadHtml(controller.renderHtml(note));
+        // render.reload();
+    }
 
     onWidthChanged: textArea.update()
     onHeightChanged: textArea.update()
@@ -42,6 +52,8 @@ Rectangle {
             root.currentNoteTitle = title
             textArea.text = content
             // console.log("onNoteOpened", id, title, content)
+            root.render(content);
+
         }
 
         onNoteCreated: (id, title, content) => {
@@ -50,7 +62,7 @@ Rectangle {
             textArea.text = content
             ExplorerModel.generate_model()
             explorer.reset()
-            console.log("onNoteCreated", id, title, content)
+            root.render(content);
         }
 
         onNoteRenamed: (id, newTitle) => {
@@ -93,7 +105,7 @@ Rectangle {
             explorer.reset()
             console.log("onFolderRenamed", id, newName)
         }
-        
+
          onFolderDeleted: (id) =>{
             if (root.currentFolderId === id) {
                         // Clear the current note data from UI
@@ -242,7 +254,7 @@ Rectangle {
                     var words = textArea.text.split(/\s+/);
                     // remove empty words
                     words = words.filter(function (word) { return word.length > 0; });
-                   
+
                     root.currentWordCount = words.length;
                     root.currentCharacterCount = textArea.text.length;
                     root.currentCharacterCountNoSpaces = textArea.text.replace(/\s+/g, '').length;

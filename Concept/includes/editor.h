@@ -22,6 +22,7 @@ class ConceptEditor : public QObject
         Q_INVOKABLE void openFolder(long id);
         Q_INVOKABLE void createFolder();
         Q_INVOKABLE void deleteFolder(long id);
+        Q_INVOKABLE QString renderHtml(QString note);
     signals:
         void noteOpened(long id, const QString &name, const QString &content);
         void noteCreated(long id, const QString &name, const QString &content);

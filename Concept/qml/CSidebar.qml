@@ -156,6 +156,7 @@ Rectangle {
                     calendarItem.closeCalendarFromQML();
                 }
             }
+
             // Shows the to do list when clicked.
             SidebarEntry {
                 id: todolistTab
@@ -166,6 +167,26 @@ Rectangle {
                 ToolTip {
                     text: qsTr("To Do List")
                     visible: todolistTab.hovered
+                }
+            }
+
+            SidebarEntry {
+                id: calculatorTab
+                icon.source: "icons/light_bulb.svg" // To be changed
+                checkable: true
+
+                ToolTip {
+                    text: qsTr("Calculator")
+                    visible: calculatorTab.hovered
+                }
+
+                Calc {
+                    id: calcItem
+                }
+                
+                onClicked: {
+                    calcItem.handleOpenCalculator();
+                    calendarItem.closeCalendarFromQML();
                 }
             }
         }

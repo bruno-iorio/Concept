@@ -150,7 +150,7 @@ void SearchDialog::onGlobalSearch()
     query.bind(":keyword", "%" + keyword + "%");
 
     QList<std::shared_ptr<Note>> notes;
-    qx::dao::fetch_by_query(query, notes);
+    qx::dao::fetch_by_query_with_all_relation(query, notes);
 
     QStringList titleOccurrences;
     QStringList contentOccurrences;

@@ -7,10 +7,11 @@ QX_REGISTER_CPP_QX_CONCEPTAPP(timerElements)
 
 namespace qx {
     template <> void register_class(QxClass<timerElements> &t) {
-        t.setName("timerElements");
-
+	t.setName("timerElements");
         t.id(&timerElements::id, "id");
-        t.data(&timerElements::creationDate, "creationDate");
+        t.data(&timerElements::startTime, "startTime");
+        t.data(&timerElements::totalFocusTime, "totalFocusTime");
+        t.data(&timerElements::totalBreakTime, "totalBreakTime");
 
     }
 }

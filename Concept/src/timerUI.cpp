@@ -14,6 +14,8 @@
 #include <QMenu>
 
 
+
+
 timerStart::timerStart(QObject *parent) :
         QObject(parent),
         startAction("Start", this), 
@@ -164,7 +166,7 @@ void timerStart::startTheTimer() {
 
 bool timerStart::update_time(Timer &tim) {
 
-    qDebug() << "updating time";
+    // qDebug() << "updating time";
 
     if (!tim.countdowntimer) {
         if (tim.second != 59) {tim.second ++;}
@@ -203,8 +205,8 @@ bool timerStart::update_time(Timer &tim) {
 
 void timerStart::qTimerTimeout () {
 
-    qDebug() << "qTimerTimeout";
-    qDebug() << "timer.counting: " << timer.counting;
+    // qDebug() << "qTimerTimeout";
+    // qDebug() << "timer.counting: " << timer.counting;
 
     if (timer.counting) {
         timer.counting = update_time(timer);
@@ -362,6 +364,13 @@ void timerStart::onTimerFinished() {
         emit timeChanged();
 
         //store total_focus_time and total_break_time here
+	timerElements timerStats = timerElements();
+
+	timerStats.totalFocusTime = total_focus_time;
+	timerStats.totalBreakTime = total_break_time;
+	timerStats.startTime = start_time;
+        QSqlError daoError = qx::dao::insert(timerStats);
+
 
         paused = 0;
         total_focus_time = 0;

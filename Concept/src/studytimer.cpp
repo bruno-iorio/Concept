@@ -1,7 +1,6 @@
 //studytimer.cpp
 
 #include "studytimer.h"
-#include "database/timerElements.h"
 using namespace std;
 
 

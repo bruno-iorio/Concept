@@ -10,11 +10,13 @@
 #include "includes/import_qml_plugins.h"
 #include "QxOrm.h"
 #include "database/database.h"
+#include <QDebug>
 #include "explorer.h"
 #include <QTreeView>
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include <iostream>
+#include <vector>
 #include "includes/timerUI.h"
 
 int main(int argc, char *argv[]) {
@@ -29,6 +31,7 @@ int main(int argc, char *argv[]) {
     qx::dao::create_table<Note>();
     qx::dao::create_table<Folder>();
     qx::dao::create_table<FocusTime>();
+    qx::dao::create_table<timerElements>();
 
     // Add a note to the database
     Note_ptr note; note.reset(new Note());
@@ -68,6 +71,16 @@ int main(int argc, char *argv[]) {
         QSqlError dao = qx::dao::update_with_all_relation(note);
         qDebug() << dao.text();
     }
+    
+    // checking if timerElements is being stored in the database.
+    if (qx::dao::count<timerElements>() == 0) {
+        qDebug() << "No timerElements found";
+    } else {
+	qDebug() << " TIMER ELEMENTS FOUND " << "\n";
+	}
+
+
+
 
     set_qt_environment();
 

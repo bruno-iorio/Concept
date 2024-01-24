@@ -9,4 +9,6 @@
 #include "folders.h"
 #include "focus_time.h"
 
+#include "timerElements.h"
+
 #endif //CONCEPTAPP_DATABASE_H

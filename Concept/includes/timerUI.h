@@ -16,6 +16,11 @@
 #include <ctime>
 #include <QObject>
 #include <QTimer>
+#include "database/timerElements.h"
+#include "precompiled.h"
+#include <QxOrm.h>
+#include "QxOrm_Impl.h"
+
 
 using namespace std;
 
@@ -33,7 +38,7 @@ public:
 
 
     Q_INVOKABLE QString get_time_string() const {
-        qDebug() << "getting time string";
+        // qDebug() << "getting time string";
         return time_string;
     }
 

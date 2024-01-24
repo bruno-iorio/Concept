@@ -45,6 +45,7 @@ public:
     time_t last_go_time;
     time_t last_stop_time;
     time_t finishing_time;
+    QTime Today;
     double total_focus_time = 0;
     double total_break_time = 0;
 

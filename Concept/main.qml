@@ -134,6 +134,8 @@ ApplicationWindow {
                 text: qsTr("Non-space Character Count: ") + editor.currentCharacterCountNoSpaces
             }
         }
+
+
     }
 
     RowLayout {

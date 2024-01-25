@@ -27,6 +27,9 @@ private slots:
     void handleHelpAction1();
     void handleHelpAction2();
     void handleHelpAction3();
+    void handleHelpAction4();
+    void handleHelpAction5();
+
 
 signals:
     void File();
@@ -111,5 +114,48 @@ private:
 
    // QMap<QString, QString> featureExplanations;
 };
+
+
+class HelpGlobalSearch : public QDialog {
+    Q_OBJECT
+
+public:
+    HelpGlobalSearch(QWidget *parent = nullptr);
+    ~HelpGlobalSearch();
+
+    //private slots:
+    //  void notebook(QListWidgetItem *item);
+
+private:
+    QLabel *titleGSearch;
+    QLabel *featuresGSearch;
+    //QListWidget *featuresList;
+    QPushButton *closeGSearch;
+    //QLabel *featureExplanationLabel;
+
+    // QMap<QString, QString> featureExplanations;
+};
+
+
+class Replace : public QDialog {
+    Q_OBJECT
+
+public:
+    Replace(QWidget *parent = nullptr);
+    ~Replace();
+
+private slots:
+    void onSelected(QListWidgetItem *item);
+
+private:
+    QLabel *titleReplace;
+    QLabel *featuresReplace;
+    QListWidget *featuresListReplace;
+    QPushButton *closeReplace;
+    QLabel *featureExplanationReplace;
+
+    QMap<QString, QString> featureExplanationsReplace;;
+};
+
 #endif // MAINHELP_H
 

@@ -28,12 +28,13 @@ qt_add_executable(ConceptApp
     includes/calendar.h src/calendar.cpp
     includes/mainhelp.h src/mainhelp.cpp
     includes/ToolBox.h src/ToolBox.cpp
+    includes/calc.h src/calc.cpp
     includes/setFocusPeriod.h src/setFocusPeriod.cpp
     includes/export.h includes/precompiled.h
     includes/database/notes.h src/database/notes.cpp
     includes/database/folders.h src/database/folders.cpp
+    includes/database/calendarEvents.h src/database/calendarEvents.cpp
     includes/database/focus_time.h src/database/focus_time.cpp
-    includes/timer.h src/timer.cpp
     includes/database/database.h
     includes/errors.h
     includes/todoList.h
@@ -50,12 +51,6 @@ target_compile_definitions(ConceptApp PRIVATE -D_BUILDING_QX_CONCEPTAPP)
 if(COMMAND target_precompile_headers)
     target_precompile_headers(ConceptApp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/includes/precompiled.h)
 endif() # (COMMAND target_precompile_headers)
-
-qt_add_resources(ConceptApp "configuration"
-    PREFIX "/"
-    FILES
-        qtquickcontrols2.conf
-)
 
 target_link_libraries(ConceptApp PRIVATE
     Qt6::Core

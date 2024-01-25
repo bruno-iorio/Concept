@@ -30,3 +30,10 @@ WEEK 5:
 During the lecture, understood the updates and the new logic behind our project after the vacation.
 During the TD and the week for genereally: worked on the rename and delete features of the app, thanks to Nguyen's advice the new name is updated instantly on the UI. I will need to follow my work on the delete feature during next lecture at least.
 Objectives for next week: finish implementing the delete feature, and further on a line highlight feature.
+
+WEEK 6:
+
+During the lecture, I made the delete button effective on notes. Then, during both tds on Thursday (since I had no physics class I stayed for the second td), I worked on renaming and deleting Folders but with no success unfortunately (the main problem is finding the correct folder id on qml by clicking on it). Also, the Folder class was implemented in a different structure which may cause these bugs.
+
+WEEK 7:
+Continued working on Rename and Delete for folders and added functions to create a New Folder and open a Folder, along with corresponding signals received on qml to update the ui. Some of the functions are quoted to avoid any build error.

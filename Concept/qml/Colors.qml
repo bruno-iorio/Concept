@@ -14,6 +14,7 @@ QtObject {
     readonly property color background: isDarkMode ? "#292828" : "#e3e1d8" 
     readonly property color surface1: isDarkMode ? "#171819" : "#abbbc9"  
     readonly property color surface2: isDarkMode ? "#090A0C" : "#738290"
+    readonly property color list: isDarkMode ? "#2a2b2c" : "#c5d2e1"
     readonly property color text: isDarkMode ? "#D4BE98" : "#333333"
     readonly property color textFile: isDarkMode ? "#E1D2B7" : "#666666"
     readonly property color disabledText: isDarkMode ? "#2C313A" : "#999999"
@@ -25,6 +26,7 @@ QtObject {
     readonly property color iconIndicator: isDarkMode ? "#D5B35D" : "#FFA500"
     readonly property color color1: isDarkMode ? "#A7B464" : "#3498DB"
     readonly property color color2: isDarkMode ? "#D3869B" : "#E74C3C"
+    readonly property color clickedList: isDarkMode ? "#87CEEB" : "#1E90FF"
 
     /* load fonts from directory */
     /*

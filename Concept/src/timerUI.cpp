@@ -113,43 +113,6 @@ void timerStart::chooseTime(int minutes) {
 
 }
 
-/*
-void timerStart::choose1() {
-    timer = CountDownTimer(1, 0);
-    countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
-    emit timeChanged();
-}
-
-void timerStart::choose25() {
-    timer = CountDownTimer(25, 0);
-    countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
-    emit timeChanged();
-}
-
-void timerStart::choose30() {
-    timer = CountDownTimer(30, 0);
-    countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
-    emit timeChanged();
-}
-
-void timerStart::choose45() {
-    timer = CountDownTimer(45, 0);
-    countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
-    emit timeChanged();
-}
-
-void timerStart::choose60() {
-    timer = CountDownTimer(0, 1);
-    countdowntimer = 1;
-    time_string = createTimeString(timer.hour, timer.minute, timer.second);
-    emit timeChanged();
-}
-*/
-
 void timerStart::startTheTimer() {
     qDebug() << "starting timer";
 
@@ -242,39 +205,6 @@ void timerStart::chooseBreak(int s, int m) {
         last_stop_time = timer.get_time();
     }
 }
-/*
-void timerStart::chooseBreak5() {
-    pauseTimer();
-    break_timer = CountDownTimer(5, 0);
-    time_string = createTimeString(break_timer.hour, break_timer.minute, break_timer.second);
-    emit timeChanged();
-    break_timer.counting = 1;
-}
-
-void timerStart::chooseBreak10() {
-    break_timer = CountDownTimer(10, 0);
-    time_string = createTimeString(break_timer.hour, break_timer.minute, break_timer.second);
-    emit timeChanged();
-    pauseTimer();
-    break_timer.counting = 1;
-}
-void timerStart::chooseBreak15() {
-    timer.counting = 0;
-    break_timer = CountDownTimer(15, 0);
-    time_string = createTimeString(break_timer.hour, break_timer.minute, break_timer.second);
-    emit timeChanged();
-    pauseTimer();
-    break_timer.counting = 1;
-}
-void timerStart::chooseBreak20() {
-    timer.counting = 0;
-    break_timer = CountDownTimer(20, 0);
-    time_string = createTimeString(break_timer.hour, break_timer.minute, break_timer.second);
-    emit timeChanged();
-    pauseTimer();
-    break_timer.counting = 1;
-}
-*/
 
 void timerStart::chooseBreakUntil() {
     pauseTimer();
@@ -302,6 +232,8 @@ void timerStart::pauseTimer() {
 
 void timerStart::continueTimer() {
 
+    if (!timer.counting) {
+
         if (started) {
         timer.counting = 1;
         last_go_time = get_time();
@@ -313,15 +245,8 @@ void timerStart::continueTimer() {
             break_timer = CountUpTimer();
             time_string = createTimeString(timer.hour, timer.minute, timer.second);
             emit timeChanged();
+        }
 
-            if (timer.counting == 0) {
-                if (timer.hour == 0 && timer.minute == 0 && timer.second == 0) {
-                    emit timerFinished();
-                }
-                else {
-                    time_string = createTimeString(timer.hour, timer.minute, timer.second);
-                }
-            }
         }
     }
 

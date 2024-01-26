@@ -45,22 +45,13 @@ timerStart::timerStart(QObject *parent) :
         connect(&continueAction, &QAction::triggered, this, &timerStart::continueTimer);
         connect(&stopAction, &QAction::triggered, this, &timerStart::stopTimer);
 
-        // connect(action25, &QAction::triggered, this, &timerStart::choose25);
-        // connect(action30, &QAction::triggered, this, &timerStart::choose30);
-        // connect(action45, &QAction::triggered, this, &timerStart::choose45);
-        // connect(action60, &QAction::triggered, this, &timerStart::choose60);
-        // connect(action1, &QAction::triggered, this, &timerStart::choose1);
-
         connect(action15, &QAction::triggered, this, [=]() { chooseTime(15); });
         connect(action30, &QAction::triggered, this, [=]() { chooseTime(30); });
         connect(action45, &QAction::triggered, this, [=]() { chooseTime(45); });
         connect(action60, &QAction::triggered, this, [=]() { chooseTime(60); });
         connect(action1, &QAction::triggered, this, [=]() { chooseTime(1); });
 
-        // connect(break5, &QAction::triggered, this, &timerStart::chooseBreak5);
-        // connect(break10, &QAction::triggered, this, &timerStart::chooseBreak10);
-        // connect(break15, &QAction::triggered, this, &timerStart::chooseBreak15);
-        // connect(break20, &QAction::triggered, this, &timerStart::chooseBreak20);
+
         connect(break5, &QAction::triggered, this, [=]() { chooseBreak(0, 5); });
         connect(break10, &QAction::triggered, this, [=]() { chooseBreak(0, 10); });
         connect(break15, &QAction::triggered, this, [=]() { chooseBreak(0, 15); });
@@ -179,9 +170,13 @@ void timerStart::qTimerTimeout () {
         break_timer.counting = update_time(break_timer);
         if (break_timer.counting == 0) {
             qDebug() << "break timer finished";
+            if (!started) {
+                emit timerFinished();
+            } else {
+                continueTimer();
+            }
             break_timer = CountUpTimer();
             time_string = createTimeString(timer.hour, timer.minute, timer.second);
-            continueTimer();
             emit timeChanged();        }
     }
 }

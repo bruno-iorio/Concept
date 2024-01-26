@@ -35,7 +35,7 @@ qt_add_executable(ConceptApp
     includes/studytimer.h src/studytimer.cpp
     includes/database/database.h
     includes/errors.h
-    includes/startTimer.h src/startTimer.cpp
+
     includes/timerUI.h src/timerUI.cpp
 
 )

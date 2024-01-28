@@ -211,12 +211,7 @@ ApplicationWindow {
                         color: Colors.text
 
                     }
-                    Pomodoro {
-                        id: pomodoro
-                        SplitView.fillWidth: true
-                        SplitView.fillHeight: true
-                        color: Colors.surface1
-                    }
+                    
                 }
             }
 
@@ -244,7 +239,16 @@ ApplicationWindow {
 
                 font: Colors.font
                 color: Colors.textFile
+
             }
+		Pomodoro {
+                        id: pomodoro
+                        SplitView.fillWidth: true
+                        SplitView.fillHeight: true
+                        color: Colors.surface1
+                    }
         }
     }
+    
 }
+

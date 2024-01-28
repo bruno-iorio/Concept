@@ -31,6 +31,7 @@ qt_add_qml_module(Concept
 		../src/editor.cpp ../includes/editor.h
 		../src/explorer.cpp ../includes/explorer.h
 		../src/errors.cpp
+                RESOURCES icons/calculator.svg icons/to_do_list.svg
 )
 
 target_link_libraries(Concept PRIVATE QxOrm maddy)

@@ -4,11 +4,15 @@
 #define EVENTCALENDAR_H
 
 #include <QMainWindow>
+#include <vector>
+#include <QScrollArea>
 #include <QCalendarWidget>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTextBrowser>
 #include <QObject>
+#include <QVBoxLayout>
+#include <QLabel>
 #include "database/calendarEvents.h"
 #include <QVector>
 class Calendar : public QMainWindow {
@@ -27,7 +31,9 @@ private:
     QCalendarWidget *calendarWidget;
     QLineEdit *eventLineEdit;
     QPushButton *addButton;
-    QTextBrowser *eventDisplay;
+    QScrollArea *eventDisplay;
+    QVBoxLayout *layoutEvents;
+
 signals:
     void calendarClosed();
 };
@@ -40,13 +46,26 @@ public:
 public slots:
     void showCalendar();
     void closeCalendarFromQML();  // New slot to close the calendar from QML
-	
 private:
     Calendar *myCalendar;
-
 signals:
     void File();
 };
 
+
+
+
+
+class eventBox : public QWidget {
+public:
+    eventBox(QWidget *parent = nullptr,calendarEvents event = calendarEvents());
+    void removeEventFromDatabase();
+private:
+
+    calendarEvents e;
+    QPushButton* closeButton;
+    QLabel* title;
+
+};
 
 #endif // EVENTCALENDAR_H

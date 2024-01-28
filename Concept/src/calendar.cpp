@@ -14,7 +14,8 @@ Calendar::Calendar(QWidget *parent) : QMainWindow(parent)
     calendarWidget = new QCalendarWidget(this);
     eventLineEdit = new QLineEdit(this);
     addButton = new QPushButton("Add Event", this);
-    eventDisplay = new QTextBrowser(this);
+    eventDisplay = new QScrollArea(this);
+    layoutEvents = new QVBoxLayout(eventDisplay);
 
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(calendarWidget);
@@ -35,22 +36,25 @@ Calendar::Calendar(QWidget *parent) : QMainWindow(parent)
     setGeometry(50, 100, 200, 300);
 
     this->initializeEvents();
+    eventDisplay->show();
 }
 
 void Calendar::addEvent()
 {
     QDate selectedDate = calendarWidget->selectedDate();
     QString eventText = eventLineEdit->text();
-    calendarEvents e = calendarEvents();
-    e.eventName = eventText;
-    e.date = selectedDate;
-    QSqlError daoError = qx::dao::insert(e);
+    
     if (!eventText.isEmpty())
     {
-        QString currentText = eventDisplay->toPlainText();
-        currentText += QString("%1: %2\n").arg(selectedDate.toString("yyyy-MM-dd")).arg(eventText);
-        eventDisplay->setText(currentText);
+		calendarEvents e = calendarEvents();
+    		e.eventName = eventText;
+    		e.date = selectedDate;
+    		e.id = qx::dao::count<calendarEvents>() + 1;
+    		QSqlError daoError = qx::dao::insert(e);
+		eventBox* x = new eventBox(eventDisplay, e);
+		layoutEvents->addWidget(x);
     }
+
     
     eventLineEdit->clear();
 }
@@ -58,18 +62,17 @@ void Calendar::addEvent()
 void Calendar::initializeEvents(){
     QVector<calendarEvents> e;
     QSqlError fetchError = qx::dao::fetch_all(e);
-    QString textToAdd = QString("");
     if(fetchError.isValid())
     {
 	    return;
     }
 
-    	for(const calendarEvents& eventinDB : e){
-		textToAdd += QString("%1: %2\n").arg(eventinDB.date.toString("yyyy-MM-dd")).arg(eventinDB.eventName);
-		qDebug() << eventinDB.eventName << "\n";
+    	for(calendarEvents eventinDB : e){
+		
+	    	qDebug() << eventinDB.id;
+		eventBox* x = new eventBox(eventDisplay, eventinDB);
+		layoutEvents->addWidget(x);
 } 
-    eventDisplay->setText(textToAdd);	
-
 }
 	
 
@@ -94,3 +97,34 @@ void CalendarQML::closeCalendarFromQML() {
 void Calendar::closeCalendarFromButton() {
     close();  // Close the calendar window
 }
+
+
+eventBox::eventBox(QWidget *parent, calendarEvents event) : QWidget(parent){
+    this->e = event;
+    closeButton = new QPushButton("X", this);
+    closeButton->setFixedSize(20, 20);
+
+    connect(closeButton, &QPushButton::clicked, this, &eventBox::removeEventFromDatabase);
+    connect(closeButton, &QPushButton::clicked, this, &QWidget::close); // Close the widget when closeButton is clicked
+
+    QString name = QString("%1: %2").arg(e.date.toString("yyyy-MM-dd")).arg(e.eventName);
+    title = new QLabel(name, this);
+    title->setAlignment(Qt::AlignCenter);
+
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(closeButton, 0, Qt::AlignTop | Qt::AlignRight);
+    layout->addWidget(title, 1, Qt::AlignCenter);
+    layout->setContentsMargins(0, 0, 0, 0);
+}
+void eventBox::removeEventFromDatabase(){
+	 long id = e.id;
+         QSqlError removeError = qx::dao::delete_by_id(e);
+	 std::vector<calendarEvents> m;
+	 QSqlError fetchError = qx::dao::fetch_all(m);
+	 for(calendarEvents x : m){
+		if(x.id >= id){
+			x.id = x.id -1;
+		}
+
+	 }
+    }

@@ -7,7 +7,7 @@
 
 class QX_CONCEPTAPP_DLL_EXPORT  calendarEvents{
 	public:
-		long id;
+		long id{0};
 		QDate date;
 		QString eventName;
 

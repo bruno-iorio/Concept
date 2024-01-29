@@ -17,11 +17,16 @@ public:
 
     Folder() : id(0) { ; }
     virtual ~Folder() { ; }
+    //Folder::list_note get_notes(){return notes;}
+
+
 };
 
 QX_REGISTER_HPP_QX_CONCEPTAPP(Folder, qx::trait::no_base_class_defined, 0)
 
+
 typedef std::shared_ptr<Folder> Folder_ptr;
 typedef std::vector<Folder_ptr> list_folder;
+
 
 #endif //CONCEPTAPP_FOLDERS_H

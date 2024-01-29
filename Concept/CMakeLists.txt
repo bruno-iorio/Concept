@@ -25,7 +25,10 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third_party ${CMAKE_CURRENT_BINARY_
 ### Don't forget to add your new cpp and hpp functions here to link them with the App
 qt_add_executable(ConceptApp
     src/main.cpp
+    includes/calendar.h src/calendar.cpp
     includes/mainhelp.h src/mainhelp.cpp
+    includes/ToolBox.h src/ToolBox.cpp
+    includes/calc.h src/calc.cpp
     includes/setFocusPeriod.h src/setFocusPeriod.cpp
     includes/export.h includes/precompiled.h
     includes/database/notes.h src/database/notes.cpp
@@ -35,9 +38,12 @@ qt_add_executable(ConceptApp
     includes/studytimer.h src/studytimer.cpp
     includes/database/database.h
     includes/errors.h
-
     includes/timerUI.h src/timerUI.cpp
-
+    includes/database/calendarEvents.h src/database/calendarEvents.cpp
+    includes/todoList.h
+    includes/todoItem.h
+    src/todoList.cpp
+    src/todoItem.cpp
 )
 
 ## Configure QxOrm
@@ -48,12 +54,6 @@ target_compile_definitions(ConceptApp PRIVATE -D_BUILDING_QX_CONCEPTAPP)
 if(COMMAND target_precompile_headers)
     target_precompile_headers(ConceptApp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/includes/precompiled.h)
 endif() # (COMMAND target_precompile_headers)
-
-qt_add_resources(ConceptApp "configuration"
-    PREFIX "/"
-    FILES
-        qtquickcontrols2.conf
-)
 
 target_link_libraries(ConceptApp PRIVATE
     Qt6::Core

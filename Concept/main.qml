@@ -1,11 +1,11 @@
 //main.qml
 
 import QtQuick
-// import QtQuick.Controls
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Concept
 import QtQuick.Shapes
+import CustomControls 1.0
 
 pragma ComponentBehavior: Bound
 
@@ -15,13 +15,12 @@ ApplicationWindow {
     property bool showLineNumbers: true
     property alias editor: editor
 
-    // readonly property font fontFamily: "Arial"
-
     width: Screen.width * 0.95
     height: Screen.height * 0.95
     title: "Concept"
     visible: true
     color: Colors.background
+
     flags: Qt.Window | Qt.FramelessWindowHint
 
     function generateInfoText() {
@@ -40,6 +39,7 @@ ApplicationWindow {
         CMenu {
             id: noteContextMenu
             title: qsTr("File")
+            /*
             Action {
                 text: qsTr("Debug")
                 shortcut: "Ctrl+D"
@@ -48,10 +48,12 @@ ApplicationWindow {
                     editor.controller.openNote(1)
                 }
             }
+            */
             Action {
                 text: qsTr("Save Note")
                 shortcut: "Ctrl+S"
                 onTriggered: () => {
+                    editor.render(editor.text.text);
                     editor.controller.saveNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
                 }
             }
@@ -88,6 +90,15 @@ ApplicationWindow {
             }
         }
 
+        ToolBox {
+            id: tbTool
+            onTextChanged: (newtext) => {
+                // Action when the replace button is hit in ToolBox.cpp
+                editor.text.text = newtext;
+                editor.controller.saveNote(editor.currentNoteId, editor.currentNoteTitle, editor.text.text);
+            }
+        }
+
         CMenu {
             title: qsTr("Format")
             Action {
@@ -100,17 +111,27 @@ ApplicationWindow {
                 shortcut: StandardKey.ZoomOut
                 onTriggered: editor.text.font.pixelSize -= 1
             }
+            Action {
+                text: qsTr("Search")
+                shortcut: StandardKey.Find
+                onTriggered: tbTool.handleSearchAction(editor.text.text, false)
+            }
+            Action {
+                text: qsTr("Replace")
+                shortcut: StandardKey.Replace
+                onTriggered: tbTool.handleReplaceAction(editor.text.text)
+            }
         }
 
         CMenu {
-            title: qsTr("Tools")
+            id : toolsMenu
+            title: qsTr("Count")
             Action {
                 text: qsTr("Word Count: ") + editor.currentWordCount
             }
             Action {
                 text: qsTr("Character Count: ") + editor.currentCharacterCount
             }
-
             Action {
                 text: qsTr("Non-space Character Count: ") + editor.currentCharacterCountNoSpaces
             }
@@ -136,13 +157,13 @@ ApplicationWindow {
             // Customized handle to drag between the Navigation and the Editor.
             handle: Rectangle {
                 implicitWidth: 5
-                color: SplitHandle.pressed ? Colors.color2 : Colors.background
+                color: Colors.color2
                 border.color: SplitHandle.hovered ? Colors.color2 : Colors.background
-                opacity: SplitHandle.hovered || navigationView.width < 15 ? 1.0 : 0.0
+                opacity: SplitHandle.hovered || navigationView.width < 15 ? 1.0 : 0.2
 
                 Behavior on opacity {
                     OpacityAnimator {
-                        duration: 1400
+                        duration: 1000
                     }
                 }
             }
@@ -150,7 +171,7 @@ ApplicationWindow {
             Rectangle {
                 id: navigationView
                 color: Colors.surface1
-                SplitView.preferredWidth: 250
+                SplitView.preferredWidth: 300
                 SplitView.fillHeight: true
                 // The stack-layout provides different views, based on the
                 // selected buttons inside the sidebar.
@@ -159,6 +180,7 @@ ApplicationWindow {
                     currentIndex: sidebar.currentTabIndex
 
                     // Shows the help text.
+                    /*
                     Text {
                         anchors.leftMargin: 10
                         anchors.topMargin: 10
@@ -166,6 +188,7 @@ ApplicationWindow {
                         wrapMode: TextArea.Wrap
                         color: Colors.text
                     }
+                    */
 
                     // Shows the files on the file system.
                     FileSystemView {
@@ -175,47 +198,54 @@ ApplicationWindow {
                         onNoteClicked: index => {
                             editor.controller.openNote(index)
                         }
+                        onFolderClicked: index => {
+                                             editor.controller.openFolder(index)
+                                         }
                     }
 
-                    CTimer {}
+
+                    ToDoList {}
+                    Text {
+                        anchors.leftMargin: 10
+                        anchors.topMargin: 10
+                        text: qsTr("This is a calender")
+                        wrapMode: TextArea.Wrap
+                        color: Colors.text
+
+                    }
+                    Pomodoro {
+                        id: pomodoro
+                        SplitView.fillWidth: true
+                        SplitView.fillHeight: true
+                        color: Colors.surface1
+                    }
                 }
             }
 
             // The main view that contains the editor.
+
             CEditor {
                 id: editor
                 showLineNumbers: root.showLineNumbers
                 currentNoteId: 0  // TODO: Change later
                 explorer: fileSystemView
+                renderer: renderer
                 //currentFilePath: root.currentFilePath
-                SplitView.preferredWidth: 800
+                SplitView.preferredWidth: 900
                 SplitView.fillHeight: true
             }
 
-            SplitView {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                // Customized handle to drag between the Navigation and the Editor.
-                handle: Rectangle {
-                    implicitWidth: 5
-                    color: SplitHandle.pressed ? Colors.color2 : Colors.background
-                    border.color: SplitHandle.hovered ? Colors.color2 : Colors.background
-                    opacity: SplitHandle.hovered || navigationView.width < 15 ? 1.0 : 0.0
+            Text {
+                id: renderer
+                text: ""
 
-                    Behavior on opacity {
-                        OpacityAnimator {
-                            duration: 1400
-                        }
-                    }
-                }
+                textFormat: TextEdit.RichText
 
-                Pomodoro {
-                    id: pomodoro
-                    SplitView.fillWidth: true
-                    SplitView.fillHeight: true
-                    color: Colors.surface1
-                }
+                SplitView.preferredWidth: 900
+                SplitView.fillHeight: true
 
+                font: Colors.font
+                color: Colors.textFile
             }
         }
     }

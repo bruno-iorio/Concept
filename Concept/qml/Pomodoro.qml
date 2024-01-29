@@ -31,6 +31,7 @@ Rectangle {
             //leftPadding: root.width * 0.40
             //bottomPadding: root.height * 0.05
         }*/
+        }
     }
 
     Rectangle {
@@ -48,10 +49,15 @@ Rectangle {
                 font.pixelSize: timerBlock.height * 0.15
                 width: timerBlock.width / 2
                 background: Rectangle{
-                color: "#738290"
+                //color: "#738290"
                 //id: studyButton
                 //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
+                    color: "#738290"
+                    //id: studyButton
+                    //text: "Break"
+                    //font.pixelSize: timerBlock.height * 0.07
+                    //onClicked: startTimer(25)
                 }
                 onClicked: myTimerStart.showBreakMenu();
             }
@@ -69,11 +75,16 @@ Rectangle {
                 anchors.top: studyButton.top
                 width: timerBlock.width / 2 - spacerButtonsTimerBlock.width
                 background: Rectangle{
-                color: "#738290"
+                //color: "#738290"
                 //id: studyButton
                 //text: "Break"
                 //font.pixelSize: timerBlock.height * 0.07
 
+                    color: "#738290"
+                    //id: studyButton
+                    //text: "Break"
+                    //font.pixelSize: timerBlock.height * 0.07
+                    //onClicked: startTimer(25)
                 }
                 onClicked: myTimerStart.continueTimer();
             }
@@ -176,5 +187,4 @@ Rectangle {
             anchors.centerIn: parent
         }
     }
-
 }

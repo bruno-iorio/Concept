@@ -8,6 +8,7 @@
 #include "notes.h"
 #include "folders.h"
 #include "focus_time.h"
+#include "calendarEvents.h"
 
 #include "timerElements.h"
 

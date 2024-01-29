@@ -32,7 +32,7 @@ Rectangle {
             //bottomPadding: root.height * 0.05
         }*/
         }
-    }
+
 
     Rectangle {
         id: timerBlock

@@ -11,6 +11,7 @@ public:
     QDateTime start_time;
     QDateTime end_time;
     QDateTime time_spent;
+    QDateTime break_time;
 
     FocusTime() : id(0) { ; }
     virtual ~FocusTime() { ; }

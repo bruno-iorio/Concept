@@ -1,3 +1,5 @@
+//main.qml
+
 import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
@@ -135,8 +137,8 @@ ApplicationWindow {
             }
         }
 
-
     }
+
 
     RowLayout {
         anchors.fill: parent
@@ -248,3 +250,4 @@ ApplicationWindow {
         }
     }
 }
+

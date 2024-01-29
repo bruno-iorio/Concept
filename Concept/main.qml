@@ -1,3 +1,5 @@
+//main.qml
+
 import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
@@ -134,7 +136,9 @@ ApplicationWindow {
                 text: qsTr("Non-space Character Count: ") + editor.currentCharacterCountNoSpaces
             }
         }
+
     }
+
 
     RowLayout {
         anchors.fill: parent
@@ -246,3 +250,4 @@ ApplicationWindow {
         }
     }
 }
+

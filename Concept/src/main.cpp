@@ -1,5 +1,6 @@
 // main.cpp
 #include <QApplication>
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDirIterator>
@@ -9,6 +10,9 @@
 #include "includes/import_qml_plugins.h"
 #include "QxOrm.h"
 #include "database/database.h"
+#include <QDebug>
+#include "explorer.h"
+#include <QTreeView>
 #include "includes/mainhelp.h"
 #include "includes/setFocusPeriod.h"
 #include "includes/todoList.h"
@@ -16,6 +20,8 @@
 #include "includes/calendar.h"
 #include "includes/calc.h"
 #include <iostream>
+#include <vector>
+#include "includes/timerUI.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +36,7 @@ int main(int argc, char *argv[])
     qx::dao::create_table<Note>();
     qx::dao::create_table<Folder>();
     qx::dao::create_table<FocusTime>();
+    qx::dao::create_table<timerElements>();
     qx::dao::create_table<calendarEvents>();
 
     // Add a note to the database
@@ -99,12 +106,20 @@ int main(int argc, char *argv[])
 	}
     }
     qDebug() << "The number of calendarEvents is: " << qx::dao::count<calendarEvents>() ; 
+    
+    // checking if timerElements is being stored in the database.
+    if (qx::dao::count<timerElements>() == 0) {
+        qDebug() << "No timerElements found";
+    } else {
+	qDebug() << " TIMER ELEMENTS FOUND " << "\n";
+	}
 
     set_qt_environment();
 
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
 
     // Font database
     QDirIterator it(":/content/fonts", QDirIterator::Subdirectories);
@@ -119,6 +134,13 @@ int main(int argc, char *argv[])
     // Defining the types that will be used within the QML
     qmlRegisterType<MainHelp>("CustomControls", 1, 0, "MainHelp");
     qmlRegisterType<SetFocusPeriod>("CustomControls", 1, 0, "SetFocusPeriod");
+    qmlRegisterType<timerStart>("CustomControls", 1, 0, "TimerStart");
+
+
+    timerStart myTimerStart;
+    engine.rootContext()->setContextProperty("myTimerStart", &myTimerStart); // Exposing to QML
+
+    //RedSquareManager redSquareManager;
     qmlRegisterType<Calendar>("CustomControls", 1, 0, "Calendar");
     qmlRegisterType<ToolBox>("CustomControls", 1, 0, "ToolBox");
     qmlRegisterType<CalendarQML>("CustomControls", 1, 0, "CalendarQML");

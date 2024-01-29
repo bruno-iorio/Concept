@@ -10,4 +10,6 @@
 #include "focus_time.h"
 #include "calendarEvents.h"
 
+#include "timerElements.h"
+
 #endif //CONCEPTAPP_DATABASE_H

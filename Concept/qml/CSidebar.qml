@@ -84,12 +84,12 @@ Rectangle {
             // Shows help text when clicked.
             SidebarEntry {
                 id: infoTab
-                icon.source: "icons/light_bulb.svg"
+                icon.source: "icons/read.svg"
                 checkable: true
                 checked: true
 
                 ToolTip {
-                    text: qsTr("This is the help text.")
+                    text: qsTr("Notebooks")
                     visible: infoTab.hovered
                 }
                 onClicked: {
@@ -100,11 +100,11 @@ Rectangle {
             // Shows the file system when clicked.
             SidebarEntry {
                 id: filesystemTab
-                icon.source: "icons/read.svg"
+                icon.source: "icons/to_do_list.svg"
                 checkable: true
                 
                 ToolTip {
-                    text: qsTr("Notebooks")
+                    text: qsTr("To Do List")
                     visible: filesystemTab.hovered
                 }
                 onClicked: {
@@ -157,22 +157,9 @@ Rectangle {
                 }
             }
 
-            // Shows the to do list when clicked.
-            SidebarEntry {
-                id: todolistTab
-
-                icon.source: "icons/light_bulb.svg"
-                checkable: true
-
-                ToolTip {
-                    text: qsTr("To Do List")
-                    visible: todolistTab.hovered
-                }
-            }
-
             SidebarEntry {
                 id: calculatorTab
-                icon.source: "icons/light_bulb.svg" // TO BE CHANGED
+                icon.source: "icons/calculator.svg"
                 checkable: true
 
                 ToolTip {

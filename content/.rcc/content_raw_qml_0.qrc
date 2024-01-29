@@ -1,0 +1,22 @@
+<RCC>
+  <qresource prefix="/content/">
+    <file alias="fonts/fonts.txt">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/fonts.txt</file>
+    <file alias="fonts/RobotoMono-Bold.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-Bold.ttf</file>
+    <file alias="fonts/RobotoMono-BoldItalic.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-BoldItalic.ttf</file>
+    <file alias="fonts/RobotoMono-ExtraLight.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-ExtraLight.ttf</file>
+    <file alias="fonts/RobotoMono-ExtraLightItalic.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-ExtraLightItalic.ttf</file>
+    <file alias="fonts/RobotoMono-Italic-VariableFont_wght.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-Italic-VariableFont_wght.ttf</file>
+    <file alias="fonts/RobotoMono-Italic.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-Italic.ttf</file>
+    <file alias="fonts/RobotoMono-Light.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-Light.ttf</file>
+    <file alias="fonts/RobotoMono-LightItalic.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-LightItalic.ttf</file>
+    <file alias="fonts/RobotoMono-Medium.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-Medium.ttf</file>
+    <file alias="fonts/RobotoMono-MediumItalic.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-MediumItalic.ttf</file>
+    <file alias="fonts/RobotoMono-Regular.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-Regular.ttf</file>
+    <file alias="fonts/RobotoMono-SemiBold.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-SemiBold.ttf</file>
+    <file alias="fonts/RobotoMono-SemiBoldItalic.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-SemiBoldItalic.ttf</file>
+    <file alias="fonts/RobotoMono-Thin.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-Thin.ttf</file>
+    <file alias="fonts/RobotoMono-ThinItalic.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-ThinItalic.ttf</file>
+    <file alias="fonts/RobotoMono-VariableFont_wght.ttf">/Users/klaarahuima/Desktop/NEWCOPYofCONCEPT/concept/content/fonts/RobotoMono-VariableFont_wght.ttf</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,4 @@
+module Main
+typeinfo ConceptApp.qmltypes
+prefer :/Main/
+

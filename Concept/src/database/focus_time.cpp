@@ -12,5 +12,7 @@ namespace qx {
         t.data(&FocusTime::start_time, "start_time");
         t.data(&FocusTime::end_time, "end_time");
         t.data(&FocusTime::time_spent, "time_spent");
+        t.data(&FocusTime::break_time, "break_time");
+
     }
 }
